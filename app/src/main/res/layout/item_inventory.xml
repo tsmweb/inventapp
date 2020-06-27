@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="inventory"
+            type="br.com.tsmweb.presentation.inventory.binding.InventoryBinding" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clInventory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="16dp"
+        android:foreground="?attr/selectableItemBackground"
+        android:background="@{inventory.selected ? @color/colorItemSelected : @color/white}">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtDateInventory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{inventory.dateInventory}"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtPlace"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{inventory.place.code +` - `+ inventory.place.name}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtChecked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@string/checked"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/txtQtdChecked"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtQtdChecked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{inventory.patrimonyChecked}"
+            android:textColor="@color/green"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtNotChecked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/not_checked"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/txtQtdNotChecked"
+            app:layout_constraintTop_toBottomOf="@+id/txtChecked" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtQtdNotChecked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@{inventory.patrimonyNotChecked}"
+            android:textColor="@color/yellow"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtQtdChecked" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtNotFound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/not_found"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/txtQtdNotFound"
+            app:layout_constraintTop_toBottomOf="@+id/txtNotChecked" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtQtdNotFound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@{inventory.patrimonyNotFound}"
+            android:textColor="@color/red"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtQtdNotChecked" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

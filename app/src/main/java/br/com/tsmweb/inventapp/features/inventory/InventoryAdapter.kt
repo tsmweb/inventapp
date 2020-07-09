@@ -21,16 +21,6 @@ class InventoryAdapter(
         notifyDataSetChanged()
     }
 
-    fun sortData(sortDesc: Boolean) {
-        if (sortDesc) {
-            inventoryBindings?.sortedByDescending { inventoryBinding -> inventoryBinding.dateInventory }
-        } else {
-            inventoryBindings?.sortedBy { inventoryBinding -> inventoryBinding.dateInventory}
-        }
-
-        notifyDataSetChanged()
-    }
-
     fun getInventory(position: Int) = inventoryBindings?.get(position)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

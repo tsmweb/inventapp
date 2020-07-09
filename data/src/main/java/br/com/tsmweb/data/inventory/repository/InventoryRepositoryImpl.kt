@@ -29,4 +29,8 @@ class InventoryRepositoryImpl(
         })
     }
 
+    override suspend fun populateInitialData() {
+        inventoryRoomDataSource.populateInitialData()
+    }
+
 }

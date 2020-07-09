@@ -8,6 +8,7 @@ import br.com.tsmweb.data_room.database.AppDataBase
 import br.com.tsmweb.data_room.inventory.InventoryRoomDataSourceImpl
 import br.com.tsmweb.data_room.place.PlaceRoomDataSourceImpl
 import br.com.tsmweb.domain.inventory.interactor.LoadInventoriesUseCase
+import br.com.tsmweb.domain.inventory.interactor.PopulateInitialUseCase
 import br.com.tsmweb.domain.inventory.interactor.RemoveInventoryUseCase
 import br.com.tsmweb.domain.inventory.repository.InventoryRepository
 import br.com.tsmweb.domain.place.interactor.LoadPlacesUseCase
@@ -52,8 +53,15 @@ val presentationModule = module {
         RemoveInventoryUseCase(repository = get())
     }
 
+    factory {
+        PopulateInitialUseCase(repository = get())
+    }
+
     viewModel {
-        InventoryListViewModel(loadInventoriesUseCase = get(), removeInventoryUseCase = get())
+        InventoryListViewModel(
+            loadInventoriesUseCase = get(),
+            removeInventoryUseCase = get(),
+            populateInitialUseCase = get())
     }
 
 }

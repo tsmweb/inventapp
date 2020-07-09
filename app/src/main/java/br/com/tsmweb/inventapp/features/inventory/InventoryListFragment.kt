@@ -80,11 +80,11 @@ class InventoryListFragment : BaseFragment(),
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_sort_date_desc -> {
-                inventoryAdapter.sortData(true)
+                //TODO
                 return true
             }
             R.id.action_sort_date_asc -> {
-                inventoryAdapter.sortData(false)
+                //TODO
                 return true
             }
         }
@@ -164,6 +164,7 @@ class InventoryListFragment : BaseFragment(),
         })
 
         if (viewModel.loadState().value == null) {
+            viewModel.populateInitialData()
             viewModel.search()
         }
     }

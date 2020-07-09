@@ -7,4 +7,5 @@ interface InventoryRepository {
     fun loadInventories(term: String): Flow<List<Inventory>>
     suspend fun createInventory(inventory: Inventory)
     suspend fun removeInventory(inventories: List<Inventory>)
+    suspend fun populateInitialData()
 }

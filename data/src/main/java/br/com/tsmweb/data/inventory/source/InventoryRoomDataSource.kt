@@ -7,4 +7,5 @@ interface InventoryRoomDataSource {
     fun loadInventories(term: String): Flow<List<InventoryEntity>>
     suspend fun createInventory(inventory: InventoryEntity)
     suspend fun removeInventory(inventories: List<InventoryEntity>)
+    suspend fun populateInitialData()
 }

@@ -1,7 +1,9 @@
 package br.com.tsmweb.presentation.inventory
 
+import android.util.Log
 import androidx.lifecycle.*
 import br.com.tsmweb.domain.inventory.interactor.LoadInventoriesUseCase
+import br.com.tsmweb.domain.inventory.interactor.PopulateInitialUseCase
 import br.com.tsmweb.domain.inventory.interactor.RemoveInventoryUseCase
 import br.com.tsmweb.presentation.livedata.SingleLiveEvent
 import br.com.tsmweb.presentation.ViewState
@@ -14,7 +16,8 @@ import java.lang.Exception
 
 class InventoryListViewModel(
     private val loadInventoriesUseCase: LoadInventoriesUseCase,
-    private val removeInventoryUseCase: RemoveInventoryUseCase
+    private val removeInventoryUseCase: RemoveInventoryUseCase,
+    private val populateInitialUseCase: PopulateInitialUseCase
 ): ViewModel() {
 
     private val loadState = MutableLiveData<ViewState<List<InventoryBinding>>>()
@@ -149,6 +152,18 @@ class InventoryListViewModel(
                         error = e
                     )
                 )
+            }
+        }
+    }
+
+    fun populateInitialData() {
+        viewModelScope.launch {
+            try {
+                withContext(Dispatchers.IO) {
+                    populateInitialUseCase.execute()
+                }
+            } catch (e: Exception) {
+                Log.d("POPULATE", e.toString())
             }
         }
     }

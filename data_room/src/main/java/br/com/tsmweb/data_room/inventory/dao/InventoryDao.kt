@@ -19,4 +19,7 @@ interface InventoryDao {
 
     @Delete
     suspend fun removeInventory(vararg inventory: InventoryTable)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun saveInventory(inventory: InventoryTable)
 }

@@ -1,6 +1,5 @@
 package br.com.tsmweb.data.place.repository
 
-import br.com.tsmweb.data.place.mapper.PlaceMapper
 import br.com.tsmweb.data.place.source.PlaceRoomDataSource
 import br.com.tsmweb.domain.place.model.Place
 import br.com.tsmweb.domain.place.repository.PlaceRepository
@@ -12,11 +11,19 @@ class PlaceRepositoryImpl(
 ): PlaceRepository {
 
     override fun loadPlaces(term: String): Flow<List<Place>> {
-        return placeRoomDataSource.loadPlaces(term).map { places ->
-            places.map { place ->
-                PlaceMapper.toDomain(place)
-            }
-        }
+        return placeRoomDataSource.loadPlaces(term)
+    }
+
+    override fun loadPlace(id: Long): Flow<Place?> {
+        return placeRoomDataSource.loadPlace(id)
+    }
+
+    override suspend fun savePlace(place: Place) {
+        placeRoomDataSource.savePlace(place)
+    }
+
+    override suspend fun removePlace(place: Place) {
+        placeRoomDataSource.removePlace(place)
     }
 
 }

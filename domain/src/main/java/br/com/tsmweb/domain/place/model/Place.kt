@@ -3,6 +3,7 @@ package br.com.tsmweb.domain.place.model
 import java.util.*
 
 class Place(
+    var id: Long,
     var code: String,
     var name: String,
     var lastInventory: Date?
@@ -14,12 +15,15 @@ class Place(
 
         other as Place
 
+        if (id != other.id) return false
         if (code != other.code) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        return code.hashCode()
+        var result = id.hashCode()
+        result = 31 * result + code.hashCode()
+        return result
     }
 }

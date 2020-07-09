@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    
+    <data>
+        <variable
+            name="place"
+            type="br.com.tsmweb.inventapp.features.place.binding.PlaceBinding" />
+    </data>
+
+<com.google.android.material.card.MaterialCardView
+    android:id="@+id/cvPlace"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{place.code}"
+            android:textSize="14sp"
+            tools:text="@sample/places.json/data/code" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{place.name}"
+            android:textSize="14sp"
+            tools:text="@sample/places.json/data/name" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/last_inventory"
+            android:textSize="12sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtLastInventory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{place.lastInventory}"
+            android:textSize="12sp"
+            tools:text="@sample/places.json/data/last_inventory"/>
+        
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
+
+</layout>

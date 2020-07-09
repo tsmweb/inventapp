@@ -1,60 +1,150 @@
 package br.com.tsmweb.inventapp.features.place
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.widget.SearchView
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.tsmweb.inventapp.R
+import br.com.tsmweb.inventapp.common.BaseFragment
+import br.com.tsmweb.inventapp.common.ViewState
+import br.com.tsmweb.inventapp.databinding.FragmentPlaceListBinding
+import br.com.tsmweb.inventapp.features.place.binding.PlaceBinding
+import org.koin.android.viewmodel.ext.android.viewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class PlaceListFragment : BaseFragment(),
+    MenuItem.OnActionExpandListener,
+    SearchView.OnQueryTextListener {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [PlaceListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class PlaceListFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding: FragmentPlaceListBinding
+
+    private val placeAdapter: PlaceAdapter by lazy {
+        PlaceAdapter(this::onClick)
+    }
+
+    private val viewModel: PlaceListViewModel by viewModel()
+
+    private var searchView: SearchView? = null
+    private var firstSearch: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_place_list, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_place_list, container, false)
+
+        initRecyclerView()
+        initFab()
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PlacesFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PlaceListFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        subscriberViewModalObservable()
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.list_place_menu, menu)
+
+        val searchItem = menu.findItem(R.id.action_search)
+        searchItem.setOnActionExpandListener(this)
+
+        searchView = searchItem.actionView as SearchView
+        searchView?.maxWidth = Int.MAX_VALUE
+        searchView?.queryHint = getString(R.string.hint_search)
+        searchView?.setOnQueryTextListener(this)
+
+        if (viewModel.getLastSearchTerm().isNotEmpty()) {
+            searchView?.post {
+                val query = viewModel.getLastSearchTerm()
+                searchItem.expandActionView()
+                searchView?.setQuery(query, true)
+                searchView?.clearFocus()
+            }
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onMenuItemActionExpand(item: MenuItem?) = true
+
+    override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
+        viewModel.search()
+        return true
+    }
+
+    override fun onQueryTextSubmit(query: String?) = true
+
+    override fun onQueryTextChange(query: String?): Boolean {
+        if (firstSearch) {
+            firstSearch = false
+        } else {
+            Toast.makeText(requireContext(), query, Toast.LENGTH_SHORT).show()
+            viewModel.search(query ?: "")
+        }
+
+        return true
+    }
+
+    private fun initRecyclerView() {
+        binding.rvPlaces.run {
+            itemAnimator = DefaultItemAnimator()
+            setHasFixedSize(true)
+            adapter = placeAdapter
+        }
+    }
+
+    private fun initFab() {
+        binding.fabAddPlace.setOnClickListener {
+            Toast.makeText(requireContext(), "Nova Localidade", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun subscriberViewModalObservable() {
+        viewModel.loadState().observe(viewLifecycleOwner, Observer { state ->
+            if (state != null) {
+                handleLoadState(state)
+            }
+        })
+
+        if (viewModel.loadState().value == null) {
+            viewModel.search()
+        }
+    }
+
+    private fun handleLoadState(state: ViewState<List<PlaceBinding>>) {
+        when (state.status) {
+            ViewState.Status.LOADING -> {
+                binding.progressBar.visibility = View.VISIBLE
+            }
+            ViewState.Status.SUCCESS -> {
+                placeAdapter.setData(state.data)
+                binding.progressBar.visibility = View.GONE
+            }
+            ViewState.Status.ERROR -> {
+                binding.progressBar.visibility = View.GONE
+                Toast.makeText(requireContext(),
+                    R.string.message_error_load_places, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun onClick(place: PlaceBinding) {
+        Toast.makeText(requireContext(), place.name, Toast.LENGTH_SHORT).show()
+    }
+
 }

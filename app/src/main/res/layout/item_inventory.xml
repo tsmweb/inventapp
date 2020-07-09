@@ -5,7 +5,7 @@
     <data>
         <variable
             name="inventory"
-            type="br.com.tsmweb.presentation.inventory.binding.InventoryBinding" />
+            type="br.com.tsmweb.inventapp.features.inventory.binding.InventoryBinding" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,0 +1,22 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "code": "BR 22-4024",
+      "name": "QUEMIL",
+      "last_inventory": "09/07/2020"
+    },
+    {
+      "id": 2,
+      "code": "BR 22-4025",
+      "name": "JANDAIA II",
+      "last_inventory": "08/07/2020"
+    },
+    {
+      "id": 3,
+      "code": "BR 22-4026",
+      "name": "PORTAL DA PÉROLA",
+      "last_inventory": "05/07/2020"
+    }
+  ]
+}

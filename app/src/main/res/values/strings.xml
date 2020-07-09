@@ -11,8 +11,8 @@
     <string name="checked">Verificado</string>
     <string name="not_found">Não encontrado</string>
     <string name="not_checked">Não verificado</string>
-    <string name="message_error_load_inventories">Falha ao carregar os inventários.</string>
-    <string name="message_error_delete_inventory">Falha ao deletar o inventário.</string>
+    <string name="message_error_load_inventories">Falha ao carregar os inventários</string>
+    <string name="message_error_delete_inventory">Falha ao deletar o inventário</string>
     <string name="search">Pesquisar</string>
     <string name="sort_by_date_desc">Ordenar pelo mais recente</string>
     <string name="sort_by_date_asc">Ordenar pelo mais antigo</string>
@@ -20,6 +20,10 @@
     <string name="date_format">dd/MM/yyyy</string>
     <string name="hint_search">Pesquisar...</string>
     <string name="action_delete">Excluir</string>
+    <string name="last_inventory">Ultimo Inventario</string>
+    <string name="edit">Editar</string>
+    <string name="remove">Remover</string>
+    <string name="message_error_load_places">Falha ao carregar os locais</string>
     <plurals name="message_item_deleted">
         <item quantity="one">1 item deletado</item>
         <item quantity="other">%d itens deletados</item>

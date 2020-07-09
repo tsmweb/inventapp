@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import br.com.tsmweb.inventapp.R
 import br.com.tsmweb.inventapp.databinding.ItemInventoryBinding
-import br.com.tsmweb.presentation.inventory.binding.InventoryBinding
+import br.com.tsmweb.inventapp.features.inventory.binding.InventoryBinding
 
 class InventoryAdapter(
     private val onClick: (InventoryBinding) -> Unit,

@@ -11,10 +11,9 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.*
 import br.com.tsmweb.inventapp.R
 import br.com.tsmweb.inventapp.common.BaseFragment
-import br.com.tsmweb.presentation.ViewState
+import br.com.tsmweb.inventapp.common.ViewState
 import br.com.tsmweb.inventapp.databinding.FragmentInventoryListBinding
-import br.com.tsmweb.presentation.inventory.binding.InventoryBinding
-import br.com.tsmweb.presentation.inventory.InventoryListViewModel
+import br.com.tsmweb.inventapp.features.inventory.binding.InventoryBinding
 import com.google.android.material.snackbar.Snackbar
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -164,7 +163,6 @@ class InventoryListFragment : BaseFragment(),
         })
 
         if (viewModel.loadState().value == null) {
-            viewModel.populateInitialData()
             viewModel.search()
         }
     }

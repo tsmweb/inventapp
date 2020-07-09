@@ -1,36 +1,45 @@
 package br.com.tsmweb.inventapp.router
 
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import br.com.tsmweb.inventapp.R
-import br.com.tsmweb.presentation.Router
+import br.com.tsmweb.inventapp.common.Router
 
 class AppRouter(
-    private val navController: NavController
+    activity: FragmentActivity
 ): Router {
 
-    private val rootScreens = setOf(R.id.inventoryListFragment, R.id.placeListFragment, R.id.accountListFragment)
+    private val navController: NavController by lazy {
+        Navigation.findNavController(activity, R.id.navHostFragment)
+    }
+    private val rootScreens = setOf(R.id.placeListFragment)
 
-    override fun showInventoryList() {
-        navController.navigate(R.id.inventoryListFragment)
+    init {
+        val appBarConfiguration = AppBarConfiguration.Builder(rootScreens).build()
+
+        if (activity is AppCompatActivity) {
+            NavigationUI.setupActionBarWithNavController(activity, navController, appBarConfiguration)
+        }
     }
 
     override fun showPlaceList() {
         navController.navigate(R.id.placeListFragment)
     }
 
-    override fun showAccountList() {
-        navController.navigate(R.id.accountListFragment)
-    }
-
     override fun back() {
         navController.popBackStack()
+    }
+
+    override fun navigationUp(): Boolean {
+        return navController.navigateUp()
     }
 
     override fun isInRootScreen(): Boolean {
         return rootScreens.contains(navController.currentDestination?.id)
     }
 
-    override fun getRootScreens(): Set<Int> {
-        return rootScreens
-    }
 }

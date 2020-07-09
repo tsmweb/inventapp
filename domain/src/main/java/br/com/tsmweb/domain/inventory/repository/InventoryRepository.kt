@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface InventoryRepository {
     fun loadInventories(term: String): Flow<List<Inventory>>
-    suspend fun createInventory(inventory: Inventory)
+    fun loadInventory(id: Long): Flow<Inventory?>
+    suspend fun saveInventory(inventory: Inventory)
     suspend fun removeInventory(inventories: List<Inventory>)
-    suspend fun populateInitialData()
 }

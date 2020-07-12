@@ -7,14 +7,17 @@ object PlaceMapper {
     fun fromDomain(domain: Place) = PlaceEntity(
         id = domain.id,
         code = domain.code,
-        name = domain.name,
+        name = domain.name
+    ).apply {
+        amountPatrimony = domain.amountPatrimony
         lastInventory = domain.lastInventory
-    )
+    }
 
     fun toDomain(entity: PlaceEntity) = Place(
         id = entity.id,
         code = entity.code,
         name = entity.name,
+        amountPatrimony = entity.amountPatrimony,
         lastInventory = entity.lastInventory
     )
 }

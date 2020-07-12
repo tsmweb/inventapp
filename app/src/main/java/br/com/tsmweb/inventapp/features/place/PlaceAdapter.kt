@@ -1,8 +1,10 @@
 package br.com.tsmweb.inventapp.features.place
 
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import br.com.tsmweb.inventapp.R
@@ -10,7 +12,8 @@ import br.com.tsmweb.inventapp.databinding.ItemPlaceBinding
 import br.com.tsmweb.inventapp.features.place.binding.PlaceBinding
 
 class PlaceAdapter(
-    private val onClick: (PlaceBinding) -> Unit
+    private val onClick: (PlaceBinding) -> Unit,
+    private val onMenuItemClick: (MenuItem, PlaceBinding) -> Boolean
 ) : RecyclerView.Adapter<PlaceAdapter.ViewHolder>() {
 
     private var places: List<PlaceBinding>? = null
@@ -35,8 +38,17 @@ class PlaceAdapter(
                 place = currentPlace
                 executePendingBindings()
 
-                cvPlace.setOnClickListener {
+                clPlace.setOnClickListener {
                     onClick(currentPlace)
+                }
+
+                imgMenu.setOnClickListener {
+                    val popup = PopupMenu(it.context, it)
+                    popup.inflate(R.menu.item_place_menu)
+                    popup.setOnMenuItemClickListener { menuItem ->
+                        onMenuItemClick(menuItem, currentPlace)
+                    }
+                    popup.show()
                 }
             }
         }

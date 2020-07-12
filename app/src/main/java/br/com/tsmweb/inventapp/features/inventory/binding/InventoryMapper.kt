@@ -12,6 +12,7 @@ object InventoryMapper {
             id = domain.place?.id ?: 0,
             code = domain.place?.code ?: "",
             name = domain.place?.name ?: "",
+            amountPatrimony = domain.place?.amountPatrimony ?: 0,
             lastInventory = domain.dateInventory
         ),
         dateInventory = domain.dateInventory,
@@ -26,6 +27,7 @@ object InventoryMapper {
             id = binding.place?.id ?: 0,
             code = binding.place?.code ?: "",
             name = binding.place?.name ?: "",
+            amountPatrimony = binding.place?.amountPatrimony ?: 0,
             lastInventory = binding.dateInventory
         ),
         dateInventory = binding.dateInventory,

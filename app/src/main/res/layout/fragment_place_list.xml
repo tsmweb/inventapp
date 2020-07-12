@@ -16,8 +16,7 @@
             android:id="@+id/rvPlaces"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="@integer/cols"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:paddingBottom="100dp"
             android:clipToPadding="false"
             tools:listitem="@layout/item_place"/>
@@ -38,7 +37,7 @@
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_anchor="@+id/rvInventories"
+            app:layout_anchor="@+id/rvPlaces"
             app:layout_anchorGravity="center" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

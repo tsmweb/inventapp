@@ -14,6 +14,8 @@ class PlaceRoomDataSourceImpl(
     private val placeDao = db.placeDao()
 
     override fun loadPlaces(term: String): Flow<List<Place>> {
+        val term = if (term.isEmpty() || term.isBlank()) "%" else "%$term%"
+
         return placeDao.loadPlaces(term)
             .map { places -> places.map(PlaceMapper::toDomain) }
     }

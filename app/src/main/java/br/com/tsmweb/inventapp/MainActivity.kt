@@ -19,8 +19,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupNavigation(){
         setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
     }
 
     override fun onSupportNavigateUp(): Boolean {

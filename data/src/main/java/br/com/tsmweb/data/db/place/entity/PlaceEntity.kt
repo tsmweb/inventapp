@@ -2,6 +2,7 @@ package br.com.tsmweb.data.db.place.entity
 
 import androidx.room.*
 import br.com.tsmweb.data.db.converters.DateConverter
+import java.time.Instant
 import java.util.*
 
 @Entity(
@@ -12,7 +13,10 @@ data class PlaceEntity(
     @PrimaryKey(autoGenerate = true)
     var id: Long,
     var code: String,
-    var name: String,
-    @ColumnInfo(name = "last_inventory")
-    var lastInventory: Date?
-)
+    var name: String
+) {
+    @Ignore
+    var amountPatrimony: Int = 0
+    @Ignore
+    var lastInventory: Date? = null
+}

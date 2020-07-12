@@ -11,9 +11,11 @@ object InventoryMapper {
         place = PlaceEntity(
             id = domain.place?.id,
             code = domain.place?.code,
-            name = domain.place?.name,
+            name = domain.place?.name
+        ).apply {
+            amountPatrimony = domain.place?.amountPatrimony
             lastInventory = domain.place?.lastInventory
-        ),
+        },
         dateInventory = domain.dateInventory,
         patrimonyChecked = domain.patrimonyChecked,
         patrimonyNotChecked = domain.patrimonyNotChecked,
@@ -26,7 +28,9 @@ object InventoryMapper {
             id = entity.place?.id,
             code = entity.place?.code,
             name = entity.place?.name,
-            lastInventory = entity.place?.lastInventory),
+            amountPatrimony = entity.place?.amountPatrimony,
+            lastInventory = entity.place?.lastInventory
+        ),
         dateInventory = entity.dateInventory,
         patrimonyChecked = entity.patrimonyChecked,
         patrimonyNotChecked = entity.patrimonyNotChecked,

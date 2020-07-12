@@ -22,9 +22,11 @@ object TextBinding {
 
     @JvmStatic
     @BindingAdapter("android:text")
-    fun setTextFromDate(textView: TextView, value: Date) {
-        val dateFormat = textView.context.resources.getString(R.string.date_format)
-        textView.text = SimpleDateFormat(dateFormat).format(value)
+    fun setTextFromDate(textView: TextView, value: Date?) {
+        if (value != null) {
+            val dateFormat = textView.context.resources.getString(R.string.date_format)
+            textView.text = SimpleDateFormat(dateFormat).format(value)
+        }
     }
 
 }

@@ -6,6 +6,7 @@ class Place(
     var id: Long,
     var code: String,
     var name: String,
+    var amountPatrimony: Int,
     var lastInventory: Date?
 ) {
 

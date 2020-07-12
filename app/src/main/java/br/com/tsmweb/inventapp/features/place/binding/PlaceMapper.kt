@@ -8,6 +8,7 @@ object PlaceMapper {
         id = domain.id,
         code = domain.code,
         name = domain.name,
+        amountPatrimony = domain.amountPatrimony,
         lastInventory = domain.lastInventory
     )
 
@@ -15,6 +16,7 @@ object PlaceMapper {
         id = binding.id,
         code = binding.code,
         name = binding.name,
+        amountPatrimony = binding.amountPatrimony,
         lastInventory = binding.lastInventory
     )
 

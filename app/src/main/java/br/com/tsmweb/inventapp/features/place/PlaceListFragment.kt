@@ -2,14 +2,11 @@ package br.com.tsmweb.inventapp.features.place
 
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.tsmweb.inventapp.R
 import br.com.tsmweb.inventapp.common.BaseFragment
 import br.com.tsmweb.inventapp.common.ViewState
@@ -24,7 +21,7 @@ class PlaceListFragment : BaseFragment(),
     private lateinit var binding: FragmentPlaceListBinding
 
     private val placeAdapter: PlaceAdapter by lazy {
-        PlaceAdapter(this::onClick)
+        PlaceAdapter(this::onClick, this::onMenuItemClick)
     }
 
     private val viewModel: PlaceListViewModel by viewModel()
@@ -93,7 +90,6 @@ class PlaceListFragment : BaseFragment(),
         if (firstSearch) {
             firstSearch = false
         } else {
-            Toast.makeText(requireContext(), query, Toast.LENGTH_SHORT).show()
             viewModel.search(query ?: "")
         }
 
@@ -110,7 +106,8 @@ class PlaceListFragment : BaseFragment(),
 
     private fun initFab() {
         binding.fabAddPlace.setOnClickListener {
-            Toast.makeText(requireContext(), "Nova Localidade", Toast.LENGTH_SHORT).show()
+            PlaceFormFragment.newInstance(PlaceBinding())
+                .open(parentFragmentManager)
         }
     }
 
@@ -145,6 +142,21 @@ class PlaceListFragment : BaseFragment(),
 
     private fun onClick(place: PlaceBinding) {
         Toast.makeText(requireContext(), place.name, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun onMenuItemClick(item: MenuItem, place: PlaceBinding): Boolean {
+        when (item.itemId) {
+            R.id.menu_place_edit -> {
+                PlaceFormFragment.newInstance(place).open(parentFragmentManager)
+                return true
+            }
+            R.id.menu_place_remove -> {
+                Toast.makeText(requireContext(), place.name + " - remove", Toast.LENGTH_SHORT).show()
+                return true
+            }
+        }
+
+        return false
     }
 
 }

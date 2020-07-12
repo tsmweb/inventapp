@@ -18,9 +18,9 @@ interface PlaceDao {
     fun loadPlace(id: Long): Flow<PlaceEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun savePlace(place: PlaceEntity)
+    suspend fun savePlace(place: PlaceEntity)
 
     @Delete
-    fun removePlace(place: PlaceEntity)
+    suspend fun removePlace(place: PlaceEntity)
 
 }

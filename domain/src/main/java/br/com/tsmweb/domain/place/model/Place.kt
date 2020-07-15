@@ -3,7 +3,7 @@ package br.com.tsmweb.domain.place.model
 import java.util.*
 
 class Place(
-    var id: Long,
+    var id: String,
     var code: String,
     var name: String,
     var amountPatrimony: Int,

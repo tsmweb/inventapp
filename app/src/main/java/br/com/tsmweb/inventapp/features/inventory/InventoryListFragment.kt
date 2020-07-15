@@ -194,7 +194,7 @@ class InventoryListFragment : BaseFragment(),
             }
             ViewState.Status.ERROR -> {
                 Toast.makeText(requireContext(),
-                    R.string.message_error_delete_inventory, Toast.LENGTH_SHORT).show()
+                    R.string.message_error_remove_inventory, Toast.LENGTH_SHORT).show()
             }
         }
     }

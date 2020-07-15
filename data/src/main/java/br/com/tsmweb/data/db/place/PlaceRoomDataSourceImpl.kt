@@ -6,6 +6,7 @@ import br.com.tsmweb.data.db.place.mapper.PlaceMapper
 import br.com.tsmweb.domain.place.model.Place
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import java.util.*
 
 class PlaceRoomDataSourceImpl(
     db: AppDataBase
@@ -20,12 +21,16 @@ class PlaceRoomDataSourceImpl(
             .map { places -> places.map(PlaceMapper::toDomain) }
     }
 
-    override fun loadPlace(id: Long): Flow<Place?> {
+    override fun loadPlace(id: String): Flow<Place?> {
         return placeDao.loadPlace(id)
             .map { placeEntity -> PlaceMapper.toDomain(placeEntity) }
     }
 
     override suspend fun savePlace(place: Place) {
+        if (place.id.isBlank()) {
+            place.id = UUID.randomUUID().toString()
+        }
+
         placeDao.savePlace(PlaceMapper.fromDomain(place))
     }
 

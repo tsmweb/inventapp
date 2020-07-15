@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 class ViewPlaceDetailsUseCase(
     private val repository: PlaceRepository
 ) {
-    fun execute(id: Long): Flow<Place?> {
+    fun execute(id: String): Flow<Place?> {
         return repository.loadPlace(id)
     }
 }

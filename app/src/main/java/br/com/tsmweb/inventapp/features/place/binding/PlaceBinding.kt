@@ -6,7 +6,7 @@ import java.util.*
 
 @Parcelize
 data class PlaceBinding(
-    var id: Long = 0,
+    var id: String = "",
     var code: String = "",
     var name: String = "",
     var amountPatrimony: Int = 0,

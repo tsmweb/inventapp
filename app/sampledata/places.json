@@ -1,21 +1,21 @@
 {
   "data": [
     {
-      "id": 1,
+      "id": "1",
       "code": "BR 22-4024",
       "name": "QUEMIL",
       "amount_patrimony": 167,
       "last_inventory": "09/07/2020"
     },
     {
-      "id": 2,
+      "id": "2",
       "code": "BR 22-4025",
       "name": "JANDAIA II",
       "amount_patrimony": 120,
       "last_inventory": "08/07/2020"
     },
     {
-      "id": 3,
+      "id": "3",
       "code": "BR 22-4026",
       "name": "PORTAL DA PÉROLA",
       "amount_patrimony": 98,

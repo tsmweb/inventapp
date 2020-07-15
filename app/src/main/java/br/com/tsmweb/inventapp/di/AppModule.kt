@@ -6,6 +6,7 @@ import br.com.tsmweb.data.db.place.PlaceRoomDataSourceImpl
 import br.com.tsmweb.data.place.repository.PlaceRepositoryImpl
 import br.com.tsmweb.data.place.source.PlaceRoomDataSource
 import br.com.tsmweb.domain.place.interactor.ListPlacesUseCase
+import br.com.tsmweb.domain.place.interactor.RemovePlaceUseCase
 import br.com.tsmweb.domain.place.interactor.SavePlaceUseCase
 import br.com.tsmweb.domain.place.repository.PlaceRepository
 import br.com.tsmweb.inventapp.router.AppRouter
@@ -38,9 +39,14 @@ val appModule = module {
         SavePlaceUseCase(repository = get())
     }
 
+    factory {
+        RemovePlaceUseCase(repository = get())
+    }
+
     viewModel {
         PlaceListViewModel(
-            listPlacesUseCase = get()
+            listPlacesUseCase = get(),
+            removePlaceUseCase = get()
         )
     }
 

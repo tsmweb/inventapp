@@ -10,12 +10,12 @@ interface PlaceDao {
     @Query("""
         SELECT * FROM place 
         WHERE (code LIKE :term OR name LIKE :term) 
-        ORDER BY code
+        ORDER BY name, code
     """)
     fun loadPlaces(term: String = "%"): Flow<List<PlaceEntity>>
 
     @Query("SELECT * FROM place WHERE id = :id")
-    fun loadPlace(id: Long): Flow<PlaceEntity>
+    fun loadPlace(id: String): Flow<PlaceEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun savePlace(place: PlaceEntity)

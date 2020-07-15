@@ -3,6 +3,7 @@ package br.com.tsmweb.inventapp.features.place
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -11,7 +12,9 @@ import br.com.tsmweb.inventapp.R
 import br.com.tsmweb.inventapp.common.BaseFragment
 import br.com.tsmweb.inventapp.common.ViewState
 import br.com.tsmweb.inventapp.databinding.FragmentPlaceListBinding
+import br.com.tsmweb.inventapp.features.about.AboutDialogFragment
 import br.com.tsmweb.inventapp.features.place.binding.PlaceBinding
+import com.google.android.material.snackbar.Snackbar
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class PlaceListFragment : BaseFragment(),
@@ -74,6 +77,11 @@ class PlaceListFragment : BaseFragment(),
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_about ->
+                AboutDialogFragment().show(parentFragmentManager, "about")
+        }
+
         return super.onOptionsItemSelected(item)
     }
 
@@ -118,6 +126,12 @@ class PlaceListFragment : BaseFragment(),
             }
         })
 
+        viewModel.removeState().observe(viewLifecycleOwner, Observer { state ->
+            if (state != null) {
+                handleRemoveState(state)
+            }
+        })
+
         if (viewModel.loadState().value == null) {
             viewModel.search()
         }
@@ -134,8 +148,27 @@ class PlaceListFragment : BaseFragment(),
             }
             ViewState.Status.ERROR -> {
                 binding.progressBar.visibility = View.GONE
-                Toast.makeText(requireContext(),
-                    R.string.message_error_load_places, Toast.LENGTH_SHORT).show()
+                Snackbar.make(
+                    binding.rvPlaces,
+                    R.string.message_error_load_places,
+                    Snackbar.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun handleRemoveState(state: ViewState<Unit>) {
+        when (state.status) {
+            ViewState.Status.SUCCESS -> {
+                Snackbar.make(
+                    binding.rvPlaces,
+                    R.string.message_success_remove_place,
+                    Snackbar.LENGTH_LONG).show()
+            }
+            ViewState.Status.ERROR -> {
+                Snackbar.make(
+                    binding.rvPlaces,
+                    R.string.message_error_remove_place,
+                    Snackbar.LENGTH_SHORT).show()
             }
         }
     }
@@ -151,7 +184,15 @@ class PlaceListFragment : BaseFragment(),
                 return true
             }
             R.id.menu_place_remove -> {
-                Toast.makeText(requireContext(), place.name + " - remove", Toast.LENGTH_SHORT).show()
+                AlertDialog.Builder(requireContext())
+                    .setMessage(R.string.message_confirm_remove_place)
+                    .setPositiveButton(R.string.remove) { _, i ->
+                        viewModel.removePlace(place)
+                    }
+                    .setNegativeButton(R.string.cancel, null)
+                    .create()
+                    .show()
+
                 return true
             }
         }

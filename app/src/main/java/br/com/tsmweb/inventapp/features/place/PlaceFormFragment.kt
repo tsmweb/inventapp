@@ -38,6 +38,7 @@ class PlaceFormFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         arguments?.getParcelable<PlaceBinding>(EXTRA_PLACE)?.let {
             viewModel.setPlace(it)
+            binding.place = it
         }
 
         subscriberViewModalObservable()
@@ -55,16 +56,10 @@ class PlaceFormFragment : DialogFragment() {
         }
 
         dialog?.setTitle(R.string.action_new_place)
-
-        // Abre o teclado virtual ao exibir o Dialog
         dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
     }
 
     private fun subscriberViewModalObservable() {
-        viewModel.place().observe(viewLifecycleOwner, Observer { place ->
-            binding.place = place
-        })
-
         viewModel.saveState().observe(viewLifecycleOwner, Observer { state ->
             when (state.status) {
                 ViewState.Status.LOADING -> {

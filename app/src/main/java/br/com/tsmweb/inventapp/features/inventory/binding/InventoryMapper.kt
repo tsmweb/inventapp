@@ -9,7 +9,7 @@ object InventoryMapper {
     fun fromDomain(domain: Inventory) = InventoryBinding(
         id = domain.id,
         place = PlaceBinding(
-            id = domain.place?.id ?: 0,
+            id = domain.place?.id ?: "",
             code = domain.place?.code ?: "",
             name = domain.place?.name ?: "",
             amountPatrimony = domain.place?.amountPatrimony ?: 0,
@@ -24,7 +24,7 @@ object InventoryMapper {
     fun toDomain(binding: InventoryBinding) = Inventory(
         id = binding.id,
         place = Place(
-            id = binding.place?.id ?: 0,
+            id = binding.place?.id ?: "",
             code = binding.place?.code ?: "",
             name = binding.place?.name ?: "",
             amountPatrimony = binding.place?.amountPatrimony ?: 0,

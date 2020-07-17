@@ -4,12 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/placeListFragment">
+    app:startDestination="@id/localeListFragment">
 
     <fragment
-        android:id="@+id/placeListFragment"
-        android:name="br.com.tsmweb.inventapp.features.place.PlaceListFragment"
-        android:label="@string/places"
-        tools:layout="@layout/fragment_place_list" />
+        android:id="@+id/localeListFragment"
+        android:name="br.com.tsmweb.inventapp.features.locale.LocaleListFragment"
+        android:label="@string/locales"
+        tools:layout="@layout/fragment_locale_list" />
 
 </navigation>

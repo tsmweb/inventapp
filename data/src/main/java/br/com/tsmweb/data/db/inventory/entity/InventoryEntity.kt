@@ -2,7 +2,7 @@ package br.com.tsmweb.data.db.inventory.entity
 
 import androidx.room.*
 import br.com.tsmweb.data.db.converters.DateConverter
-import br.com.tsmweb.data.db.place.entity.PlaceEntity
+import br.com.tsmweb.data.db.locale.entity.LocaleEntity
 import java.util.*
 
 @Entity(tableName = "inventory")
@@ -11,8 +11,8 @@ data class InventoryEntity(
     @PrimaryKey(autoGenerate = true)
     var id: Long,
 
-    @Embedded(prefix = "place_")
-    var place: PlaceEntity,
+    @ColumnInfo(name = "locale_id")
+    var localeId: String,
 
     @ColumnInfo(name = "date_inventory")
     var dateInventory: Date,

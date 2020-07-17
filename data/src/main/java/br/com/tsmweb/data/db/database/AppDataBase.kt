@@ -4,13 +4,19 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import br.com.tsmweb.data.db.place.dao.PlaceDao
-import br.com.tsmweb.data.db.place.entity.PlaceEntity
+import br.com.tsmweb.data.db.locale.dao.LocaleDao
+import br.com.tsmweb.data.db.locale.entity.LocaleEntity
+import br.com.tsmweb.data.db.patrimony.dao.PatrimonyDao
+import br.com.tsmweb.data.db.patrimony.entity.PatrimonyEntity
 
-@Database(entities = [PlaceEntity::class], version = 1, exportSchema = false)
+@Database(
+    entities = [LocaleEntity::class, PatrimonyEntity::class],
+    version = 1,
+    exportSchema = false)
 abstract class AppDataBase: RoomDatabase() {
 
-    abstract fun placeDao(): PlaceDao
+    abstract fun localeDao(): LocaleDao
+    abstract fun patrimonyDao(): PatrimonyDao
 
     companion object {
         private var instance: AppDataBase? = null

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="patrimony"
+            type="br.com.tsmweb.inventapp.features.patrimony.binding.PatrimonyBinding" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clPatrimony"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:padding="8dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lblCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/patrimony_label_code"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@{patrimony.code}"
+            android:textSize="12sp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="@+id/lblCode"
+            app:layout_constraintEnd_toStartOf="@+id/lblStatus"
+            app:layout_constraintStart_toEndOf="@+id/lblCode"
+            app:layout_constraintTop_toTopOf="@+id/lblCode"
+            tools:text="@sample/patrimonies.json/data/code" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lblStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@string/patrimony_label_status"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/txtStatus"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{patrimony.status}"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/lblStatus"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/lblStatus"
+            tools:text="@sample/patrimonies.json/data/status" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{patrimony.name}"
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtCode"
+            tools:text="@sample/patrimonies.json/data/name" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lblDependency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/patrimony_label_dependency"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtName" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtDependency"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{patrimony.dependency}"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/lblDependency"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/lblDependency"
+            app:layout_constraintTop_toTopOf="@+id/lblDependency"
+            tools:text="@sample/patrimonies.json/data/dependency" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -143,7 +143,7 @@ class InventoryListFragment : BaseFragment(),
 
         viewModel.showDetails().observe(viewLifecycleOwner, Observer { inventory ->
             if (inventory != null) {
-                Toast.makeText(requireContext(), inventory.place?.code, Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), inventory.locale?.code, Toast.LENGTH_SHORT).show()
             }
         })
 
@@ -179,7 +179,7 @@ class InventoryListFragment : BaseFragment(),
             ViewState.Status.ERROR -> {
                 binding.progressBar.visibility = View.GONE
                 Toast.makeText(requireContext(),
-                    R.string.message_error_load_inventories, Toast.LENGTH_SHORT).show()
+                    R.string.inventory_message_error_load, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -194,7 +194,7 @@ class InventoryListFragment : BaseFragment(),
             }
             ViewState.Status.ERROR -> {
                 Toast.makeText(requireContext(),
-                    R.string.message_error_remove_inventory, Toast.LENGTH_SHORT).show()
+                    R.string.inventory_message_error_remove, Toast.LENGTH_SHORT).show()
             }
         }
     }

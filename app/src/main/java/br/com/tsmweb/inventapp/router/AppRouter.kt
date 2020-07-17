@@ -16,7 +16,7 @@ class AppRouter(
     private val navController: NavController by lazy {
         Navigation.findNavController(activity, R.id.navHostFragment)
     }
-    private val rootScreens = setOf(R.id.placeListFragment)
+    private val rootScreens = setOf(R.id.localeListFragment)
 
     init {
         val appBarConfiguration = AppBarConfiguration.Builder(rootScreens).build()
@@ -26,8 +26,8 @@ class AppRouter(
         }
     }
 
-    override fun showPlaceList() {
-        navController.navigate(R.id.placeListFragment)
+    override fun showLocaleList() {
+        navController.navigate(R.id.localeListFragment)
     }
 
     override fun back() {

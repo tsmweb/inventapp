@@ -32,7 +32,7 @@
             android:id="@+id/txtPlace"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{inventory.place.code +` - `+ inventory.place.name}"
+            android:text="@{inventory.locale.code +` - `+ inventory.locale.name}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 

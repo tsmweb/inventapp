@@ -2,17 +2,17 @@ package br.com.tsmweb.inventapp.di
 
 import androidx.fragment.app.FragmentActivity
 import br.com.tsmweb.data.db.database.AppDataBase
-import br.com.tsmweb.data.db.place.PlaceRoomDataSourceImpl
-import br.com.tsmweb.data.place.repository.PlaceRepositoryImpl
-import br.com.tsmweb.data.place.source.PlaceRoomDataSource
-import br.com.tsmweb.domain.place.interactor.ListPlacesUseCase
-import br.com.tsmweb.domain.place.interactor.RemovePlaceUseCase
-import br.com.tsmweb.domain.place.interactor.SavePlaceUseCase
-import br.com.tsmweb.domain.place.repository.PlaceRepository
+import br.com.tsmweb.data.db.locale.LocaleRoomDataSourceImpl
+import br.com.tsmweb.data.locale.repository.LocaleRepositoryImpl
+import br.com.tsmweb.data.locale.source.LocaleRoomDataSource
+import br.com.tsmweb.domain.locale.interactor.ListLocalesUseCase
+import br.com.tsmweb.domain.locale.interactor.RemoveLocaleUseCase
+import br.com.tsmweb.domain.locale.interactor.SaveLocaleUseCase
+import br.com.tsmweb.domain.locale.repository.LocaleRepository
 import br.com.tsmweb.inventapp.router.AppRouter
 import br.com.tsmweb.inventapp.common.Router
-import br.com.tsmweb.inventapp.features.place.PlaceFormViewModel
-import br.com.tsmweb.inventapp.features.place.PlaceListViewModel
+import br.com.tsmweb.inventapp.features.locale.LocaleFormViewModel
+import br.com.tsmweb.inventapp.features.locale.LocaleListViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -24,35 +24,35 @@ val appModule = module {
 
     /*-- Place --*/
     single {
-        PlaceRoomDataSourceImpl(AppDataBase.getDatabase(context = get())) as PlaceRoomDataSource
+        LocaleRoomDataSourceImpl(AppDataBase.getDatabase(context = get())) as LocaleRoomDataSource
     }
 
     factory {
-        PlaceRepositoryImpl(placeRoomDataSource = get()) as PlaceRepository
+        LocaleRepositoryImpl(localeRoomDataSource = get()) as LocaleRepository
     }
 
     factory {
-        ListPlacesUseCase(repository = get())
+        ListLocalesUseCase(repository = get())
     }
 
     factory {
-        SavePlaceUseCase(repository = get())
+        SaveLocaleUseCase(repository = get())
     }
 
     factory {
-        RemovePlaceUseCase(repository = get())
+        RemoveLocaleUseCase(repository = get())
     }
 
     viewModel {
-        PlaceListViewModel(
-            listPlacesUseCase = get(),
-            removePlaceUseCase = get()
+        LocaleListViewModel(
+            listLocalesUseCase = get(),
+            removeLocaleUseCase = get()
         )
     }
 
     viewModel {
-        PlaceFormViewModel(
-            savePlaceUseCase = get()
+        LocaleFormViewModel(
+            saveLocaleUseCase = get()
         )
     }
 

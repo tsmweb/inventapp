@@ -1,41 +1,36 @@
 package br.com.tsmweb.inventapp.router
 
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentActivity
+import android.os.Bundle
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
 import br.com.tsmweb.inventapp.R
+import br.com.tsmweb.inventapp.common.Constants.EXTRA_LOCALE
 import br.com.tsmweb.inventapp.common.Router
+import br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding
 
 class AppRouter(
-    activity: FragmentActivity
+    private val navController: NavController
 ): Router {
 
-    private val navController: NavController by lazy {
-        Navigation.findNavController(activity, R.id.navHostFragment)
-    }
     private val rootScreens = setOf(R.id.localeListFragment)
-
-    init {
-        val appBarConfiguration = AppBarConfiguration.Builder(rootScreens).build()
-
-        if (activity is AppCompatActivity) {
-            NavigationUI.setupActionBarWithNavController(activity, navController, appBarConfiguration)
-        }
-    }
 
     override fun showLocaleList() {
         navController.navigate(R.id.localeListFragment)
+    }
+
+    override fun showLocaleTabs(locale: LocaleBinding) {
+        val args = Bundle().apply {
+            putParcelable(EXTRA_LOCALE, locale)
+        }
+
+        navController.navigate(R.id.action_localeListFragment_to_localeTabFragment, args)
     }
 
     override fun back() {
         navController.popBackStack()
     }
 
-    override fun navigationUp(): Boolean {
-        return navController.navigateUp()
+    override fun getRootScreen(): Set<Int> {
+        return rootScreens
     }
 
     override fun isInRootScreen(): Boolean {

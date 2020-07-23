@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 class ListPatrimonyUseCase(
     private val repository: PatrimonyRepository
 ) {
-    fun execute(term: String): Flow<List<Patrimony>> {
-        return repository.loadPatrimonies(term)
+    fun execute(localeId: String, term: String): Flow<List<Patrimony>> {
+        return repository.loadPatrimonies(localeId, term)
     }
 }

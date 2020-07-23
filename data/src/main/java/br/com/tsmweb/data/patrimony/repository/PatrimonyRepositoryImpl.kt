@@ -5,12 +5,12 @@ import br.com.tsmweb.domain.patrimony.model.Patrimony
 import br.com.tsmweb.domain.patrimony.repository.PatrimonyRepository
 import kotlinx.coroutines.flow.Flow
 
-class PatrimonyRepository(
+class PatrimonyRepositoryImpl(
     private val patrimonyRoomDataSource: PatrimonyRoomDataSource
 ): PatrimonyRepository {
 
-    override fun loadPatrimonies(term: String): Flow<List<Patrimony>> {
-        return patrimonyRoomDataSource.loadPatrimonies(term)
+    override fun loadPatrimonies(localeId: String, term: String): Flow<List<Patrimony>> {
+        return patrimonyRoomDataSource.loadPatrimonies(localeId, term)
     }
 
     override fun loadPatrimony(id: Long): Flow<Patrimony?> {

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".features.locale.LocaleListFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <!--
+     Note: even though the IDs for the CoordinatorLayout and the AppBarLayout unused in HomeViewPagerFragment, they are
+     both required to preserve the toolbar scroll / collapse state when navigating to a new screen and then coming back.
+    -->
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
@@ -26,24 +28,32 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/colorPrimary"
                 android:minHeight="?attr/actionBarSize"
-                android:elevation="4dp"
+                android:elevation="0dp"
                 android:theme="@style/MaterialTheme.AppBarOverlay"
                 app:popupTheme="@style/MaterialTheme.PopupOverlay"
                 app:layout_scrollFlags="scroll|enterAlways"/>
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayoutLocale"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:theme="@style/MaterialTheme.AppBarOverlay"
+                app:tabIndicatorColor="@color/colorAccent"
+                app:tabTextColor="@android:color/white"
+                app:tabMode="fixed"
+                app:tabGravity="fill"
+                app:tabMaxWidth="0dp" />
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvLocales"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPagerLocale"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:paddingBottom="100dp"
-            android:clipToPadding="false"
-            tools:listitem="@layout/item_locale"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabAddLocale"
+            android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
@@ -52,14 +62,6 @@
             app:elevation="6dp"
             app:fabSize="normal"
             app:srcCompat="@drawable/ic_add" />
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_anchor="@+id/rvLocales"
-            app:layout_anchorGravity="center" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

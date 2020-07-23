@@ -2,11 +2,15 @@ package br.com.tsmweb.inventapp.features.locale
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.DefaultItemAnimator
 import br.com.tsmweb.inventapp.R
 import br.com.tsmweb.inventapp.common.BaseFragment
@@ -20,6 +24,8 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class LocaleListFragment : BaseFragment(),
     MenuItem.OnActionExpandListener,
     SearchView.OnQueryTextListener {
+
+    private val TAG = LocaleListFragment::class.simpleName
 
     private lateinit var binding: FragmentLocaleListBinding
 
@@ -51,6 +57,17 @@ class LocaleListFragment : BaseFragment(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val appBarConfiguration = AppBarConfiguration.Builder(router.getRootScreen()).build()
+        val navHostFragment = NavHostFragment.findNavController(this)
+        NavigationUI.setupWithNavController(binding.toolbar, navHostFragment, appBarConfiguration)
+
+        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
+
+        binding.toolbar.setNavigationOnClickListener { view ->
+            view.findNavController().navigateUp()
+        }
+
         subscriberViewModalObservable()
     }
 
@@ -58,7 +75,7 @@ class LocaleListFragment : BaseFragment(),
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.list_locale_menu, menu)
 
-        val searchItem = menu.findItem(R.id.action_search)
+        val searchItem = menu.findItem(R.id.action_search_locale)
         searchItem.setOnActionExpandListener(this)
 
         searchView = searchItem.actionView as SearchView
@@ -174,7 +191,7 @@ class LocaleListFragment : BaseFragment(),
     }
 
     private fun onClick(locale: LocaleBinding) {
-        Toast.makeText(requireContext(), locale.name, Toast.LENGTH_SHORT).show()
+        router.showLocaleTabs(locale)
     }
 
     private fun onMenuItemClick(item: MenuItem, locale: LocaleBinding): Boolean {

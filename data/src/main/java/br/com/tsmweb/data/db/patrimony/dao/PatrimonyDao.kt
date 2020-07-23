@@ -9,10 +9,11 @@ interface PatrimonyDao {
 
     @Query("""
         SELECT * FROM patrimony
-        WHERE (code LIKE :term OR name LIKE :term)
+        WHERE locale_id = :localeId  
+        AND (code LIKE :term OR name LIKE :term)
         ORDER BY code, name
     """)
-    fun loadPatrimonies(term: String): Flow<List<PatrimonyEntity>>
+    fun loadPatrimonies(localeId: String, term: String): Flow<List<PatrimonyEntity>>
 
     @Query("SELECT * FROM patrimony WHERE id = :id")
     fun loadPatrimony(id: Long): Flow<PatrimonyEntity>

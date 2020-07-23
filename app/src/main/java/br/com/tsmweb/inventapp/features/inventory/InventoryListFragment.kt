@@ -14,15 +14,19 @@ import br.com.tsmweb.inventapp.common.BaseFragment
 import br.com.tsmweb.inventapp.common.ViewState
 import br.com.tsmweb.inventapp.databinding.FragmentInventoryListBinding
 import br.com.tsmweb.inventapp.features.inventory.binding.InventoryBinding
+import br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding
 import com.google.android.material.snackbar.Snackbar
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 class InventoryListFragment : BaseFragment(),
     MenuItem.OnActionExpandListener,
     SearchView.OnQueryTextListener {
 
     private lateinit var binding: FragmentInventoryListBinding
-    private val viewModel: InventoryListViewModel by viewModel()
+    private val viewModel: InventoryListViewModel by inject {
+        parametersOf(arguments?.getParcelable<LocaleBinding>(EXTRA_LOCALE)?.id)
+    }
 
     private var actionMode: ActionMode? = null
     private var searchView: SearchView? = null
@@ -162,9 +166,9 @@ class InventoryListFragment : BaseFragment(),
             }
         })
 
-        if (viewModel.loadState().value == null) {
-            viewModel.search()
-        }
+//        if (viewModel.loadState().value == null) {
+//            viewModel.search()
+//        }
     }
 
     private fun handleLoadState(state: ViewState<List<InventoryBinding>>) {
@@ -254,6 +258,16 @@ class InventoryListFragment : BaseFragment(),
                 viewModel.setInDeleteMode(false)
             }
 
+        }
+    }
+
+    companion object {
+        const val EXTRA_LOCALE = "locale"
+
+        fun newInstance(locale: LocaleBinding) = InventoryListFragment().apply {
+            arguments = Bundle().apply {
+                putParcelable(EXTRA_LOCALE, locale)
+            }
         }
     }
 

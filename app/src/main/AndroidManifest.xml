@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/MaterialTheme">
 
+        <activity android:name=".features.locale.LocaleTabActivity"
+            android:parentActivityName=".MainActivity"/>
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop">

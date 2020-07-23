@@ -2,34 +2,25 @@ package br.com.tsmweb.inventapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import br.com.tsmweb.inventapp.common.Router
-import kotlinx.android.synthetic.main.toolbar.*
+import br.com.tsmweb.inventapp.databinding.ActivityMainBinding
+import androidx.databinding.DataBindingUtil.setContentView
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
 class MainActivity : AppCompatActivity() {
 
-    val router: Router by inject { parametersOf(this@MainActivity) }
+    private val navController: NavController by lazy {
+        Navigation.findNavController(this, R.id.navHostFragment)
+    }
+
+    val router: Router by inject { parametersOf(navController) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setupNavigation()
+        setContentView<ActivityMainBinding>(this, R.layout.activity_main)
     }
 
-    private fun setupNavigation(){
-        setSupportActionBar(toolbar)
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        return router.navigationUp()
-    }
-
-    override fun onBackPressed() {
-        if (router.isInRootScreen()) {
-            finish()
-        } else {
-            super.onBackPressed()
-        }
-    }
 }

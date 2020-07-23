@@ -10,6 +10,26 @@
         android:id="@+id/localeListFragment"
         android:name="br.com.tsmweb.inventapp.features.locale.LocaleListFragment"
         android:label="@string/locales"
-        tools:layout="@layout/fragment_locale_list" />
+        tools:layout="@layout/fragment_locale_list">
+
+        <action
+            android:id="@+id/action_localeListFragment_to_localeTabFragment"
+            app:destination="@id/localeTabFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/localeTabFragment"
+        android:name="br.com.tsmweb.inventapp.features.locale.LocaleTabFragment"
+        android:label="@string/locales"
+        tools:layout="@layout/fragment_locale_tab">
+        <argument
+            android:name="locale"
+            app:argType="br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding" />
+    </fragment>
 
 </navigation>

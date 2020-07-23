@@ -2,7 +2,7 @@
     <string name="app_name">InventApp</string>
     <string name="about">Sobre</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="cancel">Cancelar</string>
+    <string name="cancel">CANCELAR</string>
     <string name="checked">Verificado</string>
     <string name="not_found">Não encontrado</string>
     <string name="not_checked">Não verificado</string>
@@ -54,6 +54,8 @@
     <string name="patrimony_status_active">Ativo</string>
     <string name="patrimony_status_inactive">Inativo</string>
     <string name="patrimony_status_depreciated">Depreciado</string>
+    <string name="patrimonies">Patrimônios</string>
+    <string name="patrimony_message_error_load">Falha ao carregar os patrimônios</string>
 
     <plurals name="message_item_deleted">
         <item quantity="one">1 item deletado</item>

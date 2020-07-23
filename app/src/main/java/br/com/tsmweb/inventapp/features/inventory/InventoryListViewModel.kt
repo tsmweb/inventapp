@@ -7,12 +7,14 @@ import br.com.tsmweb.inventapp.common.SingleLiveEvent
 import br.com.tsmweb.inventapp.common.ViewState
 import br.com.tsmweb.inventapp.features.inventory.binding.InventoryBinding
 import br.com.tsmweb.inventapp.features.inventory.binding.InventoryMapper
+import br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOn
 import java.lang.Exception
 
 class InventoryListViewModel(
+    private val localeId: String,
     private val loadInventoriesUseCase: LoadInventoriesUseCase,
     private val removeInventoryUseCase: RemoveInventoryUseCase
 ): ViewModel() {
@@ -46,11 +48,11 @@ class InventoryListViewModel(
     fun search(term: String = "") {
         if ((loadState.value == null) or (lastSearchTerm != term)) {
             lastSearchTerm = term
-            loadInventory(lastSearchTerm)
+            loadInventory(localeId, lastSearchTerm)
         }
     }
 
-    private fun loadInventory(term: String) {
+    private fun loadInventory(localeId: String, term: String) {
         viewModelScope.launch {
             loadState.postValue(
                 ViewState(

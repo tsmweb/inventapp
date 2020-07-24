@@ -30,7 +30,7 @@
                     android:id="@+id/edtCode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/locale_form_label_code"
+                    android:hint="@string/form_label_code"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:text="@={locale.code}" />
@@ -48,7 +48,7 @@
                     android:id="@+id/edtName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/locale_form_label_name"
+                    android:hint="@string/form_label_name"
                     android:imeOptions="actionDone"
                     android:inputType="textCapWords"
                     android:text="@={locale.name}" />

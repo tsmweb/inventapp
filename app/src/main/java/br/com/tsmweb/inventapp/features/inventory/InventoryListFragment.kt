@@ -183,7 +183,7 @@ class InventoryListFragment : BaseFragment(),
             ViewState.Status.ERROR -> {
                 binding.progressBar.visibility = View.GONE
                 Toast.makeText(requireContext(),
-                    R.string.inventory_message_error_load, Toast.LENGTH_SHORT).show()
+                    R.string.message_error_load_inventory, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -198,7 +198,7 @@ class InventoryListFragment : BaseFragment(),
             }
             ViewState.Status.ERROR -> {
                 Toast.makeText(requireContext(),
-                    R.string.inventory_message_error_remove, Toast.LENGTH_SHORT).show()
+                    R.string.message_error_remove_inventory, Toast.LENGTH_SHORT).show()
             }
         }
     }

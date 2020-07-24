@@ -12,7 +12,6 @@ import br.com.tsmweb.inventapp.common.ViewState
 import br.com.tsmweb.inventapp.databinding.FragmentPatrimonyListBinding
 import br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding
 import br.com.tsmweb.inventapp.features.patrimony.binding.PatrimonyBinding
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
@@ -47,9 +46,8 @@ class PatrimonyListFragment : BaseFragment(),
         binding = FragmentPatrimonyListBinding.inflate(inflater, container, false)
 
         initRecyclerView()
-        initFab()
-
         setHasOptionsMenu(true)
+
         return binding.root
     }
 
@@ -100,7 +98,7 @@ class PatrimonyListFragment : BaseFragment(),
     }
 
     private fun onClick(patrimony: PatrimonyBinding) {
-        Toast.makeText(requireContext(), patrimony.name, Toast.LENGTH_SHORT).show()
+        PatrimonyFormFragment.newInstance(patrimony).open(parentFragmentManager)
     }
 
     private fun initRecyclerView() {
@@ -108,13 +106,6 @@ class PatrimonyListFragment : BaseFragment(),
             itemAnimator = DefaultItemAnimator()
 //            setHasFixedSize(true)
             adapter = patrimonyAdapter
-        }
-    }
-
-    private fun initFab() {
-        val fab = parentFragment?.view?.findViewById<FloatingActionButton>(R.id.fab)
-        fab?.setOnClickListener {
-            Toast.makeText(requireContext(), "Novo Patrimônio", Toast.LENGTH_SHORT).show()
         }
     }
 

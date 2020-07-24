@@ -1,29 +1,22 @@
 package br.com.tsmweb.inventapp.features.locale
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding
-import br.com.tsmweb.inventapp.features.patrimony.PatrimonyDetailsFragment
-import br.com.tsmweb.inventapp.features.patrimony.PatrimonyListFragment
 
 class LocaleTabsPagerAdapter(
-    frag: Fragment,
-    private val locale: LocaleBinding
+    frag: Fragment
 ) : FragmentStateAdapter(frag) {
 
-    override fun getItemCount() = NUM_PAGES
+    private var fragmentList = mutableListOf<Fragment>()
 
-    override fun createFragment(position: Int): Fragment {
-        if (position == 1) {
-            return PatrimonyListFragment.newInstance(locale)
-        }
-
-        return PatrimonyDetailsFragment()
+    fun addFragment(fragment: Fragment) {
+        fragmentList.add(fragment)
     }
 
-    companion object {
-        private const val NUM_PAGES = 2
+    override fun getItemCount() = fragmentList.size
+
+    override fun createFragment(position: Int): Fragment {
+        return fragmentList.get(position)
     }
 
 }

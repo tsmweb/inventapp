@@ -167,7 +167,7 @@ class LocaleListFragment : BaseFragment(),
                 binding.progressBar.visibility = View.GONE
                 Snackbar.make(
                     binding.rvLocales,
-                    R.string.locale_message_error_load,
+                    R.string.message_error_load_locale,
                     Snackbar.LENGTH_SHORT).show()
             }
         }
@@ -178,13 +178,13 @@ class LocaleListFragment : BaseFragment(),
             ViewState.Status.SUCCESS -> {
                 Snackbar.make(
                     binding.rvLocales,
-                    R.string.locale_message_success_remove,
+                    R.string.message_success_remove_locale,
                     Snackbar.LENGTH_LONG).show()
             }
             ViewState.Status.ERROR -> {
                 Snackbar.make(
                     binding.rvLocales,
-                    R.string.locale_message_error_remove,
+                    R.string.message_error_remove_locale,
                     Snackbar.LENGTH_SHORT).show()
             }
         }
@@ -202,7 +202,7 @@ class LocaleListFragment : BaseFragment(),
             }
             R.id.menu_locale_remove -> {
                 AlertDialog.Builder(requireContext())
-                    .setMessage(R.string.locale_message_confirm_remove)
+                    .setMessage(R.string.message_confirm_remove_locale)
                     .setPositiveButton(R.string.remove) { _, i ->
                         viewModel.removePlace(locale)
                     }

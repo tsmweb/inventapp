@@ -1,4 +1,4 @@
-package br.com.tsmweb.inventapp.features.locale
+package br.com.tsmweb.inventapp.features.patrimony
 
 import android.os.Bundle
 import android.util.Log
@@ -13,40 +13,40 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import br.com.tsmweb.inventapp.R
 import br.com.tsmweb.inventapp.common.ViewState
-import br.com.tsmweb.inventapp.databinding.FragmentLocaleFormBinding
-import br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding
-import kotlinx.android.synthetic.main.fragment_locale_form.*
+import br.com.tsmweb.inventapp.databinding.FragmentPatrimonyFormBinding
+import br.com.tsmweb.inventapp.features.patrimony.binding.PatrimonyBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class LocaleFormFragment : DialogFragment() {
+class PatrimonyFormFragment : DialogFragment() {
 
-    private val TAG: String = LocaleFormFragment::class.java.simpleName
+    private val TAG = PatrimonyFormFragment::class.simpleName
 
-    private lateinit var binding: FragmentLocaleFormBinding
-    private val viewModel: LocaleFormViewModel by viewModel()
+    private lateinit var binding: FragmentPatrimonyFormBinding
+    private val viewModel: PatrimonyFormViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentLocaleFormBinding.inflate(inflater, container, false)
+        binding = FragmentPatrimonyFormBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        arguments?.getParcelable<LocaleBinding>(EXTRA_LOCALE)?.let {
-            viewModel.setLocale(it)
-            binding.locale = it
+
+        arguments?.getParcelable<PatrimonyBinding>(EXTRA_PATRIMONY)?.let {
+            viewModel.setPatrimony(it)
+            binding.patrimony = it
         }
 
         subscriberViewModalObservable()
 
-        binding.btnLocaleOK.setOnClickListener {
-            savePlace()
+        binding.btnOK.setOnClickListener {
+            savePatrimony()
         }
 
-        binding.btnLocaleCancel.setOnClickListener {
+        binding.btnCancel.setOnClickListener {
             dismiss()
         }
 
@@ -56,6 +56,15 @@ class LocaleFormFragment : DialogFragment() {
 
         dialog?.setTitle(R.string.action_new)
         dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
+    }
+
+    private fun handleKeyboardEvent(actionId: Int): Boolean {
+        if (EditorInfo.IME_ACTION_DONE == actionId) {
+            savePatrimony()
+            return true
+        }
+
+        return false
     }
 
     private fun subscriberViewModalObservable() {
@@ -69,37 +78,34 @@ class LocaleFormFragment : DialogFragment() {
                 }
                 ViewState.Status.ERROR -> {
                     Log.d(TAG, state.error.toString())
-                    Toast.makeText(requireContext(), R.string.message_error_save_locale, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), R.string.message_error_save_patrimony, Toast.LENGTH_SHORT).show()
                 }
             }
         })
     }
 
-    private fun handleKeyboardEvent(actionId: Int): Boolean {
-        if (EditorInfo.IME_ACTION_DONE == actionId) {
-            savePlace()
-            return true
-        }
+    private fun savePatrimony() {
+        val patrimony = binding.patrimony!!
 
-        return false
-    }
-
-    private fun savePlace() {
-        val locale = binding.locale!!
-
-        if (locale.code.isBlank()) {
+        if (patrimony.code.isBlank()) {
             binding.edtCode.error = getString(R.string.message_form_enter_code)
             binding.edtCode.requestFocus()
             return
         }
 
-        if (locale.name.isBlank()) {
+        if (patrimony.name.isBlank()) {
             binding.edtName.error = getString(R.string.message_form_enter_name)
             binding.edtName.requestFocus()
             return
         }
 
-        viewModel.saveLocale()
+        if (patrimony.dependency.isBlank()) {
+            binding.edtDependency.error = getString(R.string.message_form_enter_dependency)
+            binding.edtDependency.requestFocus()
+            return
+        }
+
+        viewModel.savePatrimony()
     }
 
     fun open(fm: FragmentManager) {
@@ -110,11 +116,11 @@ class LocaleFormFragment : DialogFragment() {
 
     companion object {
         private const val DIALOG_TAG = "formDialog"
-        private const val EXTRA_LOCALE = "locale"
+        private const val EXTRA_PATRIMONY = "patrimony"
 
-        fun newInstance(locale: LocaleBinding) = LocaleFormFragment().apply {
+        fun newInstance(patrimony: PatrimonyBinding) = PatrimonyFormFragment().apply {
             arguments = Bundle().apply {
-                putParcelable(EXTRA_LOCALE, locale)
+                putParcelable(EXTRA_PATRIMONY, patrimony)
             }
         }
     }

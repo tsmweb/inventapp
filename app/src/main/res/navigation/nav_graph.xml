@@ -27,9 +27,29 @@
         android:name="br.com.tsmweb.inventapp.features.locale.LocaleTabFragment"
         android:label="@string/locales"
         tools:layout="@layout/fragment_locale_tab">
+
         <argument
             android:name="locale"
             app:argType="br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding" />
+
+        <action
+            android:id="@+id/action_localeTabFragment_to_patrimonyDetailsFragment"
+            app:destination="@id/patrimonyDetailsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/patrimonyDetailsFragment"
+        android:name="br.com.tsmweb.inventapp.features.patrimony.PatrimonyDetailsFragment"
+        android:label="@string/patrimonies"
+        tools:layout="@layout/fragment_patrimony_details">
+
+        <argument
+            android:name="patrimony"
+            app:argType="br.com.tsmweb.inventapp.features.patrimony.binding.PatrimonyBinding" />
     </fragment>
 
 </navigation>

@@ -196,11 +196,11 @@ class LocaleListFragment : BaseFragment(),
 
     private fun onMenuItemClick(item: MenuItem, locale: LocaleBinding): Boolean {
         when (item.itemId) {
-            R.id.menu_locale_edit -> {
+            R.id.action_locale_edit -> {
                 LocaleFormFragment.newInstance(locale).open(parentFragmentManager)
                 return true
             }
-            R.id.menu_locale_remove -> {
+            R.id.action_locale_remove -> {
                 AlertDialog.Builder(requireContext())
                     .setMessage(R.string.message_confirm_remove_locale)
                     .setPositiveButton(R.string.remove) { _, i ->

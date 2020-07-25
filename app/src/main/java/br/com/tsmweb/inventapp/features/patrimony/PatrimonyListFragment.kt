@@ -2,7 +2,6 @@ package br.com.tsmweb.inventapp.features.patrimony
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -98,7 +97,8 @@ class PatrimonyListFragment : BaseFragment(),
     }
 
     private fun onClick(patrimony: PatrimonyBinding) {
-        PatrimonyFormFragment.newInstance(patrimony).open(parentFragmentManager)
+        router.showPatrimonyDetails(patrimony)
+//        PatrimonyFormFragment.newInstance(patrimony).open(parentFragmentManager)
     }
 
     private fun initRecyclerView() {

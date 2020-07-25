@@ -47,4 +47,21 @@ object TextBinding {
         }
     }
 
+    @JvmStatic
+    @BindingAdapter("android:background")
+    fun setBackgroundByStatusType(textView: TextView, statusType: StatusType?) {
+        val context = textView.context
+
+        if (statusType == null) {
+            textView.background = context.getDrawable(R.drawable.bg_rectangle_gray)
+            return
+        }
+
+        when (statusType) {
+            StatusType.ACTIVE -> textView.background = context.getDrawable(R.drawable.bg_rectangle_green)
+            StatusType.DEPRECIATED -> textView.background = context.getDrawable(R.drawable.bg_rectangle_gray)
+            StatusType.INACTIVE -> textView.background = context.getDrawable(R.drawable.bg_rectangle_red)
+        }
+    }
+
 }

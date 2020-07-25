@@ -15,7 +15,6 @@ import br.com.tsmweb.inventapp.R
 import br.com.tsmweb.inventapp.common.ViewState
 import br.com.tsmweb.inventapp.databinding.FragmentLocaleFormBinding
 import br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding
-import kotlinx.android.synthetic.main.fragment_locale_form.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class LocaleFormFragment : DialogFragment() {
@@ -54,7 +53,7 @@ class LocaleFormFragment : DialogFragment() {
             handleKeyboardEvent(i)
         }
 
-        dialog?.setTitle(R.string.action_new)
+        dialog?.setTitle(R.string.title_new_locale)
         dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
     }
 

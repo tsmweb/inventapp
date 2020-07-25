@@ -54,7 +54,7 @@ class PatrimonyFormFragment : DialogFragment() {
             handleKeyboardEvent(i)
         }
 
-        dialog?.setTitle(R.string.action_new)
+        dialog?.setTitle(R.string.title_new_patrimony)
         dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
     }
 

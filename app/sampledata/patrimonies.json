@@ -4,7 +4,7 @@
       "id": 1,
       "locale_id": "e10adc3949ba59abbe56e057f20f883e",
       "code": "000010",
-      "name": "1 - BANCO DE MADEIRA / GENUFLEXÓRIO BANCO DE MADEIRA (2,25 X 0.55 X 0,86 M)",
+      "name": "GENUFLEXÓRIO BANCO DE MADEIRA (2,25 X 0.55 X 0,86 M)",
       "dependency": "SALÃO DE CULTO",
       "status": "Ativo"
     },
@@ -12,7 +12,7 @@
       "id": 2,
       "locale_id": "e10adc3949ba59abbe56e057f20f884e",
       "code": "000011",
-      "name": "1 - BANCO DE MADEIRA / GENUFLEXÓRIO BANCO DE MADEIRA (2,25 X 0.55 X 0,86 M)",
+      "name": "GENUFLEXÓRIO BANCO DE MADEIRA (2,25 X 0.55 X 0,86 M)",
       "dependency": "SALÃO DE CULTO",
       "status": "Ativo"
     },
@@ -20,7 +20,7 @@
       "id": 3,
       "locale_id": "e10adc3949ba59abbe56e057f20f885e",
       "code": "000012",
-      "name": "1 - BANCO DE MADEIRA / GENUFLEXÓRIO BANCO DE MADEIRA (2,25 X 0.55 X 0,86 M)",
+      "name": "GENUFLEXÓRIO BANCO DE MADEIRA (2,25 X 0.55 X 0,86 M)",
       "dependency": "SALÃO DE CULTO",
       "status": "Ativo"
     }

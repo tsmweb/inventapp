@@ -73,6 +73,29 @@
                     tools:text="@sample/patrimonies.json/data/code" />
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/lblLocale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/label_locale"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/lblCode" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtLocale"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@{patrimony.locale.name}"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/lblLocale"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/lblLocale"
+                    app:layout_constraintTop_toTopOf="@+id/lblLocale"
+                    tools:text="@sample/patrimonies.json/data/locale/name" />
+
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/lblDependency"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -80,7 +103,7 @@
                     android:text="@string/label_dependency"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/lblCode" />
+                    app:layout_constraintTop_toBottomOf="@+id/lblLocale" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txtDependency"

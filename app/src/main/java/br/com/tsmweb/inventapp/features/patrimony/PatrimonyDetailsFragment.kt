@@ -15,7 +15,7 @@ import br.com.tsmweb.inventapp.common.Constants.EXTRA_PATRIMONY
 import br.com.tsmweb.inventapp.common.ViewState
 import br.com.tsmweb.inventapp.databinding.FragmentPatrimonyDetailsBinding
 import br.com.tsmweb.inventapp.features.patrimony.binding.PatrimonyBinding
-import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class PatrimonyDetailsFragment : BaseFragment() {
@@ -28,7 +28,7 @@ class PatrimonyDetailsFragment : BaseFragment() {
         arguments?.getParcelable<PatrimonyBinding>(EXTRA_PATRIMONY)
     }
 
-    private val viewModel: PatrimonyDetailsViewModel by inject {
+    private val viewModel: PatrimonyDetailsViewModel by viewModel {
         parametersOf(patrimony?.id)
     }
 
@@ -74,13 +74,19 @@ class PatrimonyDetailsFragment : BaseFragment() {
 
     private fun subscriberViewModalObservable() {
         viewModel.loadState().observe(viewLifecycleOwner, Observer { state ->
-            when (state.status) {
-                ViewState.Status.SUCCESS -> {
-                    binding.patrimony = state.data
-                }
-                ViewState.Status.ERROR -> {
-                    Log.d(TAG, state.error.toString())
-                    Toast.makeText(requireContext(), R.string.message_error_load_patrimony, Toast.LENGTH_SHORT).show()
+            state?.run {
+                when (status) {
+                    ViewState.Status.SUCCESS -> {
+                        binding.patrimony = data
+                    }
+                    ViewState.Status.ERROR -> {
+                        Log.d(TAG, error.toString())
+                        Toast.makeText(
+                            requireContext(),
+                            R.string.message_error_load_patrimony,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             }
         })

@@ -10,7 +10,8 @@ import br.com.tsmweb.inventapp.databinding.ItemPatrimonyBinding
 import br.com.tsmweb.inventapp.features.patrimony.binding.PatrimonyBinding
 
 class PatrimonyAdapter(
-    private val onClick: (PatrimonyBinding) -> Unit
+    private val onClick: (PatrimonyBinding) -> Unit,
+    private val onLongClick: (PatrimonyBinding) -> Boolean
 ): RecyclerView.Adapter<PatrimonyAdapter.ViewHolder>() {
 
     private var patrimonies: List<PatrimonyBinding>? = null
@@ -37,6 +38,10 @@ class PatrimonyAdapter(
 
                 clPatrimony.setOnClickListener {
                     onClick(currentPatrimony)
+                }
+
+                clPatrimony.setOnLongClickListener {
+                    onLongClick(currentPatrimony)
                 }
             }
         }

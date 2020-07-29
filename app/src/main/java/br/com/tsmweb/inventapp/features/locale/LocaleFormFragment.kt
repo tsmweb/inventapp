@@ -59,16 +59,18 @@ class LocaleFormFragment : DialogFragment() {
 
     private fun subscriberViewModalObservable() {
         viewModel.saveState().observe(viewLifecycleOwner, Observer { state ->
-            when (state.status) {
-                ViewState.Status.LOADING -> {
-                    Log.d(TAG, "Process is loading")
-                }
-                ViewState.Status.SUCCESS -> {
-                    dialog?.dismiss()
-                }
-                ViewState.Status.ERROR -> {
-                    Log.d(TAG, state.error.toString())
-                    Toast.makeText(requireContext(), R.string.message_error_save_locale, Toast.LENGTH_SHORT).show()
+            state?.run {
+                when (status) {
+                    ViewState.Status.LOADING -> {
+                        Log.d(TAG, "Process is loading")
+                    }
+                    ViewState.Status.SUCCESS -> {
+                        dialog?.dismiss()
+                    }
+                    ViewState.Status.ERROR -> {
+                        Log.d(TAG, error.toString())
+                        Toast.makeText(requireContext(), R.string.message_error_save_locale, Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         })

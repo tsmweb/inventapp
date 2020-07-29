@@ -1,8 +1,10 @@
 package br.com.tsmweb.domain.patrimony.model
 
+import br.com.tsmweb.domain.locale.model.Locale
+
 class Patrimony(
     var id: Long,
-    var localeId: String,
+    var locale: Locale,
     var code: String,
     var name: String,
     var dependency: String,

@@ -1,7 +1,6 @@
 package br.com.tsmweb.inventapp.features.locale
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,14 +9,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import androidx.viewpager2.widget.ViewPager2
 import br.com.tsmweb.inventapp.R
 import br.com.tsmweb.inventapp.common.BaseFragment
 import br.com.tsmweb.inventapp.common.Constants.EXTRA_LOCALE
 import br.com.tsmweb.inventapp.databinding.FragmentLocaleTabBinding
 import br.com.tsmweb.inventapp.features.inventory.InventoryReaderFragment
 import br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding
-import br.com.tsmweb.inventapp.features.patrimony.PatrimonyDetailsFragment
 import br.com.tsmweb.inventapp.features.patrimony.PatrimonyFormFragment
 import br.com.tsmweb.inventapp.features.patrimony.PatrimonyListFragment
 import br.com.tsmweb.inventapp.features.patrimony.binding.PatrimonyBinding
@@ -28,6 +25,7 @@ class LocaleTabFragment : BaseFragment() {
     private val TAG = LocaleTabFragment::class.simpleName
 
     private lateinit var binding: FragmentLocaleTabBinding
+    private lateinit var tabsPagerAdapter: LocaleTabsPagerAdapter
 
     private val locale: LocaleBinding? by lazy {
         arguments?.getParcelable<LocaleBinding>(EXTRA_LOCALE)
@@ -38,9 +36,6 @@ class LocaleTabFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLocaleTabBinding.inflate(inflater, container, false)
-
-        initFab()
-
         return binding.root
     }
 
@@ -62,15 +57,16 @@ class LocaleTabFragment : BaseFragment() {
 
         locale?.let {
             initTabLayout(it)
+            initFab(it)
         }
     }
 
     private fun initTabLayout(locale: LocaleBinding) {
-        val adapter = LocaleTabsPagerAdapter(this)
-        adapter.addFragment(InventoryReaderFragment())
-        adapter.addFragment(PatrimonyListFragment.newInstance(locale))
+        val tabsPagerAdapter = LocaleTabsPagerAdapter(this)
+        tabsPagerAdapter.addFragment(InventoryReaderFragment())
+        tabsPagerAdapter.addFragment(PatrimonyListFragment.newInstance(locale))
 
-        binding.viewPagerLocale.adapter = adapter
+        binding.viewPagerLocale.adapter = tabsPagerAdapter
 
         TabLayoutMediator(binding.tabLayoutLocale, binding.viewPagerLocale) { tab, position ->
             when (position) {
@@ -79,23 +75,23 @@ class LocaleTabFragment : BaseFragment() {
             }
         }.attach()
 
-        binding.viewPagerLocale.registerOnPageChangeCallback(object :
-            ViewPager2.OnPageChangeCallback() {
-                override fun onPageSelected(position: Int) {
-                    when (position) {
-                        0 -> {
-                            Log.i(TAG, "Detalhes Patrimônio")
-                        }
-                        1 -> {
-                            Log.i(TAG, "Novo Patrimônio")
-                        }
-                    }
-
-                }
-            })
+//        binding.viewPagerLocale.registerOnPageChangeCallback(object :
+//            ViewPager2.OnPageChangeCallback() {
+//                override fun onPageSelected(position: Int) {
+//                    when (position) {
+//                        0 -> {
+//                            Log.i(TAG, "Detalhes Patrimônio")
+//                        }
+//                        1 -> {
+//                            Log.i(TAG, "Novo Patrimônio")
+//                        }
+//                    }
+//
+//                }
+//            })
     }
 
-    private fun initFab() {
+    private fun initFab(localeBinding: LocaleBinding) {
         binding.fab.setOnClickListener {
             when (binding.viewPagerLocale.currentItem) {
                 0 -> {
@@ -103,7 +99,7 @@ class LocaleTabFragment : BaseFragment() {
                 }
                 1 -> {
                     val patrimony = PatrimonyBinding().apply {
-                        localeId = locale?.id ?: ""
+                        locale = localeBinding
                     }
                     PatrimonyFormFragment.newInstance(patrimony).open(parentFragmentManager)
                 }

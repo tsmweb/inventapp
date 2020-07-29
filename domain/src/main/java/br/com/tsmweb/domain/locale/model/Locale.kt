@@ -6,8 +6,8 @@ class Locale(
     var id: String,
     var code: String,
     var name: String,
-    var amountPatrimony: Int,
-    var lastInventory: Date?
+    var amountPatrimony: Int = 0,
+    var lastInventory: Date? = null
 ) {
 
     override fun equals(other: Any?): Boolean {

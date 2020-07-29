@@ -13,6 +13,7 @@ import br.com.tsmweb.domain.locale.interactor.RemoveLocaleUseCase
 import br.com.tsmweb.domain.locale.interactor.SaveLocaleUseCase
 import br.com.tsmweb.domain.locale.repository.LocaleRepository
 import br.com.tsmweb.domain.patrimony.interactor.ListPatrimonyUseCase
+import br.com.tsmweb.domain.patrimony.interactor.RemovePatrimonyUseCase
 import br.com.tsmweb.domain.patrimony.interactor.SavePatrimonyUseCase
 import br.com.tsmweb.domain.patrimony.interactor.ViewPatrimonyDetailsUseCase
 import br.com.tsmweb.domain.patrimony.repository.PatrimonyRepository
@@ -84,13 +85,18 @@ val appModule = module {
     }
 
     factory {
+        RemovePatrimonyUseCase(repository = get())
+    }
+
+    factory {
         ViewPatrimonyDetailsUseCase(repository = get())
     }
 
     viewModel { (localeId: String) ->
         PatrimonyListViewModel(
             localeId,
-            listPatrimonyUseCase = get()
+            listPatrimonyUseCase = get(),
+            removePatrimonyUseCase = get()
         )
     }
 

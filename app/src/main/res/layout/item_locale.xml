@@ -44,7 +44,7 @@
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="@sample/places.json/data/name" />
+                    tools:text="@sample/locales.json" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txtCode"
@@ -56,7 +56,7 @@
                     android:textStyle="italic"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtName"
-                    tools:text="@sample/places.json/data/code" />
+                    tools:text="@sample/locales.json" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/appCompatTextView"
@@ -78,7 +78,7 @@
                     app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView"
                     app:layout_constraintStart_toEndOf="@+id/appCompatTextView"
                     app:layout_constraintTop_toTopOf="@+id/appCompatTextView"
-                    tools:text="@sample/places.json/data/last_inventory" />
+                    tools:text="@sample/locales.json" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txtAmountPatrimony"
@@ -89,7 +89,7 @@
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/appCompatTextView2"
-                    tools:text="@sample/places.json/data/amount_patrimony" />
+                    tools:text="@sample/locales.json" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/appCompatTextView2"

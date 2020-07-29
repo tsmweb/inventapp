@@ -4,6 +4,7 @@ import android.os.Parcelable
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import androidx.databinding.library.baseAdapters.BR
+import br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -17,10 +18,10 @@ class PatrimonyBinding: BaseObservable(), Parcelable {
         }
 
     @Bindable
-    var localeId: String = ""
+    var locale: LocaleBinding = LocaleBinding()
         set(value) {
             field = value
-            notifyPropertyChanged(BR.localeId)
+            notifyPropertyChanged(BR.locale)
         }
 
     @Bindable
@@ -49,5 +50,12 @@ class PatrimonyBinding: BaseObservable(), Parcelable {
         set(value) {
             field = value
             notifyPropertyChanged(BR.status)
+        }
+
+    @Bindable
+    var selected: Boolean = false
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.selected)
         }
 }

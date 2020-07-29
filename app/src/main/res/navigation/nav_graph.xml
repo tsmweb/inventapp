@@ -44,7 +44,7 @@
     <fragment
         android:id="@+id/patrimonyDetailsFragment"
         android:name="br.com.tsmweb.inventapp.features.patrimony.PatrimonyDetailsFragment"
-        android:label="@string/patrimonies"
+        android:label="@string/patrimony"
         tools:layout="@layout/fragment_patrimony_details">
 
         <argument

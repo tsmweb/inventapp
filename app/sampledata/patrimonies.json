@@ -2,7 +2,11 @@
   "data": [
     {
       "id": 1,
-      "locale_id": "e10adc3949ba59abbe56e057f20f883e",
+      "locale": {
+        "id": "e10adc3949ba59abbe56e057f20f883e",
+        "code": "BR 22-4024",
+        "name": "QUEMIL"
+      },
       "code": "000010",
       "name": "GENUFLEXÓRIO BANCO DE MADEIRA (2,25 X 0.55 X 0,86 M)",
       "dependency": "SALÃO DE CULTO",
@@ -10,7 +14,11 @@
     },
     {
       "id": 2,
-      "locale_id": "e10adc3949ba59abbe56e057f20f884e",
+      "locale": {
+        "id": "e10adc3949ba59abbe56e057f20f883e",
+        "code": "BR 22-4024",
+        "name": "QUEMIL"
+      },
       "code": "000011",
       "name": "GENUFLEXÓRIO BANCO DE MADEIRA (2,25 X 0.55 X 0,86 M)",
       "dependency": "SALÃO DE CULTO",
@@ -18,7 +26,11 @@
     },
     {
       "id": 3,
-      "locale_id": "e10adc3949ba59abbe56e057f20f885e",
+      "locale": {
+        "id": "e10adc3949ba59abbe56e057f20f883e",
+        "code": "BR 22-4024",
+        "name": "QUEMIL"
+      },
       "code": "000012",
       "name": "GENUFLEXÓRIO BANCO DE MADEIRA (2,25 X 0.55 X 0,86 M)",
       "dependency": "SALÃO DE CULTO",

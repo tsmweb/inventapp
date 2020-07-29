@@ -1,6 +1,7 @@
 package br.com.tsmweb.inventapp.features.locale
 
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
 class LocaleTabsPagerAdapter(

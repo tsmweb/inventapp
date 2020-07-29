@@ -1,7 +1,11 @@
 package br.com.tsmweb.inventapp.features.patrimony
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.ActionMode
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -11,8 +15,7 @@ import br.com.tsmweb.inventapp.common.ViewState
 import br.com.tsmweb.inventapp.databinding.FragmentPatrimonyListBinding
 import br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding
 import br.com.tsmweb.inventapp.features.patrimony.binding.PatrimonyBinding
-import com.google.android.material.snackbar.Snackbar
-import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class PatrimonyListFragment : BaseFragment(),
@@ -22,16 +25,17 @@ class PatrimonyListFragment : BaseFragment(),
     private val TAG = PatrimonyListFragment::class.simpleName
 
     private lateinit var binding: FragmentPatrimonyListBinding
+    private var actionMode: ActionMode? = null
 
     private val locale: LocaleBinding? by lazy {
         arguments?.getParcelable<LocaleBinding>(EXTRA_LOCALE)
     }
 
     private val patrimonyAdapter: PatrimonyAdapter by lazy {
-        PatrimonyAdapter(this::onClick)
+        PatrimonyAdapter(this::onClick, this::onLongClick)
     }
 
-    private val viewModel: PatrimonyListViewModel by inject {
+    private val viewModel: PatrimonyListViewModel by viewModel {
         parametersOf(locale?.id)
     }
 
@@ -96,11 +100,6 @@ class PatrimonyListFragment : BaseFragment(),
         return true
     }
 
-    private fun onClick(patrimony: PatrimonyBinding) {
-        router.showPatrimonyDetails(patrimony)
-//        PatrimonyFormFragment.newInstance(patrimony).open(parentFragmentManager)
-    }
-
     private fun initRecyclerView() {
         binding.rvPatrimonies.run {
             itemAnimator = DefaultItemAnimator()
@@ -111,8 +110,35 @@ class PatrimonyListFragment : BaseFragment(),
 
     private fun subscriberViewModalObservable() {
         viewModel.loadState().observe(viewLifecycleOwner, Observer { state ->
-            if (state != null) {
-                handleLoadState(state)
+            state?.let {
+                handleLoadState(it)
+            }
+        })
+
+        viewModel.deleteState().observe(viewLifecycleOwner, Observer { state ->
+            state?.let {
+                handleDeleteState(it)
+            }
+        })
+
+        viewModel.showDetails().observe(viewLifecycleOwner, Observer { patrimony ->
+            patrimony?.let {
+                router.showPatrimonyDetails(it)
+            }
+        })
+
+        viewModel.isInDeleteModel().observe(viewLifecycleOwner, Observer { deleteMode ->
+            if (deleteMode) {
+                showDeleteMode()
+            } else {
+                hideDeleteMode()
+            }
+        })
+
+        viewModel.selectionCount().observe(viewLifecycleOwner, Observer { count ->
+            count?.let {
+                updateSelectionCountText(it)
+                patrimonyAdapter.notifyDataSetChanged()
             }
         })
 
@@ -132,11 +158,87 @@ class PatrimonyListFragment : BaseFragment(),
             }
             ViewState.Status.ERROR -> {
                 binding.progressBar.visibility = View.GONE
-                Snackbar.make(
-                    binding.rvPatrimonies,
+                Toast.makeText(
+                    requireContext(),
                     R.string.patrimony_message_error_load,
-                    Snackbar.LENGTH_SHORT).show()
+                    Toast.LENGTH_SHORT
+                ).show()
             }
+        }
+    }
+
+    private fun handleDeleteState(state: ViewState<Int>) {
+        when (state.status) {
+            ViewState.Status.SUCCESS -> {
+                val count = state.data ?: 0
+                Toast.makeText(
+                    requireContext(),
+                    resources.getQuantityString(R.plurals.message_item_deleted, count, count),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            ViewState.Status.ERROR -> {
+                Toast.makeText(requireContext(),
+                    R.string.message_error_remove_patrimonies, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun updateSelectionCountText(count: Int) {
+        view?.post {
+            actionMode?.title = resources.getQuantityString(R.plurals.list_patrimony_selected, count, count)
+        }
+    }
+
+    private fun showDeleteMode() {
+        val appCompatActivity = (activity as AppCompatActivity)
+        actionMode = appCompatActivity.startSupportActionMode(getActionModeCallBack())
+    }
+
+    private fun hideDeleteMode() {
+        binding.rvPatrimonies.post {
+            actionMode?.finish()
+        }
+    }
+
+    private fun onClick(patrimony: PatrimonyBinding) {
+        viewModel.selectPatrimony(patrimony)
+    }
+
+    private fun onLongClick(patrimony: PatrimonyBinding): Boolean {
+        if (actionMode == null) {
+            viewModel.setInDeleteMode(true)
+            viewModel.selectPatrimony(patrimony)
+            return true
+        }
+
+        return false
+    }
+
+    private fun getActionModeCallBack() : ActionMode.Callback {
+        return object : ActionMode.Callback {
+
+            override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
+                if (item?.itemId == R.id.action_delete) {
+                    viewModel.deleteSelected()
+                    return true
+                }
+
+                return false
+            }
+
+            override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+                activity?.menuInflater?.inflate(R.menu.inventories_cab, menu)
+                return true
+            }
+
+            override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?) = false
+
+            override fun onDestroyActionMode(mode: ActionMode?) {
+                actionMode = null
+                viewModel.setInDeleteMode(false)
+            }
+
         }
     }
 

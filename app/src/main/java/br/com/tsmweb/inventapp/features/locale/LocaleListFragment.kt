@@ -2,6 +2,7 @@ package br.com.tsmweb.inventapp.features.locale
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -18,7 +19,6 @@ import br.com.tsmweb.inventapp.common.ViewState
 import br.com.tsmweb.inventapp.databinding.FragmentLocaleListBinding
 import br.com.tsmweb.inventapp.features.about.AboutDialogFragment
 import br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding
-import com.google.android.material.snackbar.Snackbar
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class LocaleListFragment : BaseFragment(),
@@ -138,14 +138,14 @@ class LocaleListFragment : BaseFragment(),
 
     private fun subscriberViewModalObservable() {
         viewModel.loadState().observe(viewLifecycleOwner, Observer { state ->
-            if (state != null) {
-                handleLoadState(state)
+            state?.let {
+                handleLoadState(it)
             }
         })
 
         viewModel.removeState().observe(viewLifecycleOwner, Observer { state ->
-            if (state != null) {
-                handleRemoveState(state)
+            state?.let {
+                handleRemoveState(it)
             }
         })
 
@@ -165,10 +165,11 @@ class LocaleListFragment : BaseFragment(),
             }
             ViewState.Status.ERROR -> {
                 binding.progressBar.visibility = View.GONE
-                Snackbar.make(
-                    binding.rvLocales,
+                Toast.makeText(
+                    requireContext(),
                     R.string.message_error_load_locale,
-                    Snackbar.LENGTH_SHORT).show()
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
@@ -176,16 +177,18 @@ class LocaleListFragment : BaseFragment(),
     private fun handleRemoveState(state: ViewState<Unit>) {
         when (state.status) {
             ViewState.Status.SUCCESS -> {
-                Snackbar.make(
-                    binding.rvLocales,
+                Toast.makeText(
+                    requireContext(),
                     R.string.message_success_remove_locale,
-                    Snackbar.LENGTH_LONG).show()
+                    Toast.LENGTH_LONG
+                ).show()
             }
             ViewState.Status.ERROR -> {
-                Snackbar.make(
-                    binding.rvLocales,
+                Toast.makeText(
+                    requireContext(),
                     R.string.message_error_remove_locale,
-                    Snackbar.LENGTH_SHORT).show()
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }

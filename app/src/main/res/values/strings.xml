@@ -69,6 +69,7 @@
     <string name="form_label_status">Status</string>
     <string name="message_error_load_patrimony">Falha ao carregar dados do patrimônio</string>
     <string name="label_locale">Localidade:</string>
+    <string name="action_locale_save">Salvar</string>
 
     <plurals name="message_item_deleted">
         <item quantity="one">1 item deletado</item>

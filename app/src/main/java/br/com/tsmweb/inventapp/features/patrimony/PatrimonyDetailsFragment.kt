@@ -65,7 +65,7 @@ class PatrimonyDetailsFragment : BaseFragment() {
         when (item.itemId) {
             R.id.action_edit_patrimony -> {
                 val pat = patrimony ?: PatrimonyBinding()
-                PatrimonyFormFragment.newInstance(pat).open(parentFragmentManager)
+                router.showPatrimonyEdit(pat)
             }
         }
 

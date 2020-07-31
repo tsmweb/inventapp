@@ -9,6 +9,8 @@ import androidx.appcompat.view.ActionMode
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.tsmweb.inventapp.R
 import br.com.tsmweb.inventapp.common.BaseFragment
 import br.com.tsmweb.inventapp.common.ViewState
@@ -103,6 +105,9 @@ class PatrimonyListFragment : BaseFragment(),
     private fun initRecyclerView() {
         binding.rvPatrimonies.run {
             itemAnimator = DefaultItemAnimator()
+            addItemDecoration(
+                DividerItemDecoration(context, LinearLayoutManager.VERTICAL)
+            )
 //            setHasFixedSize(true)
             adapter = patrimonyAdapter
         }

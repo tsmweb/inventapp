@@ -19,6 +19,14 @@ class AppRouter(
         navController.navigate(R.id.localeListFragment)
     }
 
+    override fun showLocaleForm(locale: LocaleBinding) {
+        val args = Bundle().apply {
+            putParcelable(EXTRA_LOCALE, locale)
+        }
+
+        navController.navigate(R.id.action_localeListFragment_to_localeFormFragment, args)
+    }
+
     override fun showLocaleTabs(locale: LocaleBinding) {
         val args = Bundle().apply {
             putParcelable(EXTRA_LOCALE, locale)
@@ -33,6 +41,22 @@ class AppRouter(
         }
 
         navController.navigate(R.id.action_localeTabFragment_to_patrimonyDetailsFragment, args)
+    }
+
+    override fun showPatrimonyNew(patrimony: PatrimonyBinding) {
+        val args = Bundle().apply {
+            putParcelable(EXTRA_PATRIMONY, patrimony)
+        }
+
+        navController.navigate(R.id.action_localeTabFragment_to_patrimonyFormFragment, args)
+    }
+
+    override fun showPatrimonyEdit(patrimony: PatrimonyBinding) {
+        val args = Bundle().apply {
+            putParcelable(EXTRA_PATRIMONY, patrimony)
+        }
+
+        navController.navigate(R.id.action_patrimonyDetailsFragment_to_patrimonyFormFragment, args)
     }
 
     override fun back() {

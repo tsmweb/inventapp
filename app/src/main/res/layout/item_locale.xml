@@ -21,95 +21,109 @@
         android:layout_marginEnd="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clLocale"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackground"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/clLocale"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtName"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:padding="8dp"
-                android:background="?attr/selectableItemBackground"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@{locale.name}"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toStartOf="@+id/imgMenu"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@sample/locales.json/data/name" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{locale.name}"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="@sample/locales.json" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtCode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@{locale.code}"
+                android:textSize="12sp"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toStartOf="@+id/imgMenu"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtName"
+                tools:text="@sample/locales.json/data/code" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtCode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@{locale.code}"
-                    android:textSize="14sp"
-                    android:textStyle="italic"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtName"
-                    tools:text="@sample/locales.json" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/appCompatTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/last_inventory"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtAmountPatrimony" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/appCompatTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/last_inventory"
-                    android:textSize="12sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtCode" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtLastInventory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@{locale.lastInventory}"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView"
+                app:layout_constraintStart_toEndOf="@+id/appCompatTextView"
+                app:layout_constraintTop_toTopOf="@+id/appCompatTextView"
+                tools:text="@sample/locales.json/data/last_inventory" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtLastInventory"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="@{locale.lastInventory}"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView"
-                    app:layout_constraintStart_toEndOf="@+id/appCompatTextView"
-                    app:layout_constraintTop_toTopOf="@+id/appCompatTextView"
-                    tools:text="@sample/locales.json" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtAmountPatrimony"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@{locale.amountPatrimony}"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtCode"
+                tools:text="@sample/locales.json/data/amount_patrimony" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtAmountPatrimony"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:text="@{locale.amountPatrimony}"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/appCompatTextView2"
-                    tools:text="@sample/locales.json" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/appCompatTextView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/locale_amount_patrimony"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/appCompatTextView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/locale_amount_patrimony"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="@+id/txtAmountPatrimony"
+                app:layout_constraintStart_toEndOf="@+id/txtAmountPatrimony"
+                app:layout_constraintTop_toTopOf="@+id/txtAmountPatrimony" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgMenu"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:paddingStart="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/txtCode"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_dots" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.5" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

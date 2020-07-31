@@ -2,26 +2,32 @@ package br.com.tsmweb.inventapp.features.patrimony
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
+import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
-import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.FragmentManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import br.com.tsmweb.inventapp.R
+import br.com.tsmweb.inventapp.common.BaseFragment
+import br.com.tsmweb.inventapp.common.Constants.EXTRA_PATRIMONY
 import br.com.tsmweb.inventapp.common.ViewState
 import br.com.tsmweb.inventapp.databinding.FragmentPatrimonyFormBinding
 import br.com.tsmweb.inventapp.features.patrimony.binding.PatrimonyBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class PatrimonyFormFragment : DialogFragment() {
+class PatrimonyFormFragment : BaseFragment() {
 
     private val TAG = PatrimonyFormFragment::class.simpleName
 
     private lateinit var binding: FragmentPatrimonyFormBinding
+
+    private val patrimony: PatrimonyBinding? by lazy {
+        arguments?.getParcelable<PatrimonyBinding>(EXTRA_PATRIMONY)
+    }
+
     private val viewModel: PatrimonyFormViewModel by viewModel()
 
     override fun onCreateView(
@@ -29,33 +35,45 @@ class PatrimonyFormFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentPatrimonyFormBinding.inflate(inflater, container, false)
+        setHasOptionsMenu(true)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        arguments?.getParcelable<PatrimonyBinding>(EXTRA_PATRIMONY)?.let {
+        val navHostFragment = NavHostFragment.findNavController(this)
+        NavigationUI.setupWithNavController(binding.toolbar, navHostFragment)
+
+        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
+
+        binding.toolbar.setNavigationOnClickListener { view ->
+            view.findNavController().navigateUp()
+        }
+
+        patrimony?.let {
             viewModel.setPatrimony(it)
             binding.patrimony = it
-        }
-
-        subscriberViewModalObservable()
-
-        binding.btnOK.setOnClickListener {
-            savePatrimony()
-        }
-
-        binding.btnCancel.setOnClickListener {
-            dismiss()
         }
 
         binding.edtName.setOnEditorActionListener{ _, i, _ ->
             handleKeyboardEvent(i)
         }
 
-        dialog?.setTitle(R.string.title_new_patrimony)
-        dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
+        subscriberViewModalObservable()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.form_patrimony_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_patrimony_save -> savePatrimony()
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     private fun handleKeyboardEvent(actionId: Int): Boolean {
@@ -75,7 +93,7 @@ class PatrimonyFormFragment : DialogFragment() {
                         Log.d(TAG, "Process is loading")
                     }
                     ViewState.Status.SUCCESS -> {
-                        dialog?.dismiss()
+                        router.back()
                     }
                     ViewState.Status.ERROR -> {
                         Log.d(TAG, error.toString())
@@ -112,23 +130,6 @@ class PatrimonyFormFragment : DialogFragment() {
         }
 
         viewModel.savePatrimony()
-    }
-
-    fun open(fm: FragmentManager) {
-        if (fm.findFragmentByTag(DIALOG_TAG) == null) {
-            show(fm, DIALOG_TAG)
-        }
-    }
-
-    companion object {
-        private const val DIALOG_TAG = "formDialog"
-        private const val EXTRA_PATRIMONY = "patrimony"
-
-        fun newInstance(patrimony: PatrimonyBinding) = PatrimonyFormFragment().apply {
-            arguments = Bundle().apply {
-                putParcelable(EXTRA_PATRIMONY, patrimony)
-            }
-        }
     }
 
 }

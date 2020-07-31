@@ -35,11 +35,12 @@
             android:id="@+id/rvLocales"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:paddingBottom="100dp"
             android:clipToPadding="false"
-            tools:listitem="@layout/item_locale"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+            android:paddingBottom="100dp"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:spanCount="@integer/span_count_locales"
+            tools:listitem="@layout/item_locale" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabAddLocale"

@@ -15,6 +15,19 @@ object PatrimonyMapper {
         status = domain.status
     )
 
+    fun toDomain(entity: PatrimonyEntity) = Patrimony(
+        id = entity.id,
+        locale = Locale(
+            id = entity.localeId,
+            code = "",
+            name = ""
+        ),
+        code = entity.code,
+        name = entity.name,
+        dependency = entity.dependency,
+        status = entity.status
+    )
+
     fun toDomain(entity: PatrimonyAndLocale) = Patrimony(
         id = entity.patrimony.id,
         locale = Locale(

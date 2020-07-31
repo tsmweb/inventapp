@@ -8,79 +8,71 @@
             type="br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding" />
     </data>
 
-    <ScrollView
-        android:id="@+id/scrollView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:elevation="4dp"
+            android:theme="@style/MaterialTheme.AppBarOverlay"
+            app:popupTheme="@style/MaterialTheme.PopupOverlay" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilCode"
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtCode"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/form_label_code"
-                    android:imeOptions="actionNext"
-                    android:inputType="text"
-                    android:text="@={locale.code}" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilName"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tilCode">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/form_label_name"
-                    android:imeOptions="actionDone"
-                    android:inputType="textCapWords"
-                    android:text="@={locale.name}" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/btnLocaleOK"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="?attr/selectableItemBackground"
-                android:text="@android:string/ok"
-                android:textColor="@color/colorAccent"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tilName" />
+                android:padding="16dp">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/btnLocaleCancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                android:background="?attr/selectableItemBackground"
-                android:text="@string/cancel"
-                android:textColor="@color/colorAccent"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/btnLocaleOK"
-                app:layout_constraintEnd_toStartOf="@+id/btnLocaleOK"
-                app:layout_constraintTop_toTopOf="@+id/btnLocaleOK" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/form_label_code"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:text="@={locale.code}" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-    </ScrollView>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tilCode">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/form_label_name"
+                        android:imeOptions="actionDone"
+                        android:inputType="textCapWords"
+                        android:text="@={locale.name}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
 
 </layout>

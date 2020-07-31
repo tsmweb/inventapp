@@ -20,6 +20,14 @@
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_right" />
 
+        <action
+            android:id="@+id/action_localeListFragment_to_localeFormFragment"
+            app:destination="@id/localeFormFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right" />
+
     </fragment>
 
     <fragment
@@ -39,6 +47,14 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_localeTabFragment_to_patrimonyFormFragment"
+            app:destination="@id/patrimonyFormFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -46,6 +62,36 @@
         android:name="br.com.tsmweb.inventapp.features.patrimony.PatrimonyDetailsFragment"
         android:label="@string/patrimony"
         tools:layout="@layout/fragment_patrimony_details">
+
+        <argument
+            android:name="patrimony"
+            app:argType="br.com.tsmweb.inventapp.features.patrimony.binding.PatrimonyBinding" />
+
+        <action
+            android:id="@+id/action_patrimonyDetailsFragment_to_patrimonyFormFragment"
+            app:destination="@id/patrimonyFormFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/localeFormFragment"
+        android:name="br.com.tsmweb.inventapp.features.locale.LocaleFormFragment"
+        android:label="@string/title_new_locale"
+        tools:layout="@layout/fragment_locale_form">
+
+        <argument
+            android:name="locale"
+            app:argType="br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/patrimonyFormFragment"
+        android:name="br.com.tsmweb.inventapp.features.patrimony.PatrimonyFormFragment"
+        android:label="@string/title_new_patrimony"
+        tools:layout="@layout/fragment_patrimony_form">
 
         <argument
             android:name="patrimony"

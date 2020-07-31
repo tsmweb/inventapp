@@ -124,15 +124,14 @@ class LocaleListFragment : BaseFragment(),
     private fun initRecyclerView() {
         binding.rvLocales.run {
             itemAnimator = DefaultItemAnimator()
-            setHasFixedSize(true)
+//            setHasFixedSize(true)
             adapter = localeAdapter
         }
     }
 
     private fun initFab() {
         binding.fabAddLocale.setOnClickListener {
-            LocaleFormFragment.newInstance(LocaleBinding())
-                .open(parentFragmentManager)
+            router.showLocaleForm(LocaleBinding())
         }
     }
 
@@ -200,7 +199,7 @@ class LocaleListFragment : BaseFragment(),
     private fun onMenuItemClick(item: MenuItem, locale: LocaleBinding): Boolean {
         when (item.itemId) {
             R.id.action_locale_edit -> {
-                LocaleFormFragment.newInstance(locale).open(parentFragmentManager)
+                router.showLocaleForm(locale)
                 return true
             }
             R.id.action_locale_remove -> {

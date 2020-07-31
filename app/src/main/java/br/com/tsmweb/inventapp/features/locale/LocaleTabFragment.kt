@@ -15,7 +15,6 @@ import br.com.tsmweb.inventapp.common.Constants.EXTRA_LOCALE
 import br.com.tsmweb.inventapp.databinding.FragmentLocaleTabBinding
 import br.com.tsmweb.inventapp.features.inventory.InventoryReaderFragment
 import br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding
-import br.com.tsmweb.inventapp.features.patrimony.PatrimonyFormFragment
 import br.com.tsmweb.inventapp.features.patrimony.PatrimonyListFragment
 import br.com.tsmweb.inventapp.features.patrimony.binding.PatrimonyBinding
 import com.google.android.material.tabs.TabLayoutMediator
@@ -101,7 +100,7 @@ class LocaleTabFragment : BaseFragment() {
                     val patrimony = PatrimonyBinding().apply {
                         locale = localeBinding
                     }
-                    PatrimonyFormFragment.newInstance(patrimony).open(parentFragmentManager)
+                    router.showPatrimonyNew(patrimony)
                 }
             }
         }

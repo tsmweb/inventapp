@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.com.tsmweb.inventapp">
 
+    <uses-feature android:name="android.hardware.camera.any" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:name=".InventApp"
         android:allowBackup="true"
@@ -10,9 +13,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MaterialTheme">
-
-        <activity android:name=".features.locale.LocaleTabActivity"
-            android:parentActivityName=".MainActivity"/>
 
         <activity
             android:name=".MainActivity"

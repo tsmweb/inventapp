@@ -10,6 +10,7 @@ interface Router {
     fun showPatrimonyDetails(patrimony: PatrimonyBinding)
     fun showPatrimonyNew(patrimony: PatrimonyBinding)
     fun showPatrimonyEdit(patrimony: PatrimonyBinding)
+    fun showInventoryNew(locale: LocaleBinding)
     fun back()
     fun getRootScreen(): Set<Int>
     fun isInRootScreen(): Boolean

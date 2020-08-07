@@ -59,6 +59,14 @@ class AppRouter(
         navController.navigate(R.id.action_patrimonyDetailsFragment_to_patrimonyFormFragment, args)
     }
 
+    override fun showInventoryNew(locale: LocaleBinding) {
+        val args = Bundle().apply {
+            putParcelable(EXTRA_LOCALE, locale)
+        }
+
+        navController.navigate(R.id.action_localeTabFragment_to_inventoryBarcodeFragment, args)
+    }
+
     override fun back() {
         navController.popBackStack()
     }

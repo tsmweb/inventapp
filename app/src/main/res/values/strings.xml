@@ -4,6 +4,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="cancel">CANCELAR</string>
     <string name="checked">Verificado</string>
+    <string name="cd_settings_button">Configurações</string>
+    <string name="cd_close_button">Voltar</string>
+    <string name="cd_flash_button">Ativar o flash da camera</string>
     <string name="not_found">Não encontrado</string>
     <string name="not_checked">Não verificado</string>
     <string name="search">Pesquisar</string>
@@ -70,6 +73,7 @@
     <string name="message_error_load_patrimony">Falha ao carregar dados do patrimônio</string>
     <string name="label_locale">Localidade:</string>
     <string name="action_locale_save">Salvar</string>
+    <string name="typed_barcode">Digitar código</string>
 
     <plurals name="message_item_deleted">
         <item quantity="one">1 item deletado</item>

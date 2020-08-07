@@ -55,6 +55,14 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_localeTabFragment_to_inventoryBarcodeFragment"
+            app:destination="@id/inventoryBarcodeFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -96,6 +104,17 @@
         <argument
             android:name="patrimony"
             app:argType="br.com.tsmweb.inventapp.features.patrimony.binding.PatrimonyBinding" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/inventoryBarcodeFragment"
+        android:name="br.com.tsmweb.inventapp.features.inventory.InventoryBarcodeFragment"
+        android:label="@string/inventories"
+        tools:layout="@layout/fragment_inventory_barcode" >
+
+        <argument
+            android:name="locale"
+            app:argType="br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding" />
     </fragment>
 
 </navigation>

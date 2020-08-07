@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -94,7 +93,7 @@ class LocaleTabFragment : BaseFragment() {
         binding.fab.setOnClickListener {
             when (binding.viewPagerLocale.currentItem) {
                 0 -> {
-                    Toast.makeText(requireContext(), "Detalhes Patrimônio", Toast.LENGTH_SHORT).show()
+                    router.showInventoryNew(localeBinding)
                 }
                 1 -> {
                     val patrimony = PatrimonyBinding().apply {

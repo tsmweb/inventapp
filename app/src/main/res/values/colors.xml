@@ -16,4 +16,6 @@
     <color name="strokeGray">#636363</color>
     <color name="black">#FF000000</color>
     <color name="transparent">#00000000</color>
+    <color name="capture_box_stroke_color">#FFFFFFFF</color>
+    <color name="capture_background_color">#B3000000</color>
 </resources>

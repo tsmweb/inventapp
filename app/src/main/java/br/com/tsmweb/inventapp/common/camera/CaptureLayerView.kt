@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
+import br.com.tsmweb.inventapp.R
 
 class CaptureLayerView @JvmOverloads constructor(
     context: Context,
@@ -21,7 +22,7 @@ class CaptureLayerView @JvmOverloads constructor(
     private val rect: RectF = RectF()
     private var parentWith: Int = 0
     private var parentHeight: Int = 0
-    private val boxCornerRadius: Float = 10f
+    private val boxCornerRadius: Float = resources.getDimension(R.dimen.capture_box_corner_radius)
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
@@ -29,7 +30,7 @@ class CaptureLayerView @JvmOverloads constructor(
         paint = Paint(Paint.ANTI_ALIAS_FLAG)
 
         strokePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            color = Color.parseColor("#FFFFFFFF")
+            color = resources.getColor(R.color.capture_box_stroke_color)
             style = Paint.Style.STROKE
             strokeWidth = 2f
         }
@@ -39,7 +40,7 @@ class CaptureLayerView @JvmOverloads constructor(
         }
 
         semiTransparentPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            color = Color.parseColor("#CC000000")
+            color = resources.getColor(R.color.capture_background_color)
         }
     }
 
@@ -60,14 +61,12 @@ class CaptureLayerView @JvmOverloads constructor(
         rect.set(left, top, right, bottom)
 
         setMeasuredDimension(parentWith, parentHeight)
+
+        bitmap = Bitmap.createBitmap(parentWith, parentHeight, Bitmap.Config.ARGB_8888)
     }
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-
-        if (bitmap == null) {
-            bitmap = Bitmap.createBitmap(parentWith, parentHeight, Bitmap.Config.ARGB_8888)
-        }
 
         Canvas(bitmap!!).apply {
             // semi-transparent background

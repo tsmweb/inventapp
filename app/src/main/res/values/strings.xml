@@ -74,6 +74,9 @@
     <string name="label_locale">Localidade:</string>
     <string name="action_locale_save">Salvar</string>
     <string name="typed_barcode">Digitar código</string>
+    <string name="form_label_description">Descrição</string>
+    <string name="label_note">Observação:</string>
+    <string name="save">Salvar</string>
 
     <plurals name="message_item_deleted">
         <item quantity="one">1 item deletado</item>

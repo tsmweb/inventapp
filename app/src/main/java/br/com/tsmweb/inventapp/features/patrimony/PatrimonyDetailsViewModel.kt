@@ -1,7 +1,7 @@
 package br.com.tsmweb.inventapp.features.patrimony
 
 import androidx.lifecycle.*
-import br.com.tsmweb.domain.patrimony.interactor.ViewPatrimonyDetailsUseCase
+import br.com.tsmweb.domain.patrimony.interactor.DetailsPatrimonyUseCase
 import br.com.tsmweb.inventapp.common.ViewState
 import br.com.tsmweb.inventapp.features.patrimony.binding.PatrimonyBinding
 import br.com.tsmweb.inventapp.features.patrimony.binding.PatrimonyMapper
@@ -13,7 +13,7 @@ import java.lang.Exception
 
 class PatrimonyDetailsViewModel(
     private val patrimonyId: Long,
-    private val viewPatrimonyDetailsUseCase: ViewPatrimonyDetailsUseCase
+    private val detailsPatrimonyUseCase: DetailsPatrimonyUseCase
 ) : ViewModel() {
 
     private val loadState: MutableLiveData<ViewState<PatrimonyBinding>> = MutableLiveData()
@@ -26,7 +26,7 @@ class PatrimonyDetailsViewModel(
             loadState.postValue(ViewState(ViewState.Status.LOADING))
 
             try {
-                viewPatrimonyDetailsUseCase.execute(patrimonyId)
+                detailsPatrimonyUseCase.execute(patrimonyId)
                     .flowOn(Dispatchers.IO)
                     .collect { patrimony ->
                         if (patrimony != null) {

@@ -1,5 +1,5 @@
 package br.com.tsmweb.domain.patrimony.model
 
-enum class StatusType {
+enum class StatusPatrimony {
     ACTIVE, INACTIVE, DEPRECIATED
 }

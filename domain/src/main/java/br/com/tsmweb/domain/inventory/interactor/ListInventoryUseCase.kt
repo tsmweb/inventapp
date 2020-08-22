@@ -4,10 +4,10 @@ import br.com.tsmweb.domain.inventory.model.Inventory
 import br.com.tsmweb.domain.inventory.repository.InventoryRepository
 import kotlinx.coroutines.flow.Flow
 
-class LoadInventoriesUseCase(
+class ListInventoryUseCase(
     private val repository: InventoryRepository
 ) {
-    fun execute(term: String): Flow<List<Inventory>> {
-        return repository.loadInventories(term)
+    fun execute(localeId: String, term: String): Flow<List<Inventory>> {
+        return repository.loadInventories(localeId, term)
     }
 }

@@ -2,7 +2,7 @@ package br.com.tsmweb.inventapp.features.patrimony.binding
 
 import br.com.tsmweb.domain.locale.model.Locale
 import br.com.tsmweb.domain.patrimony.model.Patrimony
-import br.com.tsmweb.domain.patrimony.model.StatusType
+import br.com.tsmweb.domain.patrimony.model.StatusPatrimony
 import br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding
 import br.com.tsmweb.inventapp.features.patrimony.binding.StatusType as StatusTypeBinding
 
@@ -30,6 +30,6 @@ object PatrimonyMapper {
         code = binding.code,
         name = binding.name,
         dependency = binding.dependency,
-        status = StatusType.values()[binding.status.ordinal]
+        status = StatusPatrimony.values()[binding.status.ordinal]
     )
 }

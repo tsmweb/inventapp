@@ -11,7 +11,7 @@ object InventoryMapper {
         dateInventory = domain.dateInventory,
         patrimonyChecked = domain.patrimonyChecked,
         patrimonyNotFound = domain.patrimonyNotFound,
-        patrimonyNotChecked = domain.patrimonyNotChecked
+        patrimonyNotChecked = domain.patrimonyUnchecked
     )
 
     fun toDomain(binding: InventoryBinding) = Inventory(
@@ -20,7 +20,7 @@ object InventoryMapper {
         dateInventory = binding.dateInventory,
         patrimonyChecked = binding.patrimonyChecked,
         patrimonyNotFound = binding.patrimonyNotFound,
-        patrimonyNotChecked = binding.patrimonyNotChecked
+        patrimonyUnchecked = binding.patrimonyNotChecked
     )
 
 }

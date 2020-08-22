@@ -1,5 +1,6 @@
 package br.com.tsmweb.data.db.patrimony.mapper
 
+import br.com.tsmweb.data.db.locale.mapper.LocaleMapper
 import br.com.tsmweb.data.db.patrimony.entity.PatrimonyAndLocale
 import br.com.tsmweb.data.db.patrimony.entity.PatrimonyEntity
 import br.com.tsmweb.domain.locale.model.Locale
@@ -30,11 +31,7 @@ object PatrimonyMapper {
 
     fun toDomain(entity: PatrimonyAndLocale) = Patrimony(
         id = entity.patrimony.id,
-        locale = Locale(
-            id = entity.locale.id,
-            code = entity.locale.code,
-            name = entity.locale.name
-        ),
+        locale = LocaleMapper.toDomain(entity.locale),
         code = entity.patrimony.code,
         name = entity.patrimony.name,
         dependency = entity.patrimony.dependency,

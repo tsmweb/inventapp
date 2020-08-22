@@ -9,8 +9,8 @@ class InventoryRepositoryImpl(
     private val inventoryRoomDataSource: InventoryRoomDataSource
 ): InventoryRepository {
 
-    override fun loadInventories(term: String): Flow<List<Inventory>> {
-        return inventoryRoomDataSource.loadInventories(term)
+    override fun loadInventories(localeId: String, term: String): Flow<List<Inventory>> {
+        return inventoryRoomDataSource.loadInventories(localeId, term)
     }
 
     override fun loadInventory(id: Long): Flow<Inventory?> {

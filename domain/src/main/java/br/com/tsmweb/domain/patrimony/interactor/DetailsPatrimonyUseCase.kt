@@ -4,7 +4,7 @@ import br.com.tsmweb.domain.patrimony.model.Patrimony
 import br.com.tsmweb.domain.patrimony.repository.PatrimonyRepository
 import kotlinx.coroutines.flow.Flow
 
-class ViewPatrimonyDetailsUseCase(
+class DetailsPatrimonyUseCase(
     private val repository: PatrimonyRepository
 ) {
     fun execute(id: Long): Flow<Patrimony?> {

@@ -1,21 +1,20 @@
-package br.com.tsmweb.domain.patrimony.model
+package br.com.tsmweb.domain.inventory.model
 
-import br.com.tsmweb.domain.locale.model.Locale
+import br.com.tsmweb.domain.patrimony.model.Patrimony
 
-class Patrimony(
+class InventoryItem(
     var id: Long,
-    var locale: Locale,
-    var code: String,
-    var name: String,
-    var dependency: String,
-    var status: StatusPatrimony
+    var inventoryId: Long,
+    var patrimony: Patrimony,
+    var status: StatusInventory,
+    var note: String
 ) {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as Patrimony
+        other as InventoryItem
 
         if (id != other.id) return false
 

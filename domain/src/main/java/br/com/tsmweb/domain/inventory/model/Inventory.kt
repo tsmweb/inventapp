@@ -8,7 +8,7 @@ class Inventory (
     var dateInventory: Date,
     var patrimonyChecked: Int,
     var patrimonyNotFound: Int,
-    var patrimonyNotChecked: Int
+    var patrimonyUnchecked: Int
 ) {
 
     override fun equals(other: Any?): Boolean {

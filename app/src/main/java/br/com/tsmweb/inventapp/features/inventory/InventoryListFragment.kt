@@ -6,7 +6,6 @@ import androidx.appcompat.view.ActionMode
 import androidx.appcompat.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.*
 import br.com.tsmweb.inventapp.R
@@ -15,7 +14,6 @@ import br.com.tsmweb.inventapp.common.ViewState
 import br.com.tsmweb.inventapp.databinding.FragmentInventoryListBinding
 import br.com.tsmweb.inventapp.features.inventory.binding.InventoryBinding
 import br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding
-import com.google.android.material.snackbar.Snackbar
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
@@ -45,10 +43,9 @@ class InventoryListFragment : BaseFragment(),
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_inventory_list, container, false)
+        binding = FragmentInventoryListBinding.inflate(inflater, container, false)
 
         initRecyclerView()
-        initFab()
 
         return binding.root
     }
@@ -80,21 +77,6 @@ class InventoryListFragment : BaseFragment(),
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_sort_date_desc -> {
-                //TODO
-                return true
-            }
-            R.id.action_sort_date_asc -> {
-                //TODO
-                return true
-            }
-        }
-
-        return super.onOptionsItemSelected(item)
-    }
-
     override fun onMenuItemActionExpand(item: MenuItem?) = true
 
     override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
@@ -108,7 +90,6 @@ class InventoryListFragment : BaseFragment(),
         if (firstSearch) {
             firstSearch = false
         } else {
-            Toast.makeText(requireContext(), query, Toast.LENGTH_SHORT).show()
             viewModel.search(query ?: "")
         }
 
@@ -126,28 +107,22 @@ class InventoryListFragment : BaseFragment(),
         }
     }
 
-    private fun initFab() {
-        binding.fabAddInventory.setOnClickListener {
-            Toast.makeText(requireContext(), "Novo Inventário", Toast.LENGTH_SHORT).show()
-        }
-    }
-
     private fun subscriberViewModalObservable() {
         viewModel.loadState().observe(viewLifecycleOwner, Observer { state ->
-            if (state != null) {
-                handleLoadState(state)
+            state?.let {
+                handleLoadState(it)
             }
         })
 
         viewModel.deleteState().observe(viewLifecycleOwner, Observer { state ->
-            if (state != null) {
-                handleDeleteState(state)
+            state?.let {
+                handleDeleteState(it)
             }
         })
 
         viewModel.showDetails().observe(viewLifecycleOwner, Observer { inventory ->
-            if (inventory != null) {
-                Toast.makeText(requireContext(), inventory.locale?.code, Toast.LENGTH_SHORT).show()
+            inventory?.let {
+                Toast.makeText(requireContext(), it.locale?.code, Toast.LENGTH_SHORT).show()
             }
         })
 
@@ -160,15 +135,15 @@ class InventoryListFragment : BaseFragment(),
         })
 
         viewModel.selectionCount().observe(viewLifecycleOwner, Observer { count ->
-            if (count != null) {
-                updateSelectionCountText(count)
+            count?.let {
+                updateSelectionCountText(it)
                 inventoryAdapter.notifyDataSetChanged()
             }
         })
 
-//        if (viewModel.loadState().value == null) {
-//            viewModel.search()
-//        }
+        if (viewModel.loadState().value == null) {
+            viewModel.search()
+        }
     }
 
     private fun handleLoadState(state: ViewState<List<InventoryBinding>>) {
@@ -182,8 +157,10 @@ class InventoryListFragment : BaseFragment(),
             }
             ViewState.Status.ERROR -> {
                 binding.progressBar.visibility = View.GONE
-                Toast.makeText(requireContext(),
-                    R.string.message_error_load_inventory, Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    R.string.message_error_load_inventory,
+                    Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -192,13 +169,16 @@ class InventoryListFragment : BaseFragment(),
         when (state.status) {
             ViewState.Status.SUCCESS -> {
                 val count = state.data ?: 0
-                Snackbar.make(binding.rvInventories,
+                Toast.makeText(
+                    requireContext(),
                     resources.getQuantityString(R.plurals.message_item_deleted, count, count),
-                    Snackbar.LENGTH_LONG).show()
+                    Toast.LENGTH_SHORT).show()
             }
             ViewState.Status.ERROR -> {
-                Toast.makeText(requireContext(),
-                    R.string.message_error_remove_inventory, Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    R.string.message_error_remove_inventory,
+                    Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -225,7 +205,7 @@ class InventoryListFragment : BaseFragment(),
     }
 
     private fun onLongClick(inventoryBinding: InventoryBinding): Boolean {
-        if (actionMode == null) {
+        actionMode?.let {
             viewModel.setInDeleteMode(true)
             viewModel.selectInventory(inventoryBinding)
             return true

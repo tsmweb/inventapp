@@ -4,9 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".features.inventory.InventoryListFragment">
 
-    <data>
-    </data>
-
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -19,17 +16,6 @@
             android:paddingBottom="100dp"
             android:clipToPadding="false"
             tools:listitem="@layout/item_inventory"/>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabAddInventory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:layout_margin="16dp"
-            android:tint="@android:color/black"
-            app:elevation="6dp"
-            app:fabSize="normal"
-            app:srcCompat="@drawable/ic_add" />
 
         <ProgressBar
             android:id="@+id/progressBar"

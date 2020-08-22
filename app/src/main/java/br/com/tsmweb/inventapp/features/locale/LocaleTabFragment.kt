@@ -12,6 +12,7 @@ import br.com.tsmweb.inventapp.R
 import br.com.tsmweb.inventapp.common.BaseFragment
 import br.com.tsmweb.inventapp.common.Constants.EXTRA_LOCALE
 import br.com.tsmweb.inventapp.databinding.FragmentLocaleTabBinding
+import br.com.tsmweb.inventapp.features.inventory.InventoryListFragment
 import br.com.tsmweb.inventapp.features.inventory.InventoryReaderFragment
 import br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding
 import br.com.tsmweb.inventapp.features.patrimony.PatrimonyListFragment
@@ -61,7 +62,7 @@ class LocaleTabFragment : BaseFragment() {
 
     private fun initTabLayout(locale: LocaleBinding) {
         val tabsPagerAdapter = LocaleTabsPagerAdapter(this)
-        tabsPagerAdapter.addFragment(InventoryReaderFragment())
+        tabsPagerAdapter.addFragment(InventoryListFragment.newInstance(locale))
         tabsPagerAdapter.addFragment(PatrimonyListFragment.newInstance(locale))
 
         binding.viewPagerLocale.adapter = tabsPagerAdapter

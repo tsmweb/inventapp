@@ -2,8 +2,7 @@ package br.com.tsmweb.data.db.patrimony.entity
 
 import androidx.room.*
 import br.com.tsmweb.data.db.converters.StatusTypeConverter
-import br.com.tsmweb.data.db.locale.entity.LocaleEntity
-import br.com.tsmweb.domain.patrimony.model.StatusType
+import br.com.tsmweb.domain.patrimony.model.StatusPatrimony
 
 @Entity(
     tableName = "patrimony",
@@ -17,5 +16,5 @@ data class PatrimonyEntity(
     var code: String,
     var name: String,
     var dependency: String,
-    var status: StatusType
+    var status: StatusPatrimony
 )

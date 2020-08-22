@@ -1,6 +1,7 @@
 package br.com.tsmweb.inventapp.features.locale
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -169,6 +170,8 @@ class LocaleListFragment : BaseFragment(),
                     R.string.message_error_load_locale,
                     Toast.LENGTH_SHORT
                 ).show()
+
+                Log.d(TAG, state.error?.message ?: "")
             }
         }
     }

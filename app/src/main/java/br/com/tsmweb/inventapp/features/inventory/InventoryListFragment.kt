@@ -14,7 +14,7 @@ import br.com.tsmweb.inventapp.common.ViewState
 import br.com.tsmweb.inventapp.databinding.FragmentInventoryListBinding
 import br.com.tsmweb.inventapp.features.inventory.binding.InventoryBinding
 import br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding
-import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class InventoryListFragment : BaseFragment(),
@@ -22,7 +22,7 @@ class InventoryListFragment : BaseFragment(),
     SearchView.OnQueryTextListener {
 
     private lateinit var binding: FragmentInventoryListBinding
-    private val viewModel: InventoryListViewModel by inject {
+    private val viewModel: InventoryListViewModel by viewModel {
         parametersOf(arguments?.getParcelable<LocaleBinding>(EXTRA_LOCALE)?.id)
     }
 

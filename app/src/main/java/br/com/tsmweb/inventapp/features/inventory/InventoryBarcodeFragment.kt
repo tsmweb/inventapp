@@ -16,9 +16,9 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import br.com.tsmweb.inventapp.R
 import br.com.tsmweb.inventapp.common.BaseFragment
-import br.com.tsmweb.inventapp.common.Constants.EXTRA_LOCALE
+import br.com.tsmweb.inventapp.common.Constants.EXTRA_INVENTORY
+import br.com.tsmweb.inventapp.features.inventory.binding.InventoryBinding
 import br.com.tsmweb.inventapp.features.inventory.camera.BarcodeImageAnalyzer
-import br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding
 import com.google.common.util.concurrent.ListenableFuture
 import kotlinx.android.synthetic.main.fragment_inventory_barcode.*
 import kotlinx.android.synthetic.main.top_action_bar_in_live_camera.*
@@ -38,8 +38,8 @@ class InventoryBarcodeFragment : BaseFragment() {
 
     private lateinit var cameraExecutor: ExecutorService
 
-    private val locale: LocaleBinding? by lazy {
-        arguments?.getParcelable<LocaleBinding>(EXTRA_LOCALE)
+    private val inventory: InventoryBinding? by lazy {
+        arguments?.getParcelable<InventoryBinding>(EXTRA_INVENTORY)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

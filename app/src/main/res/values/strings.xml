@@ -8,7 +8,7 @@
     <string name="cd_close_button">Voltar</string>
     <string name="cd_flash_button">Ativar o flash da camera</string>
     <string name="not_found">Não encontrado</string>
-    <string name="not_checked">Não verificado</string>
+    <string name="unchecked">Não verificado</string>
     <string name="search">Pesquisar</string>
     <string name="sort_by_date_desc">Ordenar pelo mais recente</string>
     <string name="sort_by_date_asc">Ordenar pelo mais antigo</string>
@@ -29,12 +29,12 @@
     <string name="message_form_enter_code">Informe o código</string>
     <string name="message_form_enter_name">Informe o nome</string>
     <string name="message_form_enter_dependency">Informe a dependência</string>
-    <string name="message_error_save_patrimony">Falha ao salvar o patrimônio</string>
-    <string name="message_error_remove_patrimonies">Falha ao remover os patrimônios</string>
+    <string name="message_error_save_patrimony">Falha ao salvar o bem</string>
+    <string name="message_error_remove_patrimonies">Falha ao remover os bens</string>
 
     <string name="message_error_load_locale">Falha ao carregar os locais</string>
     <string name="message_error_view_details_locale">Falha ao carregar o local</string>
-    <string name="message_confirm_remove_locale">Os patrimônios e os inventários também serão removidos.\n\nDeseja continuar?</string>
+    <string name="message_confirm_remove_locale">Os bens e os inventários também serão removidos.\n\nDeseja continuar?</string>
     <string name="message_success_remove_locale">Local removido com sucesso</string>
     <string name="message_error_remove_locale">Falha ao remover o local</string>
     <string name="message_error_save_locale">Falha ao salvar o local</string>
@@ -62,15 +62,15 @@
     <string name="patrimony_status_active">Ativo</string>
     <string name="patrimony_status_inactive">Inativo</string>
     <string name="patrimony_status_depreciated">Depreciado</string>
-    <string name="patrimonies">Patrimônios</string>
-    <string name="patrimony">Patrimônio</string>
-    <string name="patrimony_message_error_load">Falha ao carregar os patrimônios</string>
+    <string name="patrimonies">Bens</string>
+    <string name="patrimony">Bem</string>
+    <string name="patrimony_message_error_load">Falha ao carregar os bens</string>
     <string name="form_label_status_active">Ativo</string>
     <string name="form_label_status_inactive">Inativo</string>
     <string name="form_label_status_depreciated">Depreciado</string>
-    <string name="title_new_patrimony">Novo Patrimônio</string>
+    <string name="title_new_patrimony">Novo Bem</string>
     <string name="form_label_status">Status</string>
-    <string name="message_error_load_patrimony">Falha ao carregar dados do patrimônio</string>
+    <string name="message_error_load_patrimony">Falha ao carregar dados do bem</string>
     <string name="label_locale">Localidade:</string>
     <string name="action_locale_save">Salvar</string>
     <string name="typed_barcode">Digitar código</string>

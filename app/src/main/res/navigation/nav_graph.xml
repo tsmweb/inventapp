@@ -55,14 +55,14 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_right" />
-
         <action
-            android:id="@+id/action_localeTabFragment_to_inventoryBarcodeFragment"
-            app:destination="@id/inventoryBarcodeFragment"
+            android:id="@+id/action_localeTabFragment_to_inventoryTabFragment"
+            app:destination="@id/inventoryTabFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_right" />
+
     </fragment>
 
     <fragment
@@ -113,8 +113,27 @@
         tools:layout="@layout/fragment_inventory_barcode" >
 
         <argument
-            android:name="locale"
-            app:argType="br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding" />
+            android:name="inventory"
+            app:argType="br.com.tsmweb.inventapp.features.inventory.binding.InventoryBinding" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/inventoryTabFragment"
+        android:name="br.com.tsmweb.inventapp.features.inventory.InventoryTabFragment"
+        android:label="InventoryTabFragment"
+        tools:layout="@layout/fragment_inventory_tab">
+
+        <argument
+            android:name="inventory"
+            app:argType="br.com.tsmweb.inventapp.features.inventory.binding.InventoryBinding" />
+
+        <action
+            android:id="@+id/action_inventoryTabFragment_to_inventoryBarcodeFragment"
+            app:destination="@id/inventoryBarcodeFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
 </navigation>

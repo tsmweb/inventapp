@@ -3,9 +3,11 @@ package br.com.tsmweb.inventapp.router
 import android.os.Bundle
 import androidx.navigation.NavController
 import br.com.tsmweb.inventapp.R
+import br.com.tsmweb.inventapp.common.Constants.EXTRA_INVENTORY
 import br.com.tsmweb.inventapp.common.Constants.EXTRA_LOCALE
 import br.com.tsmweb.inventapp.common.Constants.EXTRA_PATRIMONY
 import br.com.tsmweb.inventapp.common.Router
+import br.com.tsmweb.inventapp.features.inventory.binding.InventoryBinding
 import br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding
 import br.com.tsmweb.inventapp.features.patrimony.binding.PatrimonyBinding
 
@@ -59,12 +61,20 @@ class AppRouter(
         navController.navigate(R.id.action_patrimonyDetailsFragment_to_patrimonyFormFragment, args)
     }
 
-    override fun showInventoryNew(locale: LocaleBinding) {
+    override fun showInventoryTab(inventory: InventoryBinding) {
         val args = Bundle().apply {
-            putParcelable(EXTRA_LOCALE, locale)
+            putParcelable(EXTRA_INVENTORY, inventory)
         }
 
-        navController.navigate(R.id.action_localeTabFragment_to_inventoryBarcodeFragment, args)
+        navController.navigate(R.id.action_localeTabFragment_to_inventoryTabFragment, args)
+    }
+
+    override fun showBarcodeReader(inventory: InventoryBinding) {
+        val args = Bundle().apply {
+            putParcelable(EXTRA_INVENTORY, inventory)
+        }
+
+        navController.navigate(R.id.action_inventoryTabFragment_to_inventoryBarcodeFragment, args)
     }
 
     override fun back() {

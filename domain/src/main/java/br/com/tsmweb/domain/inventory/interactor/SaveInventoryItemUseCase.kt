@@ -17,7 +17,6 @@ class SaveInventoryItemUseCase(
 
     private fun inventoryItemIsValid(inventoryItem: InventoryItem): Boolean {
         return (inventoryItem.inventoryId > 0 &&
-                (inventoryItem.patrimony != null) &&
-                (inventoryItem.status != null))
+                inventoryItem.patrimony.id > 0)
     }
 }

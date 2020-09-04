@@ -48,6 +48,7 @@
     <string name="last_inventory">Último inventário</string>
     <string name="message_error_load_inventory">Falha ao carregar os inventários</string>
     <string name="message_error_remove_inventory">Falha ao remover o inventário</string>
+    <string name="message_error_load_inventory_item">Falha ao carregar os itens do inventário</string>
     <plurals name="list_inventory_selected">
         <item quantity="one">1 selecionado</item>
         <item quantity="other">%d selecionados</item>

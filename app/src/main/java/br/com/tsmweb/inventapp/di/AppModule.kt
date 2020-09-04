@@ -28,7 +28,9 @@ import br.com.tsmweb.domain.patrimony.interactor.DetailsPatrimonyUseCase
 import br.com.tsmweb.domain.patrimony.repository.PatrimonyRepository
 import br.com.tsmweb.inventapp.router.AppRouter
 import br.com.tsmweb.inventapp.common.Router
+import br.com.tsmweb.inventapp.features.inventory.InventoryItemListViewModel
 import br.com.tsmweb.inventapp.features.inventory.InventoryListViewModel
+import br.com.tsmweb.inventapp.features.inventory.binding.StatusInventory
 import br.com.tsmweb.inventapp.features.locale.LocaleFormViewModel
 import br.com.tsmweb.inventapp.features.locale.LocaleListViewModel
 import br.com.tsmweb.inventapp.features.patrimony.PatrimonyDetailsViewModel
@@ -171,5 +173,13 @@ val appModule = module {
 
     factory {
         SaveInventoryItemUseCase(repository = get())
+    }
+
+    viewModel { (inventoryId: Long, statusInventory: StatusInventory) ->
+        InventoryItemListViewModel(
+            inventoryId,
+            statusInventory,
+            listInventoryItemUseCase = get()
+        )
     }
 }

@@ -16,12 +16,9 @@ class SavePatrimonyUseCase(
     }
 
     private fun patrimonyIsValid(patrimony: Patrimony): Boolean {
-        return (
-                patrimony.locale.id.isNotBlank() &&
+        return (patrimony.locale.id.isNotBlank() &&
                 patrimony.code.isNotBlank() &&
                 patrimony.name.isNotBlank() &&
-                patrimony.dependency.isNotBlank() &&
-                (patrimony.status != null)
-        )
+                patrimony.dependency.isNotBlank())
     }
 }

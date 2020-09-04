@@ -1,10 +1,11 @@
 package br.com.tsmweb.domain.inventory.model
 
+import br.com.tsmweb.domain.locale.model.Locale
 import java.util.*
 
 class Inventory (
     var id: Long,
-    var localeId: String,
+    var locale: Locale,
     var dateInventory: Date,
     var patrimonyChecked: Int,
     var patrimonyNotFound: Int,

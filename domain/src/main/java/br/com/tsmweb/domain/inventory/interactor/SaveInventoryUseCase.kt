@@ -16,7 +16,6 @@ class SaveInventoryUseCase(
     }
 
     private fun inventoryIsValid(inventory: Inventory): Boolean {
-        return ((inventory.dateInventory != null) &&
-                inventory.localeId.isNotBlank())
+        return inventory.locale.id.isNotBlank()
     }
 }

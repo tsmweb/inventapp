@@ -1,35 +1,26 @@
 package br.com.tsmweb.inventapp.features.patrimony.binding
 
-import br.com.tsmweb.domain.locale.model.Locale
 import br.com.tsmweb.domain.patrimony.model.Patrimony
 import br.com.tsmweb.domain.patrimony.model.StatusPatrimony
-import br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding
+import br.com.tsmweb.inventapp.features.locale.binding.LocaleMapper
 import br.com.tsmweb.inventapp.features.patrimony.binding.StatusType as StatusTypeBinding
 
 object PatrimonyMapper {
     fun fromDomain(domain: Patrimony) = PatrimonyBinding().apply {
         id = domain.id
-        locale = LocaleBinding().apply {
-            id = domain.locale.id
-            code = domain.locale.code
-            name = domain.locale.name
-        }
+        locale = LocaleMapper.fromDomain(domain.locale)
         code = domain.code
         name = domain.name
         dependency = domain.dependency
-        status = StatusTypeBinding.values()[domain.status.ordinal]
+        status = StatusTypeBinding.valueOf(domain.status.name)
     }
 
     fun toDomain(binding: PatrimonyBinding) = Patrimony(
         id = binding.id,
-        locale = Locale(
-            id = binding.locale.id,
-            code = binding.locale.code,
-            name = binding.locale.name
-        ),
+        locale = LocaleMapper.toDomain(binding.locale),
         code = binding.code,
         name = binding.name,
         dependency = binding.dependency,
-        status = StatusPatrimony.values()[binding.status.ordinal]
+        status = StatusPatrimony.valueOf(binding.status.name)
     )
 }

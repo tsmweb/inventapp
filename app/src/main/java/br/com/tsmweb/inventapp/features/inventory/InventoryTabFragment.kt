@@ -14,6 +14,7 @@ import br.com.tsmweb.inventapp.common.Constants.EXTRA_INVENTORY
 import br.com.tsmweb.inventapp.common.extensions.toView
 import br.com.tsmweb.inventapp.databinding.FragmentInventoryTabBinding
 import br.com.tsmweb.inventapp.features.inventory.binding.InventoryBinding
+import br.com.tsmweb.inventapp.features.inventory.binding.StatusInventory
 import com.google.android.material.tabs.TabLayoutMediator
 
 class InventoryTabFragment : BaseFragment() {
@@ -60,9 +61,9 @@ class InventoryTabFragment : BaseFragment() {
 
     private fun initTabLayout(inventory: InventoryBinding) {
         val tabsPagerAdapter = InventoryTabsPagerAdapter(this).apply {
-            addFragment(InventoryItemListFragment.newInstance(inventory, R.string.checked))
-            addFragment(InventoryItemListFragment.newInstance(inventory, R.string.unchecked))
-            addFragment(InventoryItemListFragment.newInstance(inventory, R.string.not_found))
+            addFragment(InventoryItemListFragment.newInstance(inventory, StatusInventory.CHECKED))
+            addFragment(InventoryItemListFragment.newInstance(inventory, StatusInventory.UNCHECKED))
+            addFragment(InventoryItemListFragment.newInstance(inventory, StatusInventory.NOT_FOUND))
         }
 
         binding.viewPagerInventory.adapter = tabsPagerAdapter

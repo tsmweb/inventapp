@@ -12,7 +12,7 @@ interface InventoryDao {
     @Query("""
         SELECT * FROM inventory
         WHERE locale_id = :localeId  
-        AND date_inventory LIKE :term
+        AND (date_inventory LIKE :term OR id LIKE :term)
         ORDER BY date_inventory DESC
     """)
     fun loadInventories(localeId: String, term: String): Flow<List<InventoryAndLocale>>

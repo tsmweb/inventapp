@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -14,27 +15,42 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
-        android:padding="16dp"
+        android:padding="8dp"
         android:foreground="?attr/selectableItemBackground"
         android:background="@{inventory.selected ? @color/colorItemSelected : @color/white}">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{inventory.id}"
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@sample/inventories.json/data/id" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtDateInventory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:text="@{inventory.dateInventory}"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/txtID"
+            tools:text="@sample/inventories.json/data/data_inventory" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtPlace"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@{inventory.locale.code +` - `+ inventory.locale.name}"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="@sample/inventories.json/data/locale/name"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtChecked"
@@ -54,7 +70,8 @@
             android:textColor="@color/green"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@sample/inventories.json/data/patrimony_checked"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtNotChecked"
@@ -76,7 +93,8 @@
             android:textColor="@color/yellow"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtQtdChecked" />
+            app:layout_constraintTop_toBottomOf="@+id/txtQtdChecked"
+            tools:text="@sample/inventories.json/data/patrimony_unchecked"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtNotFound"
@@ -100,7 +118,8 @@
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtQtdNotChecked" />
+            app:layout_constraintTop_toBottomOf="@+id/txtQtdNotChecked"
+            tools:text="@sample/inventories.json/data/patrimony_not_found"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

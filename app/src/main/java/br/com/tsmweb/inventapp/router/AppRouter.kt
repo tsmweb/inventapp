@@ -7,6 +7,7 @@ import br.com.tsmweb.inventapp.common.Constants.EXTRA_INVENTORY
 import br.com.tsmweb.inventapp.common.Constants.EXTRA_LOCALE
 import br.com.tsmweb.inventapp.common.Constants.EXTRA_PATRIMONY
 import br.com.tsmweb.inventapp.common.Router
+import br.com.tsmweb.inventapp.features.inventory.InventoryNewFragment
 import br.com.tsmweb.inventapp.features.inventory.binding.InventoryBinding
 import br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding
 import br.com.tsmweb.inventapp.features.patrimony.binding.PatrimonyBinding

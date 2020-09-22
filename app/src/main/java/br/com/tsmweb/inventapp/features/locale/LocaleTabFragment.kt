@@ -13,6 +13,7 @@ import br.com.tsmweb.inventapp.common.BaseFragment
 import br.com.tsmweb.inventapp.common.Constants.EXTRA_LOCALE
 import br.com.tsmweb.inventapp.databinding.FragmentLocaleTabBinding
 import br.com.tsmweb.inventapp.features.inventory.InventoryListFragment
+import br.com.tsmweb.inventapp.features.inventory.InventoryNewFragment
 import br.com.tsmweb.inventapp.features.inventory.binding.InventoryBinding
 import br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding
 import br.com.tsmweb.inventapp.features.patrimony.PatrimonyListFragment
@@ -95,10 +96,7 @@ class LocaleTabFragment : BaseFragment() {
         binding.fab.setOnClickListener {
             when (binding.viewPagerLocale.currentItem) {
                 0 -> {
-                    val inventory = InventoryBinding().apply {
-                        locale = localeBinding
-                    }
-                    router.showInventoryTab(inventory)
+                    InventoryNewFragment.newInstance(localeBinding).open(parentFragmentManager)
                 }
                 1 -> {
                     val patrimony = PatrimonyBinding().apply {

@@ -79,6 +79,11 @@
     <string name="label_note">Observação:</string>
     <string name="save">Salvar</string>
     <string name="message_error_search_inventory">Digite uma data valida</string>
+    <string name="title_new_inventory">Novo inventário</string>
+    <string name="message_new_inventory">Um novo inventário será criado.</string>
+    <string name="create">Criar</string>
+    <string name="message_error_new_inventory">Falha ao criar um novo inventário.</string>
+    <string name="btn_create_inventory">CRIAR</string>
 
     <plurals name="message_item_deleted">
         <item quantity="one">1 item deletado</item>

@@ -30,9 +30,12 @@ import br.com.tsmweb.inventapp.router.AppRouter
 import br.com.tsmweb.inventapp.common.Router
 import br.com.tsmweb.inventapp.features.inventory.InventoryItemListViewModel
 import br.com.tsmweb.inventapp.features.inventory.InventoryListViewModel
+import br.com.tsmweb.inventapp.features.inventory.InventoryNewViewModel
+import br.com.tsmweb.inventapp.features.inventory.binding.InventoryBinding
 import br.com.tsmweb.inventapp.features.inventory.binding.StatusInventory
 import br.com.tsmweb.inventapp.features.locale.LocaleFormViewModel
 import br.com.tsmweb.inventapp.features.locale.LocaleListViewModel
+import br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding
 import br.com.tsmweb.inventapp.features.patrimony.PatrimonyDetailsViewModel
 import br.com.tsmweb.inventapp.features.patrimony.PatrimonyFormViewModel
 import br.com.tsmweb.inventapp.features.patrimony.PatrimonyListViewModel
@@ -144,6 +147,13 @@ val appModule = module {
 
     factory {
         RemoveInventoryUseCase(repository = get())
+    }
+
+    viewModel { (locale: LocaleBinding) ->
+        InventoryNewViewModel(
+            locale,
+            saveInventoryUseCase = get()
+        )
     }
 
     viewModel { (localeId: String) ->

@@ -6,6 +6,6 @@
         android:id="@+id/action_patrimony_save"
         android:title="@string/action_locale_save"
         android:icon="@drawable/ic_done"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always|withText" />
 
 </menu>

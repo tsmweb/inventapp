@@ -50,7 +50,7 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/form_label_code"
                         android:imeOptions="actionNext"
-                        android:inputType="text"
+                        android:inputType="number"
                         android:text="@={patrimony.code}" />
                 </com.google.android.material.textfield.TextInputLayout>
 

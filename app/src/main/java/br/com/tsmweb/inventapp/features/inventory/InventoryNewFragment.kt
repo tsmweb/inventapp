@@ -57,15 +57,13 @@ class InventoryNewFragment : DialogFragment() {
             state?.let {
                 when (it.status) {
                     ViewState.Status.LOADING -> {
-                        binding.progressBar.visibility = View.VISIBLE
+                        binding.contentLoading.visibility = View.VISIBLE
                         binding.contentNewInventory.visibility = View.GONE
                     }
                     ViewState.Status.SUCCESS -> {
-                        binding.progressBar.visibility = View.GONE
                         dismiss()
                     }
                     ViewState.Status.ERROR -> {
-                        binding.progressBar.visibility = View.GONE
                         Toast.makeText(
                             requireContext(),
                             R.string.message_error_new_inventory,

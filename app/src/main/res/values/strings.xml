@@ -3,12 +3,12 @@
     <string name="about">Sobre</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="cancel">CANCELAR</string>
-    <string name="checked">Verificado</string>
+    <string name="checked">verificado</string>
     <string name="cd_settings_button">Configurações</string>
     <string name="cd_close_button">Voltar</string>
     <string name="cd_flash_button">Ativar o flash da camera</string>
-    <string name="not_found">Não encontrado</string>
-    <string name="unchecked">Não verificado</string>
+    <string name="not_found">não encontrado</string>
+    <string name="unchecked">não verificado</string>
     <string name="search">Pesquisar</string>
     <string name="sort_by_date_desc">Ordenar pelo mais recente</string>
     <string name="sort_by_date_asc">Ordenar pelo mais antigo</string>
@@ -81,9 +81,11 @@
     <string name="message_error_search_inventory">Digite uma data valida</string>
     <string name="title_new_inventory">Novo inventário</string>
     <string name="message_new_inventory">Um novo inventário será criado.</string>
+    <string name="message_wait">Aguarde...</string>
     <string name="create">Criar</string>
     <string name="message_error_new_inventory">Falha ao criar um novo inventário.</string>
     <string name="btn_create_inventory">CRIAR</string>
+    <string name="form_label_date_inventory">Data</string>
 
     <plurals name="message_item_deleted">
         <item quantity="one">1 item deletado</item>

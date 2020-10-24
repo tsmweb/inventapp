@@ -10,9 +10,9 @@
         "last_inventory": "09/07/2020"
       },
       "data_inventory": "21/09/2020",
-      "patrimony_checked": 10,
-      "patrimony_unchecked": 2,
-      "patrimony_not_found": 0
+      "patrimony_checked": 999,
+      "patrimony_unchecked": 25,
+      "patrimony_not_found": 1
     }
   ]
 }

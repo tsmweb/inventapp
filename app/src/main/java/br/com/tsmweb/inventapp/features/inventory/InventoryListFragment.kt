@@ -100,9 +100,6 @@ class InventoryListFragment : BaseFragment(),
         binding.rvInventories.run {
             itemAnimator = DefaultItemAnimator()
             setHasFixedSize(true)
-            addItemDecoration(
-                DividerItemDecoration(context, LinearLayoutManager.VERTICAL)
-            )
             adapter = inventoryAdapter
         }
     }
@@ -205,7 +202,7 @@ class InventoryListFragment : BaseFragment(),
     }
 
     private fun onLongClick(inventoryBinding: InventoryBinding): Boolean {
-        actionMode?.let {
+        if (actionMode == null) {
             viewModel.setInDeleteMode(true)
             viewModel.selectInventory(inventoryBinding)
             return true

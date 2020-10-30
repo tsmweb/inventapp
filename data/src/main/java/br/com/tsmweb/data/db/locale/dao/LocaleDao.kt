@@ -11,9 +11,12 @@ interface LocaleDao {
     @Query("""
         SELECT l.*, 
             COUNT(p.id) AS amountPatrimony, 
-            (SELECT MAX(IFNULL(date_inventory, '1900-01-01')) 
-             FROM inventory 
-             WHERE locale_id = l.id) AS lastInventory   
+            IFNULL(
+                (SELECT MAX(IFNULL(date_inventory, '1900-01-01')) 
+                 FROM inventory 
+                 WHERE locale_id = l.id), 
+                '1900-01-01'
+            ) AS lastInventory   
         FROM locale l
         LEFT JOIN patrimony p ON p.locale_id = l.id
         WHERE (l.code LIKE :term OR l.name LIKE :term)

@@ -17,8 +17,8 @@ class InventoryRepositoryImpl(
         return inventoryRoomDataSource.loadInventory(id)
     }
 
-    override suspend fun saveInventory(inventory: Inventory) {
-        inventoryRoomDataSource.saveInventory(inventory)
+    override suspend fun saveInventory(inventory: Inventory): Long {
+        return inventoryRoomDataSource.saveInventory(inventory)
     }
 
     override suspend fun removeInventory(inventories: List<Inventory>) {

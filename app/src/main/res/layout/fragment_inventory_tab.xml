@@ -38,8 +38,9 @@
                 android:background="@color/colorPrimary"
                 android:theme="@style/MaterialTheme.AppBarOverlay"
                 app:tabIndicatorColor="@color/colorAccent"
-                app:tabTextColor="@android:color/white"
-                app:tabMode="fixed"
+                app:tabSelectedTextColor="@color/colorAccent"
+                app:tabTextColor="@color/tabTextColor"
+                app:tabMode="scrollable"
                 app:tabGravity="fill"
                 app:tabMaxWidth="0dp" />
         </com.google.android.material.appbar.AppBarLayout>
@@ -59,7 +60,7 @@
             android:tint="@android:color/black"
             app:elevation="6dp"
             app:fabSize="normal"
-            app:srcCompat="@drawable/ic_add" />
+            app:srcCompat="@drawable/ic_barcode" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

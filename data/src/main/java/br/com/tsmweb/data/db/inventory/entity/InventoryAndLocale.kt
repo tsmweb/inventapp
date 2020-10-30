@@ -7,6 +7,7 @@ import br.com.tsmweb.data.db.locale.entity.LocaleEntity
 data class InventoryAndLocale(
     @Embedded
     val inventory: InventoryEntity,
+
     @Relation(
         parentColumn = "locale_id",
         entityColumn = "id"

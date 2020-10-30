@@ -10,7 +10,8 @@ import br.com.tsmweb.inventapp.databinding.ItemInventoryItemBinding
 import br.com.tsmweb.inventapp.features.inventory.binding.InventoryItemBinding
 
 class InventoryItemAdapter(
-    private val onClick: (InventoryItemBinding) -> Unit
+    private val onClick: (InventoryItemBinding) -> Unit,
+    private val onLongClick: (InventoryItemBinding) -> Boolean
 ) : RecyclerView.Adapter<InventoryItemAdapter.ViewHolder>() {
 
     private var inventoryItemBindings: List<InventoryItemBinding>? = null
@@ -41,6 +42,10 @@ class InventoryItemAdapter(
 
                 clInventoryItem.setOnClickListener {
                     onClick(currentItem)
+                }
+
+                clInventoryItem.setOnLongClickListener {
+                    onLongClick(currentItem)
                 }
             }
         }

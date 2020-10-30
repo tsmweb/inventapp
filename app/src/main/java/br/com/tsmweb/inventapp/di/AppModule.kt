@@ -142,7 +142,9 @@ val appModule = module {
     }
 
     factory {
-        SaveInventoryUseCase(repository = get())
+        SaveInventoryUseCase(
+            repository = get(),
+            createInventoryItemsUseCase = get())
     }
 
     factory {
@@ -185,11 +187,23 @@ val appModule = module {
         SaveInventoryItemUseCase(repository = get())
     }
 
+    factory {
+        RemoveInventoryItemUseCase(repository = get())
+    }
+
+    factory {
+        CreateInventoryItemsUseCase(
+            inventoryItemRepository = get(),
+            patrimonyRepository = get()
+        )
+    }
+
     viewModel { (inventoryId: Long, statusInventory: StatusInventory) ->
         InventoryItemListViewModel(
             inventoryId,
             statusInventory,
-            listInventoryItemUseCase = get()
+            listInventoryItemUseCase = get(),
+            removeInventoryItemUseCase = get()
         )
     }
 }

@@ -45,4 +45,11 @@ class InventoryItemBinding: BaseObservable(), Parcelable {
             notifyPropertyChanged(BR.note)
         }
 
+    @Bindable
+    var selected: Boolean = false
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.selected)
+        }
+
 }

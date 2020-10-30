@@ -20,6 +20,17 @@ interface PatrimonyDao {
     @Query("SELECT * FROM patrimony WHERE id = :id")
     fun loadPatrimony(id: Long): Flow<PatrimonyAndLocale>
 
+    @Query("""
+        SELECT p.*
+        FROM patrimony p
+        WHERE p.locale_id = :localeId
+        AND p.id NOT IN (
+            SELECT i.patrimony_id 
+            FROM inventory_item i
+            WHERE i.inventory_id = :inventoryId)
+    """)
+    fun loadPatrimonyNotInInventoryItem(localeId: String, inventoryId: Long): List<PatrimonyEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun savePatrimony(patrimony: PatrimonyEntity)
 

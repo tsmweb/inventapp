@@ -48,7 +48,9 @@
     <string name="last_inventory">Último inventário</string>
     <string name="message_error_load_inventory">Falha ao carregar os inventários</string>
     <string name="message_error_remove_inventory">Falha ao remover o inventário</string>
+    <string name="message_error_remove_inventory_item">Falha ao remover o item do inventário</string>
     <string name="message_error_load_inventory_item">Falha ao carregar os itens do inventário</string>
+    <string name="message_error_share_inventory_item">Falha ao compartilhar itens do inventário</string>
     <plurals name="list_inventory_selected">
         <item quantity="one">1 selecionado</item>
         <item quantity="other">%d selecionados</item>
@@ -86,10 +88,13 @@
     <string name="message_error_new_inventory">Falha ao criar um novo inventário.</string>
     <string name="btn_create_inventory">CRIAR</string>
     <string name="form_label_date_inventory">Data</string>
+    <string name="action_share">Compartilhar</string>
 
     <plurals name="message_item_deleted">
         <item quantity="one">1 item deletado</item>
         <item quantity="other">%d itens deletados</item>
     </plurals>
+
+    <string name="content_share_inventory_item">Código: %1$s - %2$s \n Observação: %3$s \n</string>
 
 </resources>

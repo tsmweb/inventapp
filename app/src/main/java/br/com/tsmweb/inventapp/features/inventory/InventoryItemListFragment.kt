@@ -1,10 +1,14 @@
 package br.com.tsmweb.inventapp.features.inventory
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.ActionMode
+import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.ShareActionProvider
+import androidx.core.view.MenuItemCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -21,9 +25,17 @@ import br.com.tsmweb.inventapp.features.inventory.binding.StatusInventory
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class InventoryItemListFragment : BaseFragment() {
+class InventoryItemListFragment : BaseFragment(),
+    MenuItem.OnActionExpandListener,
+    SearchView.OnQueryTextListener {
 
     private lateinit var binding: FragmentInventoryItemListBinding
+
+    private var actionMode: ActionMode? = null
+    private var searchView: SearchView? = null
+    private var firstSearch: Boolean = true
+
+    private var shareActionProvider: ShareActionProvider? = null
 
     private val inventory: InventoryBinding? by lazy {
         arguments?.getParcelable<InventoryBinding>(EXTRA_INVENTORY)
@@ -43,7 +55,7 @@ class InventoryItemListFragment : BaseFragment() {
     }
 
     private val inventoryItemAdapter by lazy {
-        InventoryItemAdapter(this::onClick)
+        InventoryItemAdapter(this::onClick, this::onLongClick)
     }
 
     override fun onCreateView(
@@ -53,6 +65,7 @@ class InventoryItemListFragment : BaseFragment() {
         binding = FragmentInventoryItemListBinding.inflate(inflater, container, false)
 
         initRecyclerView()
+        setHasOptionsMenu(true)
 
         return binding.root
     }
@@ -60,6 +73,29 @@ class InventoryItemListFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         subscriberViewModalObservable()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.list_inventory_item_menu, menu)
+
+        // configure SearchView
+        val searchItem = menu.findItem(R.id.action_search_inventory_item)
+        searchItem.setOnActionExpandListener(this)
+
+        searchView = searchItem.actionView as SearchView
+        searchView?.maxWidth = Int.MAX_VALUE
+        searchView?.queryHint = getString(R.string.hint_search)
+        searchView?.setOnQueryTextListener(this)
+
+        if (viewModel.getLastSearchTerm().isNotEmpty()) {
+            searchView?.post {
+                val query = viewModel.getLastSearchTerm()
+                searchItem.expandActionView()
+                searchView?.setQuery(query, true)
+                searchView?.clearFocus()
+            }
+        }
     }
 
     private fun initRecyclerView() {
@@ -80,9 +116,38 @@ class InventoryItemListFragment : BaseFragment() {
             }
         })
 
+        viewModel.deleteState().observe(viewLifecycleOwner, Observer { state ->
+            state?.let {
+                handleDeleteState(it)
+            }
+        })
+
         viewModel.showDetails().observe(viewLifecycleOwner, Observer { item ->
             item?.let {
-                Toast.makeText(requireContext(), it.patrimony?.code, Toast.LENGTH_SHORT).show()
+                InventoryPatrimonyInfoFragment
+                    .newInstance(it, false)
+                    .show(parentFragmentManager, "bottomSheetTag")
+            }
+        })
+
+        viewModel.shareState().observe(viewLifecycleOwner, Observer { state ->
+            state?.let {
+                handleShareState(it)
+            }
+        })
+
+        viewModel.isInSelectionModel().observe(viewLifecycleOwner, Observer { selectionMode ->
+            if (selectionMode) {
+                showSelectionMode()
+            } else {
+                hideSelectionMode()
+            }
+        })
+
+        viewModel.selectionCount().observe(viewLifecycleOwner, Observer { count ->
+            count?.let {
+                updateSelectionCountText(it)
+                inventoryItemAdapter.notifyDataSetChanged()
             }
         })
 
@@ -110,8 +175,130 @@ class InventoryItemListFragment : BaseFragment() {
         }
     }
 
+    private fun handleDeleteState(state: ViewState<Int>) {
+        when (state.status) {
+            ViewState.Status.SUCCESS -> {
+                val count = state.data ?: 0
+                Toast.makeText(
+                    requireContext(),
+                    resources.getQuantityString(R.plurals.message_item_deleted, count, count),
+                    Toast.LENGTH_SHORT).show()
+            }
+            ViewState.Status.ERROR -> {
+                Toast.makeText(
+                    requireContext(),
+                    R.string.message_error_remove_inventory_item,
+                    Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun handleShareState(state: ViewState<List<InventoryItemBinding>>) {
+        when (state.status) {
+            ViewState.Status.SUCCESS -> {
+                var content = StringBuilder()
+
+                state.data?.forEach {
+                    val item = getString(R.string.content_share_inventory_item, it.patrimony.code, it.patrimony.name, it.note)
+                    content.append(item)
+                }
+
+                Toast.makeText(requireContext(), content.toString(), Toast.LENGTH_LONG).show()
+
+                shareActionProvider?.setShareIntent(Intent(Intent.ACTION_SEND).apply {
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
+                    type = "text/plain"
+                    putExtra(Intent.EXTRA_TEXT, content.toString())
+                })
+            }
+        }
+    }
+
+    private fun updateSelectionCountText(count: Int) {
+        view?.post {
+            actionMode?.title = resources.getQuantityString(R.plurals.list_inventory_selected, count, count)
+        }
+    }
+
+    private fun showSelectionMode() {
+        val appCompatActivity = (activity as AppCompatActivity)
+        actionMode = appCompatActivity.startSupportActionMode(getActionModeCallBack())
+    }
+
+    private fun hideSelectionMode() {
+        binding.rvInventoryItem.post {
+            actionMode?.finish()
+        }
+    }
+
     private fun onClick(inventoryItem: InventoryItemBinding) {
-        viewModel.selectInventory(inventoryItem)
+        viewModel.selectInventoryItem(inventoryItem)
+    }
+
+    private fun onLongClick(inventoryItem: InventoryItemBinding): Boolean {
+        if (actionMode == null) {
+            viewModel.setInSelectionMode(true)
+            viewModel.selectInventoryItem(inventoryItem)
+            return true
+        }
+
+        return false
+    }
+
+    override fun onMenuItemActionExpand(item: MenuItem?) = true
+
+    override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
+        viewModel.search()
+        return true
+    }
+
+    override fun onQueryTextSubmit(query: String?) = true
+
+    override fun onQueryTextChange(query: String?): Boolean {
+        if (firstSearch) {
+            firstSearch = false
+        } else {
+            viewModel.search(query ?: "")
+        }
+
+        return true
+    }
+
+    private fun getActionModeCallBack() : ActionMode.Callback {
+        return object : ActionMode.Callback {
+
+            override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
+                when (item?.itemId) {
+                    R.id.action_delete -> {
+                        viewModel.deleteSelected()
+                        return true
+                    }
+                    R.id.action_share -> {
+                        viewModel.shareSelected()
+                        return true
+                    }
+                }
+
+                return false
+            }
+
+            override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+                activity?.menuInflater?.inflate(R.menu.inventory_item_cab, menu)
+
+                val shareItem = menu?.findItem(R.id.action_share)
+                shareActionProvider = MenuItemCompat.getActionProvider(shareItem) as? ShareActionProvider
+
+                return true
+            }
+
+            override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?) = false
+
+            override fun onDestroyActionMode(mode: ActionMode?) {
+                actionMode = null
+                viewModel.setInSelectionMode(false)
+            }
+
+        }
     }
 
     companion object {

@@ -26,7 +26,7 @@ class InventoryNewViewModel(
 
     fun saveInventory() {
         val inventory = InventoryBinding().apply {
-            locale = localeBinding
+            localeId = localeBinding.id
         }
 
         saveState.postValue(ViewState(ViewState.Status.LOADING))

@@ -25,8 +25,8 @@ class InventoryRoomDataSourceImpl(
             .map { entity -> InventoryMapper.toDomain(entity) }
     }
 
-    override suspend fun saveInventory(inventory: Inventory) {
-        inventoryDao.saveInventory(InventoryMapper.fromDomain(inventory))
+    override suspend fun saveInventory(inventory: Inventory): Long {
+        return inventoryDao.saveInventory(InventoryMapper.fromDomain(inventory))
     }
 
     override suspend fun removeInventory(inventories: List<Inventory>) {

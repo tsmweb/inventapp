@@ -22,7 +22,6 @@ class InventoryTabFragment : BaseFragment() {
     private val TAG = InventoryTabFragment::class.simpleName
 
     private lateinit var binding: FragmentInventoryTabBinding
-    private lateinit var tabsPagerAdapter: InventoryTabsPagerAdapter
 
     private val inventory: InventoryBinding? by lazy {
         arguments?.getParcelable<InventoryBinding>(EXTRA_INVENTORY)
@@ -44,7 +43,7 @@ class InventoryTabFragment : BaseFragment() {
         NavigationUI.setupWithNavController(binding.toolbar, navHostFragment)
 
         binding.toolbar.apply {
-            title = inventory?.dateInventory?.toView(resources.getString(R.string.date_format))
+            title = inventory?.id.toString()
         }
 
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)

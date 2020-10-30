@@ -12,10 +12,13 @@
     <color name="strokeRed">#B71C1C</color>
     <color name="yellow">#FFC107</color>
     <color name="strokeYellow">#F9A825</color>
+    <color name="blue">#0288D1</color>
+    <color name="strokeBlue">#1976D2</color>
     <color name="gray">#7C7C7C</color>
     <color name="strokeGray">#636363</color>
     <color name="black">#FF000000</color>
     <color name="transparent">#00000000</color>
     <color name="capture_box_stroke_color">#FFFFFFFF</color>
     <color name="capture_background_color">#B3000000</color>
+    <color name="tabTextColor">#90FFFFFF</color>
 </resources>

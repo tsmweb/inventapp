@@ -119,7 +119,7 @@ class InventoryListFragment : BaseFragment(),
 
         viewModel.showDetails().observe(viewLifecycleOwner, Observer { inventory ->
             inventory?.let {
-                Toast.makeText(requireContext(), it.locale?.code, Toast.LENGTH_SHORT).show()
+                router.showInventoryTab(it)
             }
         })
 

@@ -10,11 +10,5 @@ data class InventoryEntity(
     @ColumnInfo(name = "locale_id")
     var localeId: String,
     @ColumnInfo(name = "date_inventory")
-    var dateInventory: String,
-    @ColumnInfo(name = "patrimony_checked")
-    var patrimonyChecked: Int,
-    @ColumnInfo(name = "patrimony_not_found")
-    var patrimonyNotFound: Int,
-    @ColumnInfo(name = "patrimony_unchecked")
-    var patrimonyUnchecked: Int
+    var dateInventory: String
 )

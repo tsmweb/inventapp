@@ -13,7 +13,10 @@
         android:id="@+id/clInventoryItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
+        android:background="@{inventoryItem.selected ? @color/colorItemSelected : @color/white}"
+        android:foreground="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
         android:padding="8dp">
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -42,15 +45,26 @@
             app:layout_constraintTop_toBottomOf="@+id/txtName"
             tools:text="@sample/patrimonies.json/data/code" />
 
+<!--        <androidx.appcompat.widget.AppCompatTextView-->
+<!--            android:id="@+id/txtStatus"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:background="@{inventoryItem.patrimony.status}"-->
+<!--            android:text="@{inventoryItem.patrimony.status}"-->
+<!--            android:textColor="@android:color/white"-->
+<!--            android:textSize="10sp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/txtName"-->
+<!--            tools:text="@sample/patrimonies.json/data/status" />-->
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:background="@{inventoryItem.patrimony.status}"
             android:text="@{inventoryItem.patrimony.status}"
-            android:textColor="@android:color/white"
-            android:textSize="10sp"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtName"
             tools:text="@sample/patrimonies.json/data/status" />

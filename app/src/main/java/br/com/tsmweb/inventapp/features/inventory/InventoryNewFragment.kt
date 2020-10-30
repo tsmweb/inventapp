@@ -1,6 +1,7 @@
 package br.com.tsmweb.inventapp.features.inventory
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,8 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class InventoryNewFragment : DialogFragment() {
+
+    private val TAG = InventoryNewFragment::class.simpleName
 
     private lateinit var binding: FragmentInventoryNewBinding
 
@@ -68,6 +71,9 @@ class InventoryNewFragment : DialogFragment() {
                             requireContext(),
                             R.string.message_error_new_inventory,
                             Toast.LENGTH_SHORT).show()
+
+                        Log.d(TAG, state.error?.message ?: "")
+
                         dismiss()
                     }
                 }

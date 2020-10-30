@@ -38,7 +38,8 @@
                 android:background="@color/colorPrimary"
                 android:theme="@style/MaterialTheme.AppBarOverlay"
                 app:tabIndicatorColor="@color/colorAccent"
-                app:tabTextColor="@android:color/white"
+                app:tabSelectedTextColor="@color/colorAccent"
+                app:tabTextColor="@color/tabTextColor"
                 app:tabMode="fixed"
                 app:tabGravity="fill"
                 app:tabMaxWidth="0dp" />

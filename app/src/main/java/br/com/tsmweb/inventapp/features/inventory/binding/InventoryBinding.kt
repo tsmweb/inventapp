@@ -3,7 +3,6 @@ package br.com.tsmweb.inventapp.features.inventory.binding
 import android.os.Parcelable
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
-import br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding
 import kotlinx.android.parcel.Parcelize
 import androidx.databinding.library.baseAdapters.BR
 import java.util.*
@@ -19,10 +18,10 @@ class InventoryBinding: BaseObservable(), Parcelable {
         }
 
     @Bindable
-    var locale: LocaleBinding = LocaleBinding()
+    var localeId: String = ""
         set(value) {
             field = value
-            notifyPropertyChanged(BR.locale)
+            notifyPropertyChanged(BR.localeId)
         }
 
     @Bindable

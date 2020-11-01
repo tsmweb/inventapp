@@ -12,86 +12,65 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bottomSheet"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="16dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/bottomSheetTitle"
-            android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:background="@color/colorPrimary"
-            android:theme="@style/MaterialTheme.AppBarOverlay"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:maxLines="2"
+            android:text="@{inventoryItem.patrimony.name}"
+            android:textColor="@color/colorTextHighlight"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@sample/inventory_items.json/data/patrimony/name" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txtName"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:ellipsize="end"
-                android:gravity="start"
-                android:maxLines="1"
-                android:textColor="@android:color/white"
-                android:textSize="12sp"
-                android:text="@{inventoryItem.patrimony.name}"
-                app:layout_constraintBottom_toTopOf="@+id/txtCode"
-                app:layout_constraintEnd_toStartOf="@+id/btnDone"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="@sample/inventory_items.json/data/patrimony/name" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lblCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/label_code"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtName" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txtCode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:gravity="start"
-                android:textColor="@android:color/white"
-                android:textSize="12sp"
-                android:text="@{inventoryItem.patrimony.code}"
-                app:layout_constraintBottom_toTopOf="@+id/txtName"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtName"
-                tools:text="@sample/inventory_items.json/data/patrimony/code" />
-
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/btnDone"
-                android:layout_width="48dp"
-                android:layout_height="0dp"
-                android:background="@color/transparent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/ic_done" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:gravity="start"
+            android:text="@{inventoryItem.patrimony.code}"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/lblCode"
+            app:layout_constraintStart_toEndOf="@+id/lblCode"
+            app:layout_constraintTop_toTopOf="@+id/lblCode"
+            tools:text="@sample/inventory_items.json/data/patrimony/code" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/lblDependency"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:text="@string/label_dependency"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bottomSheetTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/lblCode" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtDependency"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp"
             android:ellipsize="end"
-            android:textSize="14sp"
             android:text="@{inventoryItem.patrimony.dependency}"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/lblDependency"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/lblDependency"
@@ -102,7 +81,6 @@
             android:id="@+id/lblStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:text="@string/label_status"
             android:textSize="14sp"
@@ -114,46 +92,43 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:textSize="14sp"
             android:text="@{inventoryItem.patrimony.status}"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/lblStatus"
             app:layout_constraintStart_toEndOf="@+id/lblStatus"
             app:layout_constraintTop_toTopOf="@+id/lblStatus"
             tools:text="@sample/inventory_items.json/data/patrimony/status" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/lblNote"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/label_note"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lblStatus" />
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/txtNote"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilNote"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/bg_edit_text"
-            android:inputType="textMultiLine"
-            android:lines="3"
-            android:maxLines="5"
-            android:minLines="2"
-            android:padding="4dp"
-            android:scrollbars="vertical"
-            android:textSize="14sp"
-            android:text="@={inventoryItem.note}"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lblNote"
-            tools:text="@sample/inventory_items.json/data/note" />
+            app:layout_constraintTop_toBottomOf="@+id/lblStatus">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtNote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/label_note"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:text="@{inventoryItem.note}"
+                android:textSize="14sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSave"
+            style="@style/CustomMaterialButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/save"
+            app:layout_constraintTop_toBottomOf="@+id/tilNote"
+            tools:layout_editor_absoluteX="16dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -168,6 +168,8 @@ class PatrimonyListFragment : BaseFragment(),
                     R.string.patrimony_message_error_load,
                     Toast.LENGTH_SHORT
                 ).show()
+
+                Log.e(TAG, state.error?.message ?: "")
             }
         }
     }
@@ -185,6 +187,8 @@ class PatrimonyListFragment : BaseFragment(),
             ViewState.Status.ERROR -> {
                 Toast.makeText(requireContext(),
                     R.string.message_error_remove_patrimonies, Toast.LENGTH_SHORT).show()
+
+                Log.e(TAG, state.error?.message ?: "")
             }
         }
     }

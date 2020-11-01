@@ -171,7 +171,7 @@ class LocaleListFragment : BaseFragment(),
                     Toast.LENGTH_SHORT
                 ).show()
 
-                Log.d(TAG, state.error?.message ?: "")
+                Log.e(TAG, state.error?.message ?: "")
             }
         }
     }
@@ -191,6 +191,8 @@ class LocaleListFragment : BaseFragment(),
                     R.string.message_error_remove_locale,
                     Toast.LENGTH_SHORT
                 ).show()
+
+                Log.e(TAG, state.error?.message ?: "")
             }
         }
     }

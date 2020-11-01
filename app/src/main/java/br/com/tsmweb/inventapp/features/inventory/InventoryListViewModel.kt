@@ -81,6 +81,8 @@ class InventoryListViewModel(
                         error = e
                     )
                 )
+
+
             }
         }
     }

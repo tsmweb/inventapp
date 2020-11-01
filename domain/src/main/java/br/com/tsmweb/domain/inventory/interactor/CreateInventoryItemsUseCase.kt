@@ -13,11 +13,15 @@ class CreateInventoryItemsUseCase(
         patrimonyRepository.loadPatrimonyNotInInventoryItem(localeId, inventoryId)
             .map { patrimony ->
                 InventoryItem(
-                        id = 0,
-                        inventoryId = inventoryId,
-                        patrimony = patrimony,
-                        status = StatusInventory.UNCHECKED,
-                        note = ""
+                    id = 0,
+                    inventoryId = inventoryId,
+                    patrimonyId = patrimony.id,
+                    patrimonyCode = patrimony.code,
+                    patrimonyName = patrimony.name,
+                    patrimonyDependency = patrimony.dependency,
+                    patrimonyStatus = patrimony.status,
+                    status = StatusInventory.UNCHECKED,
+                    note = ""
                 )
             }
             .forEach { inventoryItemRepository.saveInventoryItem(it) }

@@ -80,7 +80,8 @@ class PatrimonyDetailsFragment : BaseFragment() {
                         binding.patrimony = data
                     }
                     ViewState.Status.ERROR -> {
-                        Log.d(TAG, error.toString())
+                        Log.e(TAG, state.error?.message ?: "")
+
                         Toast.makeText(
                             requireContext(),
                             R.string.message_error_load_patrimony,

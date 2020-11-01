@@ -24,7 +24,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/colorPrimary"
+                android:background="?colorPrimary"
                 android:minHeight="?attr/actionBarSize"
                 android:elevation="0dp"
                 android:theme="@style/MaterialTheme.AppBarOverlay"
@@ -35,11 +35,11 @@
                 android:id="@+id/tabLayoutLocale"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
+                android:background="?colorPrimary"
                 android:theme="@style/MaterialTheme.AppBarOverlay"
-                app:tabIndicatorColor="@color/colorAccent"
-                app:tabSelectedTextColor="@color/colorAccent"
-                app:tabTextColor="@color/tabTextColor"
+                app:tabIndicatorColor="?colorAccent"
+                app:tabSelectedTextColor="?colorAccent"
+                app:tabTextColor="?tabTextColor"
                 app:tabMode="fixed"
                 app:tabGravity="fill"
                 app:tabMaxWidth="0dp" />
@@ -53,11 +53,11 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
+            style="?floatingActionButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             android:layout_margin="16dp"
-            android:tint="@android:color/black"
             app:elevation="6dp"
             app:fabSize="normal"
             app:srcCompat="@drawable/ic_add" />

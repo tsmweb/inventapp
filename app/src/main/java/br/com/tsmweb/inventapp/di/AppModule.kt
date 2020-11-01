@@ -66,7 +66,9 @@ val appModule = module {
     }
 
     factory {
-        RemoveLocaleUseCase(repository = get())
+        RemoveLocaleUseCase(
+            localeRepository = get(),
+            patrimonyRepository = get())
     }
 
     viewModel {
@@ -148,7 +150,9 @@ val appModule = module {
     }
 
     factory {
-        RemoveInventoryUseCase(repository = get())
+        RemoveInventoryUseCase(
+            inventoryRepository = get(),
+            inventoryItemRepository = get())
     }
 
     viewModel { (locale: LocaleBinding) ->
@@ -202,8 +206,7 @@ val appModule = module {
         InventoryItemListViewModel(
             inventoryId,
             statusInventory,
-            listInventoryItemUseCase = get(),
-            removeInventoryItemUseCase = get()
+            listInventoryItemUseCase = get()
         )
     }
 }

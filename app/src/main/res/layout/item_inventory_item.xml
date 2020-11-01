@@ -5,6 +5,10 @@
 
     <data>
         <variable
+            name="view"
+            type="android.view.View" />
+
+        <variable
             name="inventoryItem"
             type="br.com.tsmweb.inventapp.features.inventory.binding.InventoryItemBinding" />
     </data>
@@ -13,20 +17,20 @@
         android:id="@+id/clInventoryItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@{inventoryItem.selected ? @color/colorItemSelected : @color/white}"
-        android:foreground="?attr/selectableItemBackground"
+        android:background="@{inventoryItem.selected ? @color/colorItemSelectedList : @color/colorItemList}"
         android:clickable="true"
         android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
         android:padding="8dp">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtName"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="2"
             android:text="@{inventoryItem.patrimony.name}"
-            android:textColor="@android:color/black"
+            android:textColor="@color/colorTextHighlight"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,18 +49,16 @@
             app:layout_constraintTop_toBottomOf="@+id/txtName"
             tools:text="@sample/patrimonies.json/data/code" />
 
-<!--        <androidx.appcompat.widget.AppCompatTextView-->
-<!--            android:id="@+id/txtStatus"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="8dp"-->
-<!--            android:background="@{inventoryItem.patrimony.status}"-->
-<!--            android:text="@{inventoryItem.patrimony.status}"-->
-<!--            android:textColor="@android:color/white"-->
-<!--            android:textSize="10sp"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/txtName"-->
-<!--            tools:text="@sample/patrimonies.json/data/status" />-->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_info"
+            app:layout_constraintEnd_toStartOf="@+id/txtStatus"
+            app:layout_constraintTop_toBottomOf="@+id/txtName"
+            android:visibility="@{inventoryItem.note.length() > 0 ? view.VISIBLE : view.GONE}" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtStatus"

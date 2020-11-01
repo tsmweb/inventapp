@@ -8,5 +8,5 @@ interface InventoryItemRepository {
     fun loadInventoryItem(id: Long): Flow<InventoryItem?>
     fun loadInventoryItemByBarcode(inventoryId: Long, barcode: String): Flow<InventoryItem?>
     suspend fun saveInventoryItem(inventoryItem: InventoryItem)
-    suspend fun removeInventoryItem(inventoryItems: List<InventoryItem>)
+    suspend fun removeInventoryItemByInventory(inventoryId: Long)
 }

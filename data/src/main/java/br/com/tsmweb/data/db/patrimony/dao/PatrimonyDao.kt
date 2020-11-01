@@ -36,4 +36,7 @@ interface PatrimonyDao {
 
     @Delete
     suspend fun removePatrimony(vararg patrimony: PatrimonyEntity)
+
+    @Query("DELETE FROM patrimony WHERE locale_id = :localeId")
+    suspend fun removePatrimonyByLocale(localeId: String)
 }

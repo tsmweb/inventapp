@@ -35,7 +35,6 @@ class PatrimonyFormFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentPatrimonyFormBinding.inflate(inflater, container, false)
-        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -56,24 +55,15 @@ class PatrimonyFormFragment : BaseFragment() {
             binding.patrimony = it
         }
 
+        binding.btnSave.setOnClickListener {
+            savePatrimony()
+        }
+
         binding.edtName.setOnEditorActionListener{ _, i, _ ->
             handleKeyboardEvent(i)
         }
 
         subscriberViewModalObservable()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.form_patrimony_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_patrimony_save -> savePatrimony()
-        }
-
-        return super.onOptionsItemSelected(item)
     }
 
     private fun handleKeyboardEvent(actionId: Int): Boolean {
@@ -96,7 +86,8 @@ class PatrimonyFormFragment : BaseFragment() {
                         router.back()
                     }
                     ViewState.Status.ERROR -> {
-                        Log.d(TAG, error.toString())
+                        Log.e(TAG, state.error?.message ?: "")
+
                         Toast.makeText(
                             requireContext(),
                             R.string.message_error_save_patrimony,

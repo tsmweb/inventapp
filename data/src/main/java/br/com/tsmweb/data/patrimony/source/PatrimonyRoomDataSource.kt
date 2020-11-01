@@ -9,4 +9,5 @@ interface PatrimonyRoomDataSource {
     fun loadPatrimonyNotInInventoryItem(localeId: String, inventoryId: Long): List<Patrimony>
     suspend fun savePatrimony(patrimony: Patrimony)
     suspend fun removePatrimony(patrimonies: List<Patrimony>)
+    suspend fun removePatrimonyByLocale(localeId: String)
 }

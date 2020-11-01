@@ -20,7 +20,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
+            android:background="?colorPrimary"
             android:minHeight="?attr/actionBarSize"
             android:elevation="4dp"
             android:theme="@style/MaterialTheme.AppBarOverlay"
@@ -51,7 +51,8 @@
                         android:hint="@string/form_label_code"
                         android:imeOptions="actionNext"
                         android:inputType="number"
-                        android:text="@={patrimony.code}" />
+                        android:text="@={patrimony.code}"
+                        android:textSize="14sp"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -69,7 +70,8 @@
                         android:hint="@string/form_label_name"
                         android:imeOptions="actionNext"
                         android:inputType="text"
-                        android:text="@={patrimony.name}" />
+                        android:text="@={patrimony.name}"
+                        android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -87,7 +89,8 @@
                         android:hint="@string/form_label_dependency"
                         android:imeOptions="actionNext"
                         android:inputType="text"
-                        android:text="@={patrimony.dependency}" />
+                        android:text="@={patrimony.dependency}"
+                        android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <RadioGroup
@@ -120,6 +123,17 @@
                         android:text="@string/form_label_status_inactive" />
 
                 </RadioGroup>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSave"
+                    style="?buttonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/save"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rgStatus" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

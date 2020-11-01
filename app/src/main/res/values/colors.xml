@@ -4,7 +4,10 @@
     <color name="colorPrimaryDark">#232F34</color>
     <color name="colorPrimarySecondary">#4A6572</color>
     <color name="colorAccent">#F9AA33</color>
-    <color name="colorItemSelected">#CFD8DC</color>
+    <color name="colorItemSelectedList">#CFD8DC</color>
+    <color name="colorItemList">#FFFFFF</color>
+    <color name="colorTextHighlight">#1C1C1C</color>
+
     <color name="white">#FFFFFF</color>
     <color name="green">#FF4CAF50</color>
     <color name="strokeGreen">#388E3C</color>
@@ -18,7 +21,10 @@
     <color name="strokeGray">#636363</color>
     <color name="black">#FF000000</color>
     <color name="transparent">#00000000</color>
+
     <color name="capture_box_stroke_color">#FFFFFFFF</color>
     <color name="capture_background_color">#B3000000</color>
+
     <color name="tabTextColor">#90FFFFFF</color>
+    <color name="buttonTextColor">#000000</color>
 </resources>

@@ -22,7 +22,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/colorPrimary"
+                android:background="?colorPrimary"
                 android:minHeight="?attr/actionBarSize"
                 android:elevation="4dp"
                 android:theme="@style/MaterialTheme.AppBarOverlay"
@@ -44,11 +44,11 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabAddLocale"
+            style="?floatingActionButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             android:layout_margin="16dp"
-            android:tint="@android:color/black"
             app:elevation="6dp"
             app:fabSize="normal"
             app:srcCompat="@drawable/ic_add" />

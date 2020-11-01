@@ -2,6 +2,7 @@ package br.com.tsmweb.inventapp.features.inventory
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -28,6 +29,8 @@ import org.koin.core.parameter.parametersOf
 class InventoryItemListFragment : BaseFragment(),
     MenuItem.OnActionExpandListener,
     SearchView.OnQueryTextListener {
+
+    private val TAG = InventoryItemListFragment::class.simpleName
 
     private lateinit var binding: FragmentInventoryItemListBinding
 
@@ -116,16 +119,10 @@ class InventoryItemListFragment : BaseFragment(),
             }
         })
 
-        viewModel.deleteState().observe(viewLifecycleOwner, Observer { state ->
-            state?.let {
-                handleDeleteState(it)
-            }
-        })
-
         viewModel.showDetails().observe(viewLifecycleOwner, Observer { item ->
             item?.let {
                 InventoryPatrimonyInfoFragment
-                    .newInstance(it, false)
+                    .newInstance(it)
                     .show(parentFragmentManager, "bottomSheetTag")
             }
         })
@@ -171,24 +168,8 @@ class InventoryItemListFragment : BaseFragment(),
                     requireContext(),
                     R.string.message_error_load_inventory_item,
                     Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
 
-    private fun handleDeleteState(state: ViewState<Int>) {
-        when (state.status) {
-            ViewState.Status.SUCCESS -> {
-                val count = state.data ?: 0
-                Toast.makeText(
-                    requireContext(),
-                    resources.getQuantityString(R.plurals.message_item_deleted, count, count),
-                    Toast.LENGTH_SHORT).show()
-            }
-            ViewState.Status.ERROR -> {
-                Toast.makeText(
-                    requireContext(),
-                    R.string.message_error_remove_inventory_item,
-                    Toast.LENGTH_SHORT).show()
+                Log.e(TAG, state.error?.message ?: "")
             }
         }
     }
@@ -269,10 +250,6 @@ class InventoryItemListFragment : BaseFragment(),
 
             override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
                 when (item?.itemId) {
-                    R.id.action_delete -> {
-                        viewModel.deleteSelected()
-                        return true
-                    }
                     R.id.action_share -> {
                         viewModel.shareSelected()
                         return true

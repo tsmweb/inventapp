@@ -13,7 +13,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@android:color/white"
+        android:backgroundTint="@color/colorItemList"
         app:cardElevation="2dp"
         app:cardCornerRadius="2dp"
         android:layout_marginStart="8dp"
@@ -39,7 +39,7 @@
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:text="@{locale.name}"
-                android:textColor="@android:color/black"
+                android:textColor="@color/colorTextHighlight"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toStartOf="@+id/imgMenu"
                 app:layout_constraintStart_toStartOf="parent"
@@ -92,7 +92,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@{locale.amountPatrimony}"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtCode"
                 tools:text="@sample/locales.json/data/amount_patrimony" />
@@ -103,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="@string/locale_amount_patrimony"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@+id/txtAmountPatrimony"
                 app:layout_constraintStart_toEndOf="@+id/txtAmountPatrimony"
                 app:layout_constraintTop_toTopOf="@+id/txtAmountPatrimony" />

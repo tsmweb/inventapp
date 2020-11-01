@@ -41,9 +41,8 @@ class InventoryItemRoomDataSourceImpl(
         inventoryItemDao.saveInventoryItem(InventoryItemMapper.fromDomain(inventoryItem))
     }
 
-    override suspend fun removeInventoryItem(inventoryItems: List<InventoryItem>) {
-        inventoryItemDao.removeInventoryItem(
-            *inventoryItems.map(InventoryItemMapper::fromDomain).toTypedArray())
+    override suspend fun removeInventoryItemByInventory(inventoryId: Long) {
+        inventoryItemDao.removeInventoryItemByInventory(inventoryId)
     }
 
 }

@@ -1,6 +1,7 @@
 package br.com.tsmweb.inventapp.features.inventory
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.appcompat.view.ActionMode
 import androidx.appcompat.widget.SearchView
@@ -20,6 +21,8 @@ import org.koin.core.parameter.parametersOf
 class InventoryListFragment : BaseFragment(),
     MenuItem.OnActionExpandListener,
     SearchView.OnQueryTextListener {
+
+    private val TAG = InventoryListFragment::class.simpleName
 
     private lateinit var binding: FragmentInventoryListBinding
     private val viewModel: InventoryListViewModel by viewModel {
@@ -158,6 +161,8 @@ class InventoryListFragment : BaseFragment(),
                     requireContext(),
                     R.string.message_error_load_inventory,
                     Toast.LENGTH_SHORT).show()
+
+                Log.e(TAG, state.error?.message ?: "")
             }
         }
     }
@@ -176,6 +181,8 @@ class InventoryListFragment : BaseFragment(),
                     requireContext(),
                     R.string.message_error_remove_inventory,
                     Toast.LENGTH_SHORT).show()
+
+                Log.e(TAG, state.error?.message ?: "")
             }
         }
     }

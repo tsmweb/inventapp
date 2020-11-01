@@ -35,7 +35,6 @@ class LocaleFormFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLocaleFormBinding.inflate(inflater, container, false)
-        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -56,24 +55,15 @@ class LocaleFormFragment : BaseFragment() {
             binding.locale = it
         }
 
+        binding.btnSave.setOnClickListener {
+            savePlace()
+        }
+
         binding.edtName.setOnEditorActionListener{ _, i, _ ->
             handleKeyboardEvent(i)
         }
 
         subscriberViewModalObservable()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.form_locale_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_locale_save -> savePlace()
-        }
-
-        return super.onOptionsItemSelected(item)
     }
 
     private fun subscriberViewModalObservable() {
@@ -87,8 +77,9 @@ class LocaleFormFragment : BaseFragment() {
                         router.back()
                     }
                     ViewState.Status.ERROR -> {
-                        Log.d(TAG, error.toString())
                         Toast.makeText(requireContext(), R.string.message_error_save_locale, Toast.LENGTH_SHORT).show()
+
+                        Log.e(TAG, state.error?.message ?: "")
                     }
                 }
             }

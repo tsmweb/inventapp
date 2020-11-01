@@ -40,4 +40,9 @@ class PatrimonyRoomDataSourceImpl(
     override suspend fun removePatrimony(patrimonies: List<Patrimony>) {
         patrimonyDao.removePatrimony(*patrimonies.map(PatrimonyMapper::fromDomain).toTypedArray())
     }
+
+    override suspend fun removePatrimonyByLocale(localeId: String) {
+        patrimonyDao.removePatrimonyByLocale(localeId)
+    }
+
 }

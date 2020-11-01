@@ -72,7 +72,7 @@ class InventoryNewFragment : DialogFragment() {
                             R.string.message_error_new_inventory,
                             Toast.LENGTH_SHORT).show()
 
-                        Log.d(TAG, state.error?.message ?: "")
+                        Log.e(TAG, state.error?.message ?: "")
 
                         dismiss()
                     }

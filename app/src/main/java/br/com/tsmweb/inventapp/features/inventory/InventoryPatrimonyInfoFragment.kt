@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import br.com.tsmweb.inventapp.R
-import br.com.tsmweb.inventapp.common.Constants.EXTRA_ACTIVE_PEEK
 import br.com.tsmweb.inventapp.common.Constants.EXTRA_BARCODE
 import br.com.tsmweb.inventapp.common.Constants.EXTRA_INVENTORY_ITEM
 import br.com.tsmweb.inventapp.databinding.FragmentInventoryPatrimonyInfoBinding
@@ -16,11 +14,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class InventoryPatrimonyInfoFragment: BottomSheetDialogFragment() {
 
-    private lateinit var binding: FragmentInventoryPatrimonyInfoBinding
+    private val TAG = InventoryPatrimonyInfoFragment::class.simpleName
 
-    private val bottomSheetPeekHeight: Int by lazy {
-        resources.getDimensionPixelSize(R.dimen.bottom_sheet_peek_height)
-    }
+    private lateinit var binding: FragmentInventoryPatrimonyInfoBinding
 
     private val barcode: String? by lazy {
         arguments?.getString(EXTRA_BARCODE)
@@ -28,10 +24,6 @@ class InventoryPatrimonyInfoFragment: BottomSheetDialogFragment() {
 
     private val inventoryItemBinding: InventoryItemBinding? by lazy {
         arguments?.getParcelable<InventoryItemBinding>(EXTRA_INVENTORY_ITEM)
-    }
-
-    private val activatePeek: Boolean? by lazy {
-        arguments?.getBoolean(EXTRA_ACTIVE_PEEK, true)
     }
 
     override fun onCreateView(
@@ -47,7 +39,8 @@ class InventoryPatrimonyInfoFragment: BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.inventoryItem = inventoryItemBinding
-        binding.btnDone.setOnClickListener {
+
+        binding.btnSave.setOnClickListener {
             Toast.makeText(requireContext(), "Salvo", Toast.LENGTH_SHORT).show()
             dismiss()
         }
@@ -60,9 +53,6 @@ class InventoryPatrimonyInfoFragment: BottomSheetDialogFragment() {
 
     private fun setUpBottomSheet() {
         BottomSheetBehavior.from(view?.parent as View).apply {
-            if (activatePeek == true) {
-                peekHeight = bottomSheetPeekHeight
-            }
             isHideable = false
         }
     }
@@ -76,11 +66,10 @@ class InventoryPatrimonyInfoFragment: BottomSheetDialogFragment() {
             }
         }
 
-        fun newInstance(inventoryItemBinding: InventoryItemBinding, activePeek: Boolean = true): InventoryPatrimonyInfoFragment {
+        fun newInstance(inventoryItemBinding: InventoryItemBinding): InventoryPatrimonyInfoFragment {
             return InventoryPatrimonyInfoFragment().apply {
                 arguments = Bundle().apply {
                     putParcelable(EXTRA_INVENTORY_ITEM, inventoryItemBinding)
-                    putBoolean(EXTRA_ACTIVE_PEEK, activePeek)
                 }
             }
         }

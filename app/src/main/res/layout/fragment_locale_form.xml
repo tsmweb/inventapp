@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -17,7 +18,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
+            android:background="?colorPrimary"
             android:minHeight="?attr/actionBarSize"
             android:elevation="4dp"
             android:theme="@style/MaterialTheme.AppBarOverlay"
@@ -48,7 +49,8 @@
                         android:hint="@string/form_label_code"
                         android:imeOptions="actionNext"
                         android:inputType="text"
-                        android:text="@={locale.code}" />
+                        android:text="@={locale.code}"
+                        android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -66,8 +68,20 @@
                         android:hint="@string/form_label_name"
                         android:imeOptions="actionDone"
                         android:inputType="textCapWords"
-                        android:text="@={locale.name}" />
+                        android:text="@={locale.name}"
+                        android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSave"
+                    style="?buttonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/save"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tilName" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

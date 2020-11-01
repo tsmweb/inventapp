@@ -32,4 +32,8 @@ class PatrimonyRepositoryImpl(
         patrimonyRoomDataSource.removePatrimony(patrimonies)
     }
 
+    override suspend fun removePatrimonyByLocale(localeId: String) {
+        patrimonyRoomDataSource.removePatrimonyByLocale(localeId)
+    }
+
 }

@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.tsmweb.domain.inventory.interactor.ListInventoryItemUseCase
-import br.com.tsmweb.domain.inventory.interactor.RemoveInventoryItemUseCase
 import br.com.tsmweb.domain.inventory.model.StatusInventory
 import br.com.tsmweb.inventapp.common.SingleLiveEvent
 import br.com.tsmweb.inventapp.common.ViewState
@@ -16,18 +15,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.lang.Exception
 
 class InventoryItemListViewModel(
     private val inventoryId: Long,
     private val statusInventory: StatusInventoryBinding,
-    private val listInventoryItemUseCase: ListInventoryItemUseCase,
-    private val removeInventoryItemUseCase: RemoveInventoryItemUseCase
+    private val listInventoryItemUseCase: ListInventoryItemUseCase
 ) : ViewModel() {
 
     private val loadState = MutableLiveData<ViewState<List<InventoryItemBinding>>>()
-    private val deleteState = SingleLiveEvent<ViewState<Int>>()
     private val showDetails = SingleLiveEvent<InventoryItemBinding>()
     private val shareState = SingleLiveEvent<ViewState<List<InventoryItemBinding>>>()
 
@@ -40,8 +36,6 @@ class InventoryItemListViewModel(
     private val selectionCount = MutableLiveData<Int>()
 
     fun loadState(): LiveData<ViewState<List<InventoryItemBinding>>> = loadState
-
-    fun deleteState(): LiveData<ViewState<Int>> = deleteState
 
     fun showDetails(): LiveData<InventoryItemBinding> = showDetails
 
@@ -134,35 +128,6 @@ class InventoryItemListViewModel(
         }
 
         inSelectionMode.value = selectionMode
-    }
-
-    fun deleteSelected() {
-        val inventoryItems = selectedItems.map { inventoryItemBinding ->
-            InventoryItemMapper.toDomain(inventoryItemBinding)
-        }
-
-        viewModelScope.launch {
-            try {
-                withContext(Dispatchers.IO) {
-                    removeInventoryItemUseCase.execute(inventoryItems)
-                }
-
-                deleteState.postValue(
-                    ViewState(
-                        ViewState.Status.SUCCESS,
-                        selectedItems.size
-                    )
-                )
-                setInSelectionMode(false)
-            } catch (e: Exception) {
-                deleteState.postValue(
-                    ViewState(
-                        ViewState.Status.ERROR,
-                        error = e
-                    )
-                )
-            }
-        }
     }
 
     fun shareSelected() {

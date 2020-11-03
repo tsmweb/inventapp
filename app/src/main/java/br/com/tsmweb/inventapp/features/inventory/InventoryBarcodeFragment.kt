@@ -22,7 +22,7 @@ import br.com.tsmweb.inventapp.features.inventory.binding.InventoryItemBinding
 import br.com.tsmweb.inventapp.features.inventory.binding.StatusInventory
 import br.com.tsmweb.inventapp.features.inventory.camera.BarcodeImageAnalyzer
 import br.com.tsmweb.inventapp.features.patrimony.binding.PatrimonyBinding
-import br.com.tsmweb.inventapp.features.patrimony.binding.StatusType
+import br.com.tsmweb.inventapp.features.patrimony.binding.StatusPatrimony
 import com.google.common.util.concurrent.ListenableFuture
 import kotlinx.android.synthetic.main.fragment_inventory_barcode.*
 import kotlinx.android.synthetic.main.top_action_bar_in_live_camera.*
@@ -136,12 +136,11 @@ class InventoryBarcodeFragment : BaseFragment() {
                 val inventoryItem = InventoryItemBinding().apply {
                     id = 1
                     inventoryId = 1
-                    patrimony = PatrimonyBinding().apply {
-                        code = "224024000059"
-                        name = "BANCO DE MADEIRA / GENUFLEXÓRIO (2,25 X 0,55 X 0,86 M)"
-                        dependency = "SALÃO DE CULTO"
-                        status = StatusType.ACTIVE
-                    }
+                    patrimonyId = 1
+                    patrimonyCode = "224024000059"
+                    patrimonyName = "BANCO DE MADEIRA / GENUFLEXÓRIO (2,25 X 0,55 X 0,86 M)"
+                    patrimonyDependency = "SALÃO DE CULTO"
+                    patrimonyStatus = StatusPatrimony.ACTIVE
                     status = StatusInventory.UNCHECKED
                     note = ""
                 }

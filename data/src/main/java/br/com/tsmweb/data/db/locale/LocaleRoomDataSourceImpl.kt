@@ -1,5 +1,6 @@
 package br.com.tsmweb.data.db.locale
 
+import androidx.room.withTransaction
 import br.com.tsmweb.data.db.database.AppDataBase
 import br.com.tsmweb.data.locale.source.LocaleRoomDataSource
 import br.com.tsmweb.data.db.locale.mapper.LocaleMapper
@@ -9,10 +10,13 @@ import kotlinx.coroutines.flow.map
 import java.util.*
 
 class LocaleRoomDataSourceImpl(
-    db: AppDataBase
+    private val db: AppDataBase
 ): LocaleRoomDataSource {
 
     private val localeDao = db.localeDao()
+    private val patrimonyDao = db.patrimonyDao()
+    private val inventoryDao = db.inventoryDao()
+    private val inventoryItemDao = db.inventoryItemDao()
 
     override fun loadLocales(term: String): Flow<List<Locale>> {
         val term = if (term.isEmpty() || term.isBlank()) "%" else "%$term%"
@@ -35,7 +39,12 @@ class LocaleRoomDataSourceImpl(
     }
 
     override suspend fun removeLocale(locale: Locale) {
-        localeDao.removeLocale(LocaleMapper.fromDomain(locale))
+        db.withTransaction {
+            inventoryItemDao.removeInventoryItemByLocale(locale.id)
+            inventoryDao.removeInventoryByLocale(locale.id)
+            patrimonyDao.removePatrimonyByLocale(locale.id)
+            localeDao.removeLocale(LocaleMapper.fromDomain(locale))
+        }
     }
 
 }

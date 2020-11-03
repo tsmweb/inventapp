@@ -8,5 +8,4 @@ interface InventoryItemRoomDataSource {
     fun loadInventoryItem(id: Long): Flow<InventoryItem?>
     fun loadInventoryItemByBarcode(inventoryId: Long, barcode: String): Flow<InventoryItem?>
     suspend fun saveInventoryItem(inventoryItem: InventoryItem)
-    suspend fun removeInventoryItemByInventory(inventoryId: Long)
 }

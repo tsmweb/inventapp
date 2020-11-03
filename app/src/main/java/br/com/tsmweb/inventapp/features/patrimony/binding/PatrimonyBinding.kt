@@ -46,7 +46,7 @@ class PatrimonyBinding: BaseObservable(), Parcelable {
         }
 
     @Bindable
-    var status: StatusType = StatusType.ACTIVE
+    var status: StatusPatrimony = StatusPatrimony.ACTIVE
         set(value) {
             field = value
             notifyPropertyChanged(BR.status)

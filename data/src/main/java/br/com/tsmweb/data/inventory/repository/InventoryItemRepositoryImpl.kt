@@ -32,8 +32,4 @@ class InventoryItemRepositoryImpl(
         inventoryItemRoomDataSource.saveInventoryItem(inventoryItem)
     }
 
-    override suspend fun removeInventoryItemByInventory(inventoryId: Long) {
-        inventoryItemRoomDataSource.removeInventoryItemByInventory(inventoryId)
-    }
-
 }

@@ -180,7 +180,7 @@ class InventoryItemListFragment : BaseFragment(),
                 var content = StringBuilder()
 
                 state.data?.forEach {
-                    val item = getString(R.string.content_share_inventory_item, it.patrimony.code, it.patrimony.name, it.note)
+                    val item = getString(R.string.content_share_inventory_item, it.patrimonyCode, it.patrimonyName, it.note)
                     content.append(item)
                 }
 

@@ -46,6 +46,9 @@ interface InventoryDao {
     suspend fun saveInventory(inventory: InventoryEntity): Long
 
     @Delete
-    suspend fun removeInventory(vararg inventory: InventoryEntity)
+    suspend fun removeInventory(inventory: InventoryEntity)
+
+    @Query("DELETE FROM inventory WHERE locale_id = :localeId")
+    suspend fun removeInventoryByLocale(localeId: String)
 
 }

@@ -42,7 +42,8 @@
                 app:tabTextColor="?tabTextColor"
                 app:tabMode="scrollable"
                 app:tabGravity="fill"
-                app:tabMaxWidth="0dp" />
+                app:tabMaxWidth="0dp"
+                app:tabIndicatorFullWidth="true"/>
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.viewpager2.widget.ViewPager2

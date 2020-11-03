@@ -34,4 +34,14 @@ interface InventoryItemDao {
     @Query("DELETE FROM inventory_item WHERE inventory_id = :inventoryId")
     suspend fun removeInventoryItemByInventory(inventoryId: Long)
 
+    @Query("""
+        DELETE FROM inventory_item
+        WHERE inventory_id IN (
+            SELECT id
+            FROM inventory
+            WHERE locale_id = :localeId
+        )
+    """)
+    suspend fun removeInventoryItemByLocale(localeId: String)
+
 }

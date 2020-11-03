@@ -1,5 +1,6 @@
 package br.com.tsmweb.data.db.inventory
 
+import androidx.room.withTransaction
 import br.com.tsmweb.data.db.database.AppDataBase
 import br.com.tsmweb.data.db.inventory.mapper.InventoryMapper
 import br.com.tsmweb.data.inventory.source.InventoryRoomDataSource
@@ -8,10 +9,11 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class InventoryRoomDataSourceImpl(
-    db: AppDataBase
+    private val db: AppDataBase
 ) : InventoryRoomDataSource {
 
     private val inventoryDao = db.inventoryDao()
+    private val inventoryItemDao = db.inventoryItemDao()
 
     override fun loadInventories(localeId: String, term: String): Flow<List<Inventory>> {
         val term = if (term.isEmpty() || term.isBlank()) "%" else "%$term%"
@@ -30,7 +32,16 @@ class InventoryRoomDataSourceImpl(
     }
 
     override suspend fun removeInventory(inventories: List<Inventory>) {
-        inventoryDao.removeInventory(*inventories.map(InventoryMapper::fromDomain).toTypedArray())
+        inventories.forEach {
+            removeInventory(it)
+        }
+    }
+
+    private suspend fun removeInventory(inventory: Inventory) {
+        db.withTransaction {
+            inventoryItemDao.removeInventoryItemByInventory(inventory.id)
+            inventoryDao.removeInventory(InventoryMapper.fromDomain(inventory))
+        }
     }
 
 }

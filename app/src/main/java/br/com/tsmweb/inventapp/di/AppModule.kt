@@ -31,7 +31,6 @@ import br.com.tsmweb.inventapp.common.Router
 import br.com.tsmweb.inventapp.features.inventory.InventoryItemListViewModel
 import br.com.tsmweb.inventapp.features.inventory.InventoryListViewModel
 import br.com.tsmweb.inventapp.features.inventory.InventoryNewViewModel
-import br.com.tsmweb.inventapp.features.inventory.binding.InventoryBinding
 import br.com.tsmweb.inventapp.features.inventory.binding.StatusInventory
 import br.com.tsmweb.inventapp.features.locale.LocaleFormViewModel
 import br.com.tsmweb.inventapp.features.locale.LocaleListViewModel
@@ -43,12 +42,12 @@ import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module {
-
     factory { (navController: NavController) ->
         AppRouter(navController) as Router
     }
+}
 
-    /*-- Locale --*/
+val localeModule = module {
     single {
         LocaleRoomDataSourceImpl(AppDataBase.getDatabase(context = get())) as LocaleRoomDataSource
     }
@@ -66,9 +65,7 @@ val appModule = module {
     }
 
     factory {
-        RemoveLocaleUseCase(
-            localeRepository = get(),
-            patrimonyRepository = get())
+        RemoveLocaleUseCase(localeRepository = get())
     }
 
     viewModel {
@@ -83,8 +80,9 @@ val appModule = module {
             saveLocaleUseCase = get()
         )
     }
+}
 
-    /*-- Patrimony --*/
+val patrimonyModule = module {
     single {
         PatrimonyRoomDataSourceImpl(AppDataBase.getDatabase(context = get())) as PatrimonyRoomDataSource
     }
@@ -129,8 +127,9 @@ val appModule = module {
             detailsPatrimonyUseCase = get()
         )
     }
+}
 
-    /*-- Inventory --*/
+val inventoryModule = module {
     single {
         InventoryRoomDataSourceImpl(AppDataBase.getDatabase(context = get())) as InventoryRoomDataSource
     }
@@ -150,9 +149,7 @@ val appModule = module {
     }
 
     factory {
-        RemoveInventoryUseCase(
-            inventoryRepository = get(),
-            inventoryItemRepository = get())
+        RemoveInventoryUseCase(inventoryRepository = get())
     }
 
     viewModel { (locale: LocaleBinding) ->
@@ -169,8 +166,9 @@ val appModule = module {
             removeInventoryUseCase = get()
         )
     }
+}
 
-    /*-- Inventory Item --*/
+val inventoryItemModule = module {
     single {
         InventoryItemRoomDataSourceImpl(AppDataBase.getDatabase(context = get())) as InventoryItemRoomDataSource
     }
@@ -189,10 +187,6 @@ val appModule = module {
 
     factory {
         SaveInventoryItemUseCase(repository = get())
-    }
-
-    factory {
-        RemoveInventoryItemUseCase(repository = get())
     }
 
     factory {

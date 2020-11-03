@@ -68,10 +68,37 @@ class InventoryTabFragment : BaseFragment() {
         binding.viewPagerInventory.adapter = tabsPagerAdapter
 
         TabLayoutMediator(binding.tabLayoutInventory, binding.viewPagerInventory) { tab, position ->
+            val badge = tab.orCreateBadge
+            badge.backgroundColor = resources.getColor(R.color.orange)
+
             when (position) {
-                0 -> tab.text = getString(R.string.checked)
-                1 -> tab.text = getString(R.string.unchecked)
-                2 -> tab.text = getString(R.string.not_found)
+                0 -> {
+                    tab.text = getString(R.string.checked)
+
+                    if (inventory.patrimonyChecked > 0) {
+                        badge.number = inventory.patrimonyChecked
+                    } else {
+                        tab.removeBadge()
+                    }
+                }
+                1 -> {
+                    tab.text = getString(R.string.unchecked)
+
+                    if (inventory.patrimonyNotChecked > 0) {
+                        badge.number = inventory.patrimonyNotChecked
+                    } else {
+                        tab.removeBadge()
+                    }
+                }
+                2 -> {
+                    tab.text = getString(R.string.not_found)
+
+                    if (inventory.patrimonyNotFound > 0) {
+                        badge.number = inventory.patrimonyNotFound
+                    } else {
+                        tab.removeBadge()
+                    }
+                }
             }
         }.attach()
     }

@@ -3,28 +3,28 @@ package br.com.tsmweb.inventapp.common.binding
 
 import androidx.databinding.InverseMethod
 import br.com.tsmweb.inventapp.R
-import br.com.tsmweb.inventapp.features.patrimony.binding.StatusType
+import br.com.tsmweb.inventapp.features.patrimony.binding.StatusPatrimony
 
 @InverseMethod("buttonIdToStatusType")
-fun statusTypeToButtonId(statusType: StatusType?): Int {
+fun statusTypeToButtonId(statusPatrimony: StatusPatrimony?): Int {
     var selectedButtonId = 0
 
-    statusType?.run {
+    statusPatrimony?.run {
         selectedButtonId = when (this) {
-            StatusType.ACTIVE -> R.id.rbStatusActive
-            StatusType.DEPRECIATED -> R.id.rbStatusDepreciated
-            StatusType.INACTIVE -> R.id.rbStatusInactive
+            StatusPatrimony.ACTIVE -> R.id.rbStatusActive
+            StatusPatrimony.DEPRECIATED -> R.id.rbStatusDepreciated
+            StatusPatrimony.INACTIVE -> R.id.rbStatusInactive
         }
     }
 
     return selectedButtonId
 }
 
-fun buttonIdToStatusType(selectedButtonId: Int): StatusType? {
+fun buttonIdToStatusType(selectedButtonId: Int): StatusPatrimony? {
     return when (selectedButtonId) {
-        R.id.rbStatusActive -> StatusType.ACTIVE
-        R.id.rbStatusDepreciated -> StatusType.DEPRECIATED
-        R.id.rbStatusInactive -> StatusType.INACTIVE
+        R.id.rbStatusActive -> StatusPatrimony.ACTIVE
+        R.id.rbStatusDepreciated -> StatusPatrimony.DEPRECIATED
+        R.id.rbStatusInactive -> StatusPatrimony.INACTIVE
         else -> null
     }
 }

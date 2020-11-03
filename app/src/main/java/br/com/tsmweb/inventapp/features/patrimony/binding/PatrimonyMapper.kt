@@ -3,7 +3,7 @@ package br.com.tsmweb.inventapp.features.patrimony.binding
 import br.com.tsmweb.domain.patrimony.model.Patrimony
 import br.com.tsmweb.domain.patrimony.model.StatusPatrimony
 import br.com.tsmweb.inventapp.features.locale.binding.LocaleMapper
-import br.com.tsmweb.inventapp.features.patrimony.binding.StatusType as StatusTypeBinding
+import br.com.tsmweb.inventapp.features.patrimony.binding.StatusPatrimony as StatusTypeBinding
 
 object PatrimonyMapper {
     fun fromDomain(domain: Patrimony) = PatrimonyBinding().apply {

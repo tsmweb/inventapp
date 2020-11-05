@@ -11,7 +11,6 @@ object InventoryItemMapper {
     fun fromDomain(domain: InventoryItem) = InventoryItemBinding().apply {
         id = domain.id
         inventoryId = domain.inventoryId
-        patrimonyId = domain.patrimonyId
         patrimonyCode = domain.patrimonyCode
         patrimonyName = domain.patrimonyName
         patrimonyDependency = domain.patrimonyDependency
@@ -23,7 +22,6 @@ object InventoryItemMapper {
     fun toDomain(binding: InventoryItemBinding) = InventoryItem(
         id = binding.id,
         inventoryId = binding.inventoryId,
-        patrimonyId = binding.patrimonyId,
         patrimonyCode = binding.patrimonyCode,
         patrimonyName = binding.patrimonyName,
         patrimonyDependency = binding.patrimonyDependency,

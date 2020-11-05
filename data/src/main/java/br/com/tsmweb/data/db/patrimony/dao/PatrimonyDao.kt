@@ -24,8 +24,8 @@ interface PatrimonyDao {
         SELECT p.*
         FROM patrimony p
         WHERE p.locale_id = :localeId
-        AND p.id NOT IN (
-            SELECT i.patrimony_id 
+        AND p.code NOT IN (
+            SELECT i.patrimony_code 
             FROM inventory_item i
             WHERE i.inventory_id = :inventoryId)
     """)

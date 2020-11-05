@@ -9,12 +9,18 @@ import br.com.tsmweb.domain.patrimony.model.StatusPatrimony
     indices = arrayOf(Index(value = ["locale_id", "code"], unique = true)))
 @TypeConverters(StatusTypeConverter::class)
 data class PatrimonyEntity(
+
     @PrimaryKey(autoGenerate = true)
     var id: Long,
+
     @ColumnInfo(name = "locale_id")
     var localeId: String,
+
     var code: String,
+
     var name: String,
+
     var dependency: String,
+
     var status: StatusPatrimony
 )

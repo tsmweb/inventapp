@@ -7,4 +7,5 @@ object Constants {
     const val EXTRA_INVENTORY_ITEM = "inventory_item"
     const val EXTRA_PATRIMONY_STATE = "patrimony_state"
     const val EXTRA_BARCODE = "barcode"
+    const val EXTRA_INVENTORY_ID = "inventory_id"
 }

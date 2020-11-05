@@ -15,7 +15,6 @@ class CreateInventoryItemsUseCase(
                 InventoryItem(
                     id = 0,
                     inventoryId = inventoryId,
-                    patrimonyId = patrimony.id,
                     patrimonyCode = patrimony.code,
                     patrimonyName = patrimony.name,
                     patrimonyDependency = patrimony.dependency,

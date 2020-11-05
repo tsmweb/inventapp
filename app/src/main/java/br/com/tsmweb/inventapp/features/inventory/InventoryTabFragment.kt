@@ -5,13 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import br.com.tsmweb.inventapp.R
 import br.com.tsmweb.inventapp.common.BaseFragment
 import br.com.tsmweb.inventapp.common.Constants.EXTRA_INVENTORY
-import br.com.tsmweb.inventapp.common.extensions.toView
 import br.com.tsmweb.inventapp.databinding.FragmentInventoryTabBinding
 import br.com.tsmweb.inventapp.features.inventory.binding.InventoryBinding
 import br.com.tsmweb.inventapp.features.inventory.binding.StatusInventory
@@ -69,7 +69,7 @@ class InventoryTabFragment : BaseFragment() {
 
         TabLayoutMediator(binding.tabLayoutInventory, binding.viewPagerInventory) { tab, position ->
             val badge = tab.orCreateBadge
-            badge.backgroundColor = resources.getColor(R.color.orange)
+            badge.backgroundColor = ContextCompat.getColor(requireContext(), R.color.orange)
 
             when (position) {
                 0 -> {

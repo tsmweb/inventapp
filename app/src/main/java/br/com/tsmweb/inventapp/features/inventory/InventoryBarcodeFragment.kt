@@ -14,14 +14,16 @@ import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.setFragmentResultListener
 import br.com.tsmweb.inventapp.R
 import br.com.tsmweb.inventapp.common.BaseFragment
+import br.com.tsmweb.inventapp.common.Constants.EXTRA_BARCODE
 import br.com.tsmweb.inventapp.common.Constants.EXTRA_INVENTORY
 import br.com.tsmweb.inventapp.features.inventory.binding.InventoryBinding
 import br.com.tsmweb.inventapp.features.inventory.binding.InventoryItemBinding
 import br.com.tsmweb.inventapp.features.inventory.binding.StatusInventory
 import br.com.tsmweb.inventapp.features.inventory.camera.BarcodeImageAnalyzer
-import br.com.tsmweb.inventapp.features.patrimony.binding.PatrimonyBinding
 import br.com.tsmweb.inventapp.features.patrimony.binding.StatusPatrimony
 import com.google.common.util.concurrent.ListenableFuture
 import kotlinx.android.synthetic.main.fragment_inventory_barcode.*
@@ -37,7 +39,6 @@ class InventoryBarcodeFragment : BaseFragment() {
 
     private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
     private var preview: Preview? = null
-    private var imageAnalyzer: ImageAnalysis? = null
     private var camera: Camera? = null
 
     private lateinit var cameraExecutor: ExecutorService
@@ -86,8 +87,16 @@ class InventoryBarcodeFragment : BaseFragment() {
             }
         }
 
+        setFragmentResultListener(InventoryBarcodeInputFragment.INPUT_BARCODE_REQUEST_KEY) { key, bundle ->
+            bundle.getString(EXTRA_BARCODE)?.let {
+                onShowInventoryPatrimonyInfo(it)
+            }
+        }
+
         chipTypeBarcode.setOnClickListener {
-            router.back()
+            InventoryBarcodeInputFragment
+                .newInstance()
+                .open(parentFragmentManager)
         }
     }
 
@@ -133,25 +142,9 @@ class InventoryBarcodeFragment : BaseFragment() {
             barcodes.forEach { barcode ->
                 Log.i(TAG, "Barcode detected: ${barcode.rawValue}.")
 
-                val inventoryItem = InventoryItemBinding().apply {
-                    id = 1
-                    inventoryId = 1
-                    patrimonyId = 1
-                    patrimonyCode = "224024000059"
-                    patrimonyName = "BANCO DE MADEIRA / GENUFLEXÓRIO (2,25 X 0,55 X 0,86 M)"
-                    patrimonyDependency = "SALÃO DE CULTO"
-                    patrimonyStatus = StatusPatrimony.ACTIVE
-                    status = StatusInventory.UNCHECKED
-                    note = ""
+                barcode.rawValue?.let {
+                    onShowInventoryPatrimonyInfo(it)
                 }
-
-                InventoryPatrimonyInfoFragment
-                    .newInstance(inventoryItem)
-                    .show(parentFragmentManager, "bottomSheetTag")
-                
-//                InventoryPatrimonyInfoFragment
-//                    .newInstance(barcode.rawValue ?: "")
-//                    .show(parentFragmentManager, "bottomSheetTag")
             }
 
 //            next()
@@ -196,6 +189,14 @@ class InventoryBarcodeFragment : BaseFragment() {
                 Toast.makeText(requireContext(), "Camera permission is required.", Toast.LENGTH_SHORT).show()
                 router.back()
             }
+        }
+    }
+
+    private fun onShowInventoryPatrimonyInfo(barcode: String) {
+        inventory?.let {
+            InventoryPatrimonyInfoFragment
+                .newInstance(it.id, barcode)
+                .show(parentFragmentManager, "bottomSheetTag")
         }
     }
 

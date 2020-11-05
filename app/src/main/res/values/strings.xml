@@ -23,21 +23,23 @@
     <string name="locales">Localidades</string>
     <string name="form_label_code">Código</string>
     <string name="label_code">Código:</string>
+    <string name="label_barcode">Código de barras</string>
     <string name="form_label_name">Nome</string>
     <string name="label_status">Status:</string>
     <string name="title_new_locale">Novo Local</string>
     <string name="message_form_enter_code">Informe o código</string>
     <string name="message_form_enter_name">Informe o nome</string>
     <string name="message_form_enter_dependency">Informe a dependência</string>
-    <string name="message_error_save_patrimony">Falha ao salvar o bem</string>
-    <string name="message_error_remove_patrimonies">Falha ao remover os bens</string>
+    <string name="message_error_save_patrimony">Falha ao salvar o bem.</string>
+    <string name="message_error_remove_patrimonies">Falha ao remover os bens.</string>
+    <string name="message_form_enter_barcode">Informe o código de barras</string>
 
-    <string name="message_error_load_locale">Falha ao carregar os locais</string>
-    <string name="message_error_view_details_locale">Falha ao carregar o local</string>
+    <string name="message_error_load_locale">Falha ao carregar os locais.</string>
+    <string name="message_error_view_details_locale">Falha ao carregar o local.</string>
     <string name="message_confirm_remove_locale">Os bens e os inventários também serão removidos.\n\nDeseja continuar?</string>
-    <string name="message_success_remove_locale">Local removido com sucesso</string>
-    <string name="message_error_remove_locale">Falha ao remover o local</string>
-    <string name="message_error_save_locale">Falha ao salvar o local</string>
+    <string name="message_success_remove_locale">Local removido com sucesso.</string>
+    <string name="message_error_remove_locale">Falha ao remover o local.</string>
+    <string name="message_error_save_locale">Falha ao salvar o local.</string>
     <string name="locale_amount_patrimony">bens</string>
     <plurals name="list_patrimony_selected">
         <item quantity="one">1 selecionado</item>
@@ -46,11 +48,11 @@
 
     <string name="inventories">Inventários</string>
     <string name="last_inventory">Último inventário</string>
-    <string name="message_error_load_inventory">Falha ao carregar os inventários</string>
-    <string name="message_error_remove_inventory">Falha ao remover o inventário</string>
-    <string name="message_error_remove_inventory_item">Falha ao remover o item do inventário</string>
-    <string name="message_error_load_inventory_item">Falha ao carregar os itens do inventário</string>
-    <string name="message_error_share_inventory_item">Falha ao compartilhar itens do inventário</string>
+    <string name="message_error_load_inventory">Falha ao carregar os inventários.</string>
+    <string name="message_error_remove_inventory">Falha ao remover o inventário.</string>
+    <string name="message_error_remove_inventory_item">Falha ao remover o item do inventário.</string>
+    <string name="message_error_load_inventory_item">Falha ao carregar os itens do inventário.</string>
+    <string name="message_error_share_inventory_item">Falha ao compartilhar itens do inventário.</string>
     <plurals name="list_inventory_selected">
         <item quantity="one">1 selecionado</item>
         <item quantity="other">%d selecionados</item>
@@ -67,13 +69,13 @@
     <string name="patrimony_status_depreciated">Depreciado</string>
     <string name="patrimonies">Bens</string>
     <string name="patrimony">Bem</string>
-    <string name="patrimony_message_error_load">Falha ao carregar os bens</string>
+    <string name="patrimony_message_error_load">Falha ao carregar os bens.</string>
     <string name="form_label_status_active">Ativo</string>
     <string name="form_label_status_inactive">Inativo</string>
     <string name="form_label_status_depreciated">Depreciado</string>
     <string name="title_new_patrimony">Novo Bem</string>
     <string name="form_label_status">Status</string>
-    <string name="message_error_load_patrimony">Falha ao carregar dados do bem</string>
+    <string name="message_error_load_patrimony">Falha ao carregar dados do bem.</string>
     <string name="label_locale">Localidade:</string>
     <string name="action_locale_save">Salvar</string>
     <string name="typed_barcode">Digitar código</string>
@@ -96,5 +98,8 @@
     </plurals>
 
     <string name="content_share_inventory_item">Código: %1$s - %2$s \n Observação: %3$s \n</string>
+    <string name="message_error_find_inventory_item">Falha ao buscar o item do inventário.</string>
+    <string name="message_error_save_inventory_item">Falha ao salvar o item do inventário.</string>
+    <string name="title_barcode">Código de Barras</string>
 
 </resources>

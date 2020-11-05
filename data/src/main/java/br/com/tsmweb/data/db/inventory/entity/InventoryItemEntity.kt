@@ -7,7 +7,7 @@ import br.com.tsmweb.domain.patrimony.model.StatusPatrimony
 
 @Entity(
     tableName = "inventory_item",
-    indices = arrayOf(Index(value = ["inventory_id", "patrimony_id"], unique = true)))
+    indices = arrayOf(Index(value = ["inventory_id", "patrimony_code"], unique = true)))
 @TypeConverters(StatusTypeConverter::class)
 data class InventoryItemEntity(
 
@@ -16,9 +16,6 @@ data class InventoryItemEntity(
 
     @ColumnInfo(name = "inventory_id")
     var inventoryId: Long,
-
-    @ColumnInfo(name = "patrimony_id")
-    var patrimonyId: Long,
 
     @ColumnInfo(name = "patrimony_code")
     var patrimonyCode: String,

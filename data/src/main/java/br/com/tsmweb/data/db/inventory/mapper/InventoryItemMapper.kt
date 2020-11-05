@@ -7,7 +7,6 @@ object InventoryItemMapper {
     fun fromDomain(domain: InventoryItem) = InventoryItemEntity(
         id = domain.id,
         inventoryId = domain.inventoryId,
-        patrimonyId = domain.patrimonyId,
         patrimonyCode = domain.patrimonyCode,
         patrimonyName = domain.patrimonyName,
         patrimonyDependency = domain.patrimonyDependency,
@@ -19,7 +18,6 @@ object InventoryItemMapper {
     fun toDomain(entity: InventoryItemEntity) = InventoryItem(
         id = entity.id,
         inventoryId = entity.inventoryId,
-        patrimonyId = entity.patrimonyId,
         patrimonyCode = entity.patrimonyCode,
         patrimonyName = entity.patrimonyName,
         patrimonyDependency = entity.patrimonyDependency,

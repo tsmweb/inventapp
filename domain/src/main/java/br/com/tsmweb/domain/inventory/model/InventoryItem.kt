@@ -5,7 +5,6 @@ import br.com.tsmweb.domain.patrimony.model.StatusPatrimony
 class InventoryItem(
     var id: Long,
     var inventoryId: Long,
-    var patrimonyId: Long,
     var patrimonyCode: String,
     var patrimonyName: String,
     var patrimonyDependency: String,

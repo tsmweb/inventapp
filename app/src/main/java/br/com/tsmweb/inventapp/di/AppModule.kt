@@ -31,6 +31,7 @@ import br.com.tsmweb.inventapp.common.Router
 import br.com.tsmweb.inventapp.features.inventory.InventoryItemListViewModel
 import br.com.tsmweb.inventapp.features.inventory.InventoryListViewModel
 import br.com.tsmweb.inventapp.features.inventory.InventoryNewViewModel
+import br.com.tsmweb.inventapp.features.inventory.InventoryPatrimonyInfoViewModel
 import br.com.tsmweb.inventapp.features.inventory.binding.StatusInventory
 import br.com.tsmweb.inventapp.features.locale.LocaleFormViewModel
 import br.com.tsmweb.inventapp.features.locale.LocaleListViewModel
@@ -201,6 +202,13 @@ val inventoryItemModule = module {
             inventoryId,
             statusInventory,
             listInventoryItemUseCase = get()
+        )
+    }
+
+    viewModel {
+        InventoryPatrimonyInfoViewModel(
+            findInventoryItemByBarcodeUseCase = get(),
+            saveInventoryItemUseCase = get()
         )
     }
 }

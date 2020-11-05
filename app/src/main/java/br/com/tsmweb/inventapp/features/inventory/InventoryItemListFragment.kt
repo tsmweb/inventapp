@@ -122,7 +122,7 @@ class InventoryItemListFragment : BaseFragment(),
         viewModel.showDetails().observe(viewLifecycleOwner, Observer { item ->
             item?.let {
                 InventoryPatrimonyInfoFragment
-                    .newInstance(it)
+                    .newInstance(it.inventoryId, it.patrimonyCode)
                     .show(parentFragmentManager, "bottomSheetTag")
             }
         })
@@ -251,6 +251,7 @@ class InventoryItemListFragment : BaseFragment(),
             override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
                 when (item?.itemId) {
                     R.id.action_share -> {
+                        shareActionProvider = item.actionProvider as? ShareActionProvider
                         viewModel.shareSelected()
                         return true
                     }
@@ -262,8 +263,8 @@ class InventoryItemListFragment : BaseFragment(),
             override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
                 activity?.menuInflater?.inflate(R.menu.inventory_item_cab, menu)
 
-                val shareItem = menu?.findItem(R.id.action_share)
-                shareActionProvider = MenuItemCompat.getActionProvider(shareItem) as? ShareActionProvider
+//                val shareItem = menu?.findItem(R.id.action_share)
+//                shareActionProvider = MenuItemCompat.getActionProvider(shareItem) as? ShareActionProvider
 
                 return true
             }

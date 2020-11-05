@@ -8,8 +8,11 @@ import br.com.tsmweb.data.db.converters.DateConverter
     indices = arrayOf(Index(value = ["code"], unique = true)))
 @TypeConverters(DateConverter::class)
 data class LocaleEntity(
+
     @PrimaryKey
     var id: String,
+
     var code: String,
+
     var name: String
 )

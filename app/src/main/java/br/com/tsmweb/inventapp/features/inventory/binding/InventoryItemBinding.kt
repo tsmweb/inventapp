@@ -25,13 +25,6 @@ class InventoryItemBinding: BaseObservable(), Parcelable {
         }
 
     @Bindable
-    var patrimonyId: Long = 0
-        set(value) {
-            field = value
-            notifyPropertyChanged(BR.patrimonyId)
-        }
-
-    @Bindable
     var patrimonyCode: String = ""
         set(value) {
             field = value

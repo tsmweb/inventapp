@@ -17,7 +17,7 @@ class PatrimonyRepositoryImpl(
         return patrimonyRoomDataSource.loadPatrimony(id)
     }
 
-    override fun loadPatrimonyNotInInventoryItem(
+    override suspend fun loadPatrimonyNotInInventoryItem(
         localeId: String,
         inventoryId: Long
     ): List<Patrimony> {

@@ -32,10 +32,21 @@
             android:text="@{inventoryItem.patrimonyName}"
             android:textColor="@color/colorTextHighlight"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imgInfo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@sample/patrimonies.json/data/name" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/ic_info"
+            android:visibility="@{inventoryItem.note.length() > 0 ? view.VISIBLE : view.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txtName"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtCode"
@@ -48,17 +59,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtName"
             tools:text="@sample/patrimonies.json/data/code" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imgInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="8dp"
-            android:src="@drawable/ic_info"
-            app:layout_constraintEnd_toStartOf="@+id/txtStatus"
-            app:layout_constraintTop_toBottomOf="@+id/txtName"
-            android:visibility="@{inventoryItem.note.length() > 0 ? view.VISIBLE : view.GONE}" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtStatus"

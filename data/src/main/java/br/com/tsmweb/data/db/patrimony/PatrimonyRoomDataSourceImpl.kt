@@ -25,7 +25,7 @@ class PatrimonyRoomDataSourceImpl(
             .map { entity -> PatrimonyMapper.toDomain(entity) }
     }
 
-    override fun loadPatrimonyNotInInventoryItem(
+    override suspend fun loadPatrimonyNotInInventoryItem(
         localeId: String,
         inventoryId: Long
     ): List<Patrimony> {

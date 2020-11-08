@@ -29,7 +29,7 @@ interface PatrimonyDao {
             FROM inventory_item i
             WHERE i.inventory_id = :inventoryId)
     """)
-    fun loadPatrimonyNotInInventoryItem(localeId: String, inventoryId: Long): List<PatrimonyEntity>
+    suspend fun loadPatrimonyNotInInventoryItem(localeId: String, inventoryId: Long): List<PatrimonyEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun savePatrimony(patrimony: PatrimonyEntity)

@@ -14,17 +14,13 @@ import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import br.com.tsmweb.inventapp.R
 import br.com.tsmweb.inventapp.common.BaseFragment
 import br.com.tsmweb.inventapp.common.Constants.EXTRA_BARCODE
 import br.com.tsmweb.inventapp.common.Constants.EXTRA_INVENTORY
 import br.com.tsmweb.inventapp.features.inventory.binding.InventoryBinding
-import br.com.tsmweb.inventapp.features.inventory.binding.InventoryItemBinding
-import br.com.tsmweb.inventapp.features.inventory.binding.StatusInventory
 import br.com.tsmweb.inventapp.features.inventory.camera.BarcodeImageAnalyzer
-import br.com.tsmweb.inventapp.features.patrimony.binding.StatusPatrimony
 import com.google.common.util.concurrent.ListenableFuture
 import kotlinx.android.synthetic.main.fragment_inventory_barcode.*
 import kotlinx.android.synthetic.main.top_action_bar_in_live_camera.*
@@ -87,7 +83,7 @@ class InventoryBarcodeFragment : BaseFragment() {
             }
         }
 
-        setFragmentResultListener(InventoryBarcodeInputFragment.INPUT_BARCODE_REQUEST_KEY) { key, bundle ->
+        setFragmentResultListener(InventoryBarcodeInputFragment.BARCODE_INPUT_REQUEST_KEY) { key, bundle ->
             bundle.getString(EXTRA_BARCODE)?.let {
                 onShowInventoryPatrimonyInfo(it)
             }
@@ -195,8 +191,12 @@ class InventoryBarcodeFragment : BaseFragment() {
     private fun onShowInventoryPatrimonyInfo(barcode: String) {
         inventory?.let {
             InventoryPatrimonyInfoFragment
-                .newInstance(it.id, barcode)
-                .show(parentFragmentManager, "bottomSheetTag")
+                .newInstance(
+                    inventoryId = it.id,
+                    barcode = barcode,
+                    editMode = false
+                )
+                .open(parentFragmentManager)
         }
     }
 

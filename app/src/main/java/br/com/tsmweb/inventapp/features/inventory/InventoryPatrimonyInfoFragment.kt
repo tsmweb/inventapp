@@ -6,18 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import br.com.tsmweb.inventapp.R
-import br.com.tsmweb.inventapp.common.Constants.EXTRA_BARCODE
-import br.com.tsmweb.inventapp.common.Constants.EXTRA_INVENTORY_ID
-import br.com.tsmweb.inventapp.common.Constants.EXTRA_INVENTORY_ITEM
 import br.com.tsmweb.inventapp.common.ViewState
 import br.com.tsmweb.inventapp.databinding.FragmentInventoryPatrimonyInfoBinding
 import br.com.tsmweb.inventapp.features.inventory.binding.InventoryItemBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.android.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
 
 class InventoryPatrimonyInfoFragment: BottomSheetDialogFragment() {
 
@@ -33,9 +30,9 @@ class InventoryPatrimonyInfoFragment: BottomSheetDialogFragment() {
         arguments?.getString(EXTRA_BARCODE) ?: ""
     }
 
-//    private val inventoryItemBinding: InventoryItemBinding? by lazy {
-//        arguments?.getParcelable<InventoryItemBinding>(EXTRA_INVENTORY_ITEM)
-//    }
+    private val editMode: Boolean by lazy {
+        arguments?.getBoolean(EXTRA_EDIT_MODE) ?: true
+    }
 
     private val viewModel: InventoryPatrimonyInfoViewModel by viewModel()
 
@@ -51,13 +48,11 @@ class InventoryPatrimonyInfoFragment: BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        binding.inventoryItem = inventoryItemBinding
+        subscriberViewModalObservable()
 
         binding.btnSave.setOnClickListener {
-            viewModel.saveInventoryItem()
+            viewModel.saveInventoryItem(editMode)
         }
-
-        subscriberViewModalObservable()
 
         viewModel.findInventoryItem(inventoryId, barcode)
     }
@@ -119,23 +114,27 @@ class InventoryPatrimonyInfoFragment: BottomSheetDialogFragment() {
         }
     }
 
+    fun open(fm: FragmentManager) {
+        if (fm.findFragmentByTag(PATRIMONY_INFO_DIALOG_TAG) == null) {
+            show(fm, PATRIMONY_INFO_DIALOG_TAG)
+        }
+    }
+
     companion object {
-        fun newInstance(inventoryId: Long, barcode: String): InventoryPatrimonyInfoFragment {
+        private const val PATRIMONY_INFO_DIALOG_TAG = "inventoryPatrimonyInfoDialog"
+        private const val EXTRA_INVENTORY_ID = "inventory_id"
+        private const val EXTRA_BARCODE = "barcode"
+        private const val EXTRA_EDIT_MODE = "edit_mode"
+
+        fun newInstance(inventoryId: Long, barcode: String, editMode: Boolean = true): InventoryPatrimonyInfoFragment {
             return InventoryPatrimonyInfoFragment().apply {
                 arguments = Bundle().apply {
                     putLong(EXTRA_INVENTORY_ID, inventoryId)
                     putString(EXTRA_BARCODE, barcode)
+                    putBoolean(EXTRA_EDIT_MODE, editMode)
                 }
             }
         }
-
-//        fun newInstance(inventoryItemBinding: InventoryItemBinding): InventoryPatrimonyInfoFragment {
-//            return InventoryPatrimonyInfoFragment().apply {
-//                arguments = Bundle().apply {
-//                    putParcelable(EXTRA_INVENTORY_ITEM, inventoryItemBinding)
-//                }
-//            }
-//        }
     }
 
 }

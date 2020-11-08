@@ -64,6 +64,10 @@ class PatrimonyFormFragment : BaseFragment() {
         }
 
         subscriberViewModalObservable()
+
+        binding.edtCode.requestFocus()
+
+        requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
     }
 
     private fun handleKeyboardEvent(actionId: Int): Boolean {

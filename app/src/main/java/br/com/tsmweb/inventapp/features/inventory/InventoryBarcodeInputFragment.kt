@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
@@ -36,21 +37,24 @@ class InventoryBarcodeInputFragment : DialogFragment() {
                 edtBarcode.error = getString(R.string.message_form_enter_barcode)
                 edtBarcode.requestFocus()
             } else {
-                setFragmentResult(INPUT_BARCODE_REQUEST_KEY, bundleOf(EXTRA_BARCODE to edtBarcode.text.toString()))
+                setFragmentResult(BARCODE_INPUT_REQUEST_KEY, bundleOf(EXTRA_BARCODE to edtBarcode.text.toString()))
                 dismiss()
             }
         }
+
+        edtBarcode.requestFocus()
+        requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
     }
 
     fun open(fm: FragmentManager) {
-        if (fm.findFragmentByTag(INPUT_BARCODE_DIALOG_TAG) == null) {
-            show(fm, INPUT_BARCODE_DIALOG_TAG)
+        if (fm.findFragmentByTag(BARCODE_INPUT_DIALOG_TAG) == null) {
+            show(fm, BARCODE_INPUT_DIALOG_TAG)
         }
     }
 
     companion object {
-        private const val INPUT_BARCODE_DIALOG_TAG = "inputBarcodeDialog"
-        const val INPUT_BARCODE_REQUEST_KEY = "inputBarcodeRequestKey"
+        private const val BARCODE_INPUT_DIALOG_TAG = "inventoryBarcodeInputDialog"
+        const val BARCODE_INPUT_REQUEST_KEY = "inventoryBarcodeInputRequestKey"
 
         fun newInstance() = InventoryBarcodeInputFragment()
     }

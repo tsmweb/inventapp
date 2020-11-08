@@ -1,7 +1,6 @@
 package br.com.tsmweb.inventapp.features.inventory
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.tsmweb.domain.inventory.interactor.FindInventoryItemByBarcodeUseCase
@@ -11,8 +10,6 @@ import br.com.tsmweb.inventapp.common.ViewState
 import br.com.tsmweb.inventapp.features.inventory.binding.InventoryItemBinding
 import br.com.tsmweb.inventapp.features.inventory.binding.InventoryItemMapper
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.Exception
@@ -22,12 +19,8 @@ class InventoryPatrimonyInfoViewModel(
     private val saveInventoryItemUseCase: SaveInventoryItemUseCase
 ) : ViewModel() {
 
-    private val inventoryItem = MutableLiveData<InventoryItemBinding>(InventoryItemBinding())
-
     private val findState = SingleLiveEvent<ViewState<InventoryItemBinding>>()
     private val saveState = SingleLiveEvent<ViewState<Unit>>()
-
-    fun inventoryItem(): LiveData<InventoryItemBinding> = inventoryItem
 
     fun findState(): LiveData<ViewState<InventoryItemBinding>> = findState
 
@@ -40,19 +33,17 @@ class InventoryPatrimonyInfoViewModel(
             )
 
             try {
-                findInventoryItemByBarcodeUseCase.execute(inventoryId, code)
-                    .flowOn(Dispatchers.IO)
-                    .collect { item ->
-                        var inventoryItem: InventoryItemBinding? = null
+                var inventoryItem: InventoryItemBinding
 
-                        item?.let {
-                            inventoryItem = InventoryItemMapper.fromDomain(it)
-                        }
+                withContext(Dispatchers.IO) {
+                    inventoryItem = InventoryItemMapper.fromDomain(
+                        findInventoryItemByBarcodeUseCase.execute(inventoryId, code)
+                    )
+                }
 
-                        findState.postValue(
-                            ViewState(ViewState.Status.SUCCESS, data = inventoryItem)
-                        )
-                    }
+                findState.postValue(
+                    ViewState(ViewState.Status.SUCCESS, data = inventoryItem)
+                )
             } catch (e: Exception) {
                 findState.postValue(
                     ViewState(ViewState.Status.ERROR, error = e)
@@ -61,7 +52,7 @@ class InventoryPatrimonyInfoViewModel(
         }
     }
 
-    fun saveInventoryItem() {
+    fun saveInventoryItem(editMode: Boolean) {
         findState.value?.data?.let {
             viewModelScope.launch {
                 saveState.postValue(
@@ -70,7 +61,7 @@ class InventoryPatrimonyInfoViewModel(
 
                 try {
                     withContext(Dispatchers.IO) {
-                        saveInventoryItemUseCase.execute(InventoryItemMapper.toDomain(it))
+                        saveInventoryItemUseCase.execute(InventoryItemMapper.toDomain(it), editMode)
                     }
 
                     saveState.postValue(ViewState(ViewState.Status.SUCCESS))

@@ -21,10 +21,10 @@ class InventoryItemRepositoryImpl(
         return inventoryItemRoomDataSource.loadInventoryItem(id)
     }
 
-    override fun loadInventoryItemByBarcode(
+    override suspend fun loadInventoryItemByBarcode(
         inventoryId: Long,
         barcode: String
-    ): Flow<InventoryItem?> {
+    ): InventoryItem? {
         return inventoryItemRoomDataSource.loadInventoryItemByBarcode(inventoryId, barcode)
     }
 

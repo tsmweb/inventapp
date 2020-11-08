@@ -29,12 +29,15 @@ class InventoryItemRoomDataSourceImpl(
             .map { entity -> InventoryItemMapper.toDomain(entity) }
     }
 
-    override fun loadInventoryItemByBarcode(
+    override suspend fun loadInventoryItemByBarcode(
         inventoryId: Long,
         barcode: String
-    ): Flow<InventoryItem?> {
-        return inventoryItemDao.loadInventoryItemByBarcode(inventoryId, barcode)
-            .map { entity -> InventoryItemMapper.toDomain(entity) }
+    ): InventoryItem? {
+        inventoryItemDao.loadInventoryItemByBarcode(inventoryId, barcode)?.let {
+            return InventoryItemMapper.toDomain(it)
+        }
+
+        return null
     }
 
     override suspend fun saveInventoryItem(inventoryItem: InventoryItem) {

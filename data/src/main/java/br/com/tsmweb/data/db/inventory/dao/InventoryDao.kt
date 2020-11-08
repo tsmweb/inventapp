@@ -12,13 +12,13 @@ interface InventoryDao {
         SELECT i.id,
             i.locale_id AS localeId,
             i.date_inventory AS dateInventory,
-            COUNT(checked.id) AS patrimonyChecked,
-            COUNT(uchecked.id) AS patrimonyUnchecked,
-            COUNT(nfound.id) AS patrimonyNotFound
+            COUNT(DISTINCT checked.id) AS patrimonyChecked,
+            COUNT(DISTINCT uchecked.id) AS patrimonyUnchecked,
+            COUNT(DISTINCT nfound.id) AS patrimonyNotFound
         FROM inventory i
         LEFT JOIN inventory_item checked ON checked.inventory_id = i.id AND checked.status = 0
         LEFT JOIN inventory_item uchecked ON uchecked.inventory_id = i.id AND uchecked.status = 1 
-        LEFT JOIN inventory_item nfound ON nfound.inventory_id = i.id AND nfound.status = 2  
+        LEFT JOIN inventory_item nfound ON nfound.inventory_id = i.id AND nfound.status = 2 
         WHERE i.locale_id = :localeId
         AND (i.date_inventory LIKE :term OR i.id LIKE :term)
         GROUP BY i.id, i.locale_id, i.date_inventory
@@ -30,9 +30,9 @@ interface InventoryDao {
         SELECT i.id,
             i.locale_id AS localeId,
             i.date_inventory AS dateInventory,
-            COUNT(checked.id) AS patrimonyChecked,
-            COUNT(uchecked.id) AS patrimonyUnchecked,
-            COUNT(nfound.id) AS patrimonyNotFound
+            COUNT(DISTINCT checked.id) AS patrimonyChecked,
+            COUNT(DISTINCT uchecked.id) AS patrimonyUnchecked,
+            COUNT(DISTINCT nfound.id) AS patrimonyNotFound
         FROM inventory i
         LEFT JOIN inventory_item checked ON checked.inventory_id = i.id AND checked.status = 0
         LEFT JOIN inventory_item uchecked ON uchecked.inventory_id = i.id AND uchecked.status = 1 

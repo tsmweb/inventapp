@@ -26,7 +26,7 @@ interface InventoryItemDao {
         WHERE i.inventory_id = :inventoryId
         AND i.patrimony_code = :barcode
     """)
-    fun loadInventoryItemByBarcode(inventoryId: Long, barcode: String): Flow<InventoryItemEntity>
+    suspend fun loadInventoryItemByBarcode(inventoryId: Long, barcode: String): InventoryItemEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveInventoryItem(inventoryItem: InventoryItemEntity)

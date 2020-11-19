@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
@@ -54,7 +55,20 @@ class InventoryPatrimonyInfoFragment: BottomSheetDialogFragment() {
             viewModel.saveInventoryItem(editMode)
         }
 
+        binding.edtNote.setOnEditorActionListener{ _, i, _ ->
+            handleKeyboardEvent(i)
+        }
+
         viewModel.findInventoryItem(inventoryId, barcode)
+    }
+
+    private fun handleKeyboardEvent(actionId: Int): Boolean {
+        if (EditorInfo.IME_ACTION_DONE == actionId) {
+            viewModel.saveInventoryItem(editMode)
+            return true
+        }
+
+        return false
     }
 
     override fun onResume() {

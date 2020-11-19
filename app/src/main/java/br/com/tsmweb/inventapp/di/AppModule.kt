@@ -21,10 +21,7 @@ import br.com.tsmweb.domain.locale.interactor.ListLocalesUseCase
 import br.com.tsmweb.domain.locale.interactor.RemoveLocaleUseCase
 import br.com.tsmweb.domain.locale.interactor.SaveLocaleUseCase
 import br.com.tsmweb.domain.locale.repository.LocaleRepository
-import br.com.tsmweb.domain.patrimony.interactor.ListPatrimonyUseCase
-import br.com.tsmweb.domain.patrimony.interactor.RemovePatrimonyUseCase
-import br.com.tsmweb.domain.patrimony.interactor.SavePatrimonyUseCase
-import br.com.tsmweb.domain.patrimony.interactor.DetailsPatrimonyUseCase
+import br.com.tsmweb.domain.patrimony.interactor.*
 import br.com.tsmweb.domain.patrimony.repository.PatrimonyRepository
 import br.com.tsmweb.inventapp.router.AppRouter
 import br.com.tsmweb.inventapp.common.Router
@@ -108,6 +105,10 @@ val patrimonyModule = module {
         DetailsPatrimonyUseCase(repository = get())
     }
 
+    factory {
+        LoadDependencyUseCase(repository = get())
+    }
+
     viewModel { (localeId: String) ->
         PatrimonyListViewModel(
             localeId,
@@ -118,7 +119,8 @@ val patrimonyModule = module {
 
     viewModel {
         PatrimonyFormViewModel(
-            savePatrimonyUseCase = get()
+            savePatrimonyUseCase = get(),
+            loadDependencyUseCase = get()
         )
     }
 

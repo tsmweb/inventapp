@@ -4,13 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.setFragmentResult
 import br.com.tsmweb.inventapp.R
 import br.com.tsmweb.inventapp.common.Constants.EXTRA_BARCODE
+import br.com.tsmweb.inventapp.common.extensions.closeKeyboard
+import br.com.tsmweb.inventapp.common.extensions.showKeyboard
 import kotlinx.android.synthetic.main.fragment_inventory_barcode_input.*
 
 class InventoryBarcodeInputFragment : DialogFragment() {
@@ -43,7 +44,12 @@ class InventoryBarcodeInputFragment : DialogFragment() {
         }
 
         edtBarcode.requestFocus()
-        requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
+        showKeyboard()
+    }
+
+    override fun onDestroyView() {
+        closeKeyboard()
+        super.onDestroyView()
     }
 
     fun open(fm: FragmentManager) {

@@ -1,35 +1,63 @@
 <resources>
 
     <!-- Material Theme -->
-    <style name="MaterialTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
+    <style name="MaterialTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="textInputStyle">@style/CustomTextInputStyle</item>
 
         <item name="tabTextColor">@color/tabTextColor</item>
         <item name="buttonStyle">@style/CustomMaterialButton</item>
         <item name="floatingActionButtonStyle">@style/CustomMaterialFloatActionButton</item>
 
         <item name="android:dialogTheme">@style/CustomMaterialDialog</item>
-        <item name="bottomSheetDialogTheme">@style/CustomMaterialBottomSheetDialog</item>
+        <item name="android:alertDialogTheme">@style/CustomMaterialAlertDialog</item>
 
         <!-- Action Mode Overlay -->
         <item name="windowActionModeOverlay">true</item>
         <item name="actionModeBackground">@color/colorPrimary</item>
     </style>
 
-    <style name="CustomMaterialDialog" parent="@style/Theme.MaterialComponents.Light.Dialog.Bridge">
+    <style name="CustomMaterialDialog" parent="@style/Theme.MaterialComponents.Light.Dialog">
         <item name="android:windowNoTitle">false</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="textInputStyle">@style/CustomTextInputStyle</item>
     </style>
 
-    <style name="CustomMaterialBottomSheetDialog" parent="@style/Theme.MaterialComponents.Light.BottomSheetDialog">
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="textInputStyle">@style/Widget.Design.TextInputLayout</item>
+    <style name="CustomMaterialAlertDialog" parent="@style/Theme.MaterialComponents.Light.Dialog.Alert">
+        <item name="android:windowNoTitle">false</item>
+        <item name="buttonBarButtonStyle">@style/CustomButtonBarButtonStyle</item>
+    </style>
+
+    <style name="CustomButtonBarButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:fillColor">@color/colorAccent</item>
     </style>
 
     <style name="MaterialTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
     <style name="MaterialTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
+
+    <style name="CustomTextInputStyle" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="materialThemeOverlay">@style/Custom.ThemeOverlay.OutlinedBox</item>
+        <item name="boxStrokeColor">@color/colorAccent</item>
+        <item name="hintTextColor">@color/colorAccent</item>
+    </style>
+
+    <style name="Custom.ThemeOverlay.OutlinedBox" parent="ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox">
+        <item name="colorControlActivated">@color/colorAccent</item>
+    </style>
+
+    <style name="CustomExposedDropdownMenu" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="materialThemeOverlay">@style/Custom.ThemeOverlay.AutoCompleteTextView.OutlinedBox</item>
+        <item name="boxStrokeColor">@color/colorAccent</item>
+        <item name="hintTextColor">@color/colorAccent</item>
+    </style>
+
+    <style name="Custom.ThemeOverlay.AutoCompleteTextView.OutlinedBox" parent="@style/ThemeOverlay.MaterialComponents.AutoCompleteTextView.OutlinedBox">
+        <item name="colorControlActivated">@color/colorAccent</item>
+    </style>
 
     <style name="CustomMaterialButton" parent="Widget.MaterialComponents.Button">
         <item name="android:textColor">@color/buttonTextColor</item>

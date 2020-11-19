@@ -17,6 +17,10 @@ class PatrimonyRepositoryImpl(
         return patrimonyRoomDataSource.loadPatrimony(id)
     }
 
+    override fun loadDependencies(localeId: String): Flow<List<String>> {
+        return patrimonyRoomDataSource.loadDependencies(localeId)
+    }
+
     override suspend fun loadPatrimonyNotInInventoryItem(
         localeId: String,
         inventoryId: Long

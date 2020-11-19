@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.view.inputmethod.EditorInfo
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -14,6 +15,8 @@ import br.com.tsmweb.inventapp.R
 import br.com.tsmweb.inventapp.common.BaseFragment
 import br.com.tsmweb.inventapp.common.Constants.EXTRA_PATRIMONY
 import br.com.tsmweb.inventapp.common.ViewState
+import br.com.tsmweb.inventapp.common.extensions.closeKeyboard
+import br.com.tsmweb.inventapp.common.extensions.showKeyboard
 import br.com.tsmweb.inventapp.databinding.FragmentPatrimonyFormBinding
 import br.com.tsmweb.inventapp.features.patrimony.binding.PatrimonyBinding
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -29,6 +32,13 @@ class PatrimonyFormFragment : BaseFragment() {
     }
 
     private val viewModel: PatrimonyFormViewModel by viewModel()
+
+    private val dependencyAdapter: ArrayAdapter<String> by lazy {
+        ArrayAdapter<String>(
+            requireContext(),
+            R.layout.dropdown_menu_popup_item
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,6 +65,8 @@ class PatrimonyFormFragment : BaseFragment() {
             binding.patrimony = it
         }
 
+        binding.edtDependency.setAdapter(dependencyAdapter)
+
         binding.btnSave.setOnClickListener {
             savePatrimony()
         }
@@ -66,8 +78,12 @@ class PatrimonyFormFragment : BaseFragment() {
         subscriberViewModalObservable()
 
         binding.edtCode.requestFocus()
+        showKeyboard()
+    }
 
-        requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
+    override fun onDestroy() {
+        closeKeyboard()
+        super.onDestroy()
     }
 
     private fun handleKeyboardEvent(actionId: Int): Boolean {
@@ -81,26 +97,62 @@ class PatrimonyFormFragment : BaseFragment() {
 
     private fun subscriberViewModalObservable() {
         viewModel.saveState().observe(viewLifecycleOwner, Observer { state ->
-            state?.run {
-                when (status) {
-                    ViewState.Status.LOADING -> {
-                        Log.d(TAG, "Process is loading")
-                    }
-                    ViewState.Status.SUCCESS -> {
-                        router.back()
-                    }
-                    ViewState.Status.ERROR -> {
-                        Log.e(TAG, state.error?.message ?: "")
-
-                        Toast.makeText(
-                            requireContext(),
-                            R.string.message_error_save_patrimony,
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
+            state?.let {
+                handleSaveState(it)
             }
         })
+
+        viewModel.loadDependencyState().observe(viewLifecycleOwner, Observer { state ->
+            state?.let {
+                handleDependencyListState(it)
+            }
+        })
+
+        patrimony?.locale?.let {
+            viewModel.loadDependency(it.id)
+        }
+    }
+
+    private fun handleSaveState(state: ViewState<Unit>) {
+        state?.run {
+            when (status) {
+                ViewState.Status.LOADING -> {
+                    Log.d(TAG, "[SaveState] Process is loading")
+                }
+                ViewState.Status.SUCCESS -> {
+                    router.back()
+                }
+                ViewState.Status.ERROR -> {
+                    Log.e(TAG, state.error?.message ?: "")
+
+                    Toast.makeText(
+                        requireContext(),
+                        R.string.message_error_save_patrimony,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
+    }
+
+    private fun handleDependencyListState(state: ViewState<List<String>>) {
+        state.run {
+            when (status) {
+                ViewState.Status.LOADING -> {
+                    Log.d(TAG, "[DependencyListState] Process is loading")
+                }
+                ViewState.Status.SUCCESS -> {
+                    data?.let {
+                        dependencyAdapter.clear()
+                        dependencyAdapter.addAll(it)
+                    }
+                }
+                ViewState.Status.ERROR -> {
+                    Log.e(TAG, state.error?.message ?: "")
+                }
+            }
+        }
+
     }
 
     private fun savePatrimony() {

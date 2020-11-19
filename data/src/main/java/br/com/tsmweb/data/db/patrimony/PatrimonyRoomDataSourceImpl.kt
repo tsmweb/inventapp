@@ -25,6 +25,10 @@ class PatrimonyRoomDataSourceImpl(
             .map { entity -> PatrimonyMapper.toDomain(entity) }
     }
 
+    override fun loadDependencies(localeId: String): Flow<List<String>> {
+        return patrimonyDao.loadDependencies(localeId)
+    }
+
     override suspend fun loadPatrimonyNotInInventoryItem(
         localeId: String,
         inventoryId: Long

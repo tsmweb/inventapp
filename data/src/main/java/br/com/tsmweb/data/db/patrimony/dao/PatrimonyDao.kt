@@ -21,6 +21,14 @@ interface PatrimonyDao {
     fun loadPatrimony(id: Long): Flow<PatrimonyAndLocale>
 
     @Query("""
+        SELECT DISTINCT dependency 
+        FROM patrimony 
+        WHERE locale_id = :localeId 
+        ORDER BY dependency
+    """)
+    fun loadDependencies(localeId: String): Flow<List<String>>
+
+    @Query("""
         SELECT p.*
         FROM patrimony p
         WHERE p.locale_id = :localeId

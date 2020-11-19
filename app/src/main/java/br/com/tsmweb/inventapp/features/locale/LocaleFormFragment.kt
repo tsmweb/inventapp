@@ -14,6 +14,8 @@ import br.com.tsmweb.inventapp.R
 import br.com.tsmweb.inventapp.common.BaseFragment
 import br.com.tsmweb.inventapp.common.Constants.EXTRA_LOCALE
 import br.com.tsmweb.inventapp.common.ViewState
+import br.com.tsmweb.inventapp.common.extensions.closeKeyboard
+import br.com.tsmweb.inventapp.common.extensions.showKeyboard
 import br.com.tsmweb.inventapp.databinding.FragmentLocaleFormBinding
 import br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -66,7 +68,12 @@ class LocaleFormFragment : BaseFragment() {
         subscriberViewModalObservable()
 
         binding.edtCode.requestFocus()
-        requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
+        showKeyboard()
+    }
+
+    override fun onDestroyView() {
+        closeKeyboard()
+        super.onDestroyView()
     }
 
     private fun subscriberViewModalObservable() {

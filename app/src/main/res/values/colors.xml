@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#344955</color>
-    <color name="colorPrimaryDark">#232F34</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
+    <color name="colorPrimaryVariant">#232F34</color>
     <color name="colorPrimarySecondary">#4A6572</color>
-    <color name="colorAccent">#F9AA33</color>
+    <color name="colorSecondary">#F9AA33</color>
+    <color name="colorOnSecondary">#000000</color>
+    <color name="colorSurface">#FFFFFF</color>
+    <color name="colorOnSurface">#000000</color>
+    <color name="colorError">#B00020</color>
+    <color name="colorOnError">#FFFFFF</color>
+    <color name="colorBackground">#FFFFFF</color>
+    <color name="colorOnBackground">#000000</color>
+
     <color name="colorItemSelectedList">#CFD8DC</color>
     <color name="colorItemList">#FFFFFF</color>
     <color name="colorTextHighlight">#1C1C1C</color>
@@ -26,6 +35,5 @@
     <color name="capture_box_stroke_color">#FFFFFFFF</color>
     <color name="capture_background_color">#B3000000</color>
 
-    <color name="tabTextColor">#90FFFFFF</color>
-    <color name="buttonTextColor">#000000</color>
+    <color name="tabTextColor">#80FFFFFF</color>
 </resources>

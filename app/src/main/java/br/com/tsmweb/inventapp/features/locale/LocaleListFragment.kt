@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
@@ -20,6 +19,7 @@ import br.com.tsmweb.inventapp.common.ViewState
 import br.com.tsmweb.inventapp.databinding.FragmentLocaleListBinding
 import br.com.tsmweb.inventapp.features.about.AboutDialogFragment
 import br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class LocaleListFragment : BaseFragment(),
@@ -208,7 +208,7 @@ class LocaleListFragment : BaseFragment(),
                 return true
             }
             R.id.action_locale_remove -> {
-                AlertDialog.Builder(requireContext())
+                MaterialAlertDialogBuilder(requireContext())
                     .setMessage(R.string.message_confirm_remove_locale)
                     .setPositiveButton(R.string.remove) { _, i ->
                         viewModel.removePlace(locale)

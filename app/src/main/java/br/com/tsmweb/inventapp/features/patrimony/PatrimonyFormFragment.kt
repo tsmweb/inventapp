@@ -76,14 +76,20 @@ class PatrimonyFormFragment : BaseFragment() {
         }
 
         subscriberViewModalObservable()
-
-        binding.edtCode.requestFocus()
-//        showKeyboard()
     }
 
-    override fun onDestroy() {
-//        closeKeyboard()
-        super.onDestroy()
+    override fun onResume() {
+        super.onResume()
+
+        binding.edtCode.post {
+            binding.edtCode.requestFocus()
+            showKeyboard()
+        }
+    }
+
+    override fun onDestroyView() {
+        closeKeyboard()
+        super.onDestroyView()
     }
 
     private fun handleKeyboardEvent(actionId: Int): Boolean {

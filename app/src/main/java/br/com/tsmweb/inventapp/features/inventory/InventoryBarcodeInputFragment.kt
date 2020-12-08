@@ -1,9 +1,13 @@
 package br.com.tsmweb.inventapp.features.inventory
 
+import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
@@ -15,6 +19,8 @@ import br.com.tsmweb.inventapp.common.extensions.showKeyboard
 import kotlinx.android.synthetic.main.fragment_inventory_barcode_input.*
 
 class InventoryBarcodeInputFragment : DialogFragment() {
+
+    private val TAG = InventoryBarcodeInputFragment::class.simpleName
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,14 +48,27 @@ class InventoryBarcodeInputFragment : DialogFragment() {
                 dismiss()
             }
         }
-
-        edtBarcode.requestFocus()
-        showKeyboard()
     }
 
-    override fun onDestroyView() {
-        closeKeyboard()
-        super.onDestroyView()
+    override fun onResume() {
+        super.onResume()
+
+        edtBarcode.post {
+            edtBarcode.requestFocus()
+            (edtBarcode.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).apply {
+                showSoftInput(edtBarcode, InputMethodManager.SHOW_IMPLICIT)
+            }
+        }
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        (edtBarcode.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).apply {
+            if (isActive) {
+                toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS)
+            }
+        }
+
+        super.onDismiss(dialog)
     }
 
     fun open(fm: FragmentManager) {

@@ -150,7 +150,7 @@ class InventoryBarcodeFragment : BaseFragment() {
             cameraProvider.unbindAll()
 
             camera = cameraProvider.bindToLifecycle(viewLifecycleOwner, cameraSelector, preview, imageAnalysis)
-            preview?.setSurfaceProvider(pvBarcode.createSurfaceProvider())
+            preview?.setSurfaceProvider(pvBarcode.surfaceProvider)
         } catch (e: Exception) {
             e.printStackTrace()
         }

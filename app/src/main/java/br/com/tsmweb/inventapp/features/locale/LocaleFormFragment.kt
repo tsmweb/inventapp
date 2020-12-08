@@ -66,9 +66,15 @@ class LocaleFormFragment : BaseFragment() {
         }
 
         subscriberViewModalObservable()
+    }
 
-        binding.edtCode.requestFocus()
-        showKeyboard()
+    override fun onResume() {
+        super.onResume()
+
+        binding.edtCode.post {
+            binding.edtCode.requestFocus()
+            showKeyboard()
+        }
     }
 
     override fun onDestroyView() {

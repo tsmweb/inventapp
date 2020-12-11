@@ -1,12 +1,12 @@
 package br.com.tsmweb.domain.locale.interactor
 
 import br.com.tsmweb.domain.locale.model.Locale
-import br.com.tsmweb.domain.locale.repository.LocaleRepository
+import br.com.tsmweb.domain.locale.gateway.LocaleDataStore
 
 class RemoveLocaleUseCase(
-    private val localeRepository: LocaleRepository
+    private val localeDataStore: LocaleDataStore
 ) {
     suspend fun execute(locale: Locale) {
-        localeRepository.removeLocale(locale)
+        localeDataStore.removeLocale(locale)
     }
 }

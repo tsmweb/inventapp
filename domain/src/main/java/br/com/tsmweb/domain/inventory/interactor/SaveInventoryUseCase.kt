@@ -1,16 +1,16 @@
 package br.com.tsmweb.domain.inventory.interactor
 
 import br.com.tsmweb.domain.inventory.model.Inventory
-import br.com.tsmweb.domain.inventory.repository.InventoryRepository
+import br.com.tsmweb.domain.inventory.gateway.InventoryDataStore
 import java.lang.IllegalArgumentException
 
 class SaveInventoryUseCase(
-    private val repository: InventoryRepository,
+    private val inventoryDataStore: InventoryDataStore,
     private val createInventoryItemsUseCase: CreateInventoryItemsUseCase
 ) {
     suspend fun execute(inventory: Inventory) {
         if (inventoryIsValid(inventory)) {
-            val id = repository.saveInventory(inventory)
+            val id = inventoryDataStore.saveInventory(inventory)
             createInventoryItemsUseCase.execute(inventory.localeId, id)
         } else {
             throw IllegalArgumentException("Inventory is invalid")

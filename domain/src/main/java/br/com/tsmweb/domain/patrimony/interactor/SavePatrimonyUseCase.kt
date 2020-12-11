@@ -1,15 +1,15 @@
 package br.com.tsmweb.domain.patrimony.interactor
 
 import br.com.tsmweb.domain.patrimony.model.Patrimony
-import br.com.tsmweb.domain.patrimony.repository.PatrimonyRepository
+import br.com.tsmweb.domain.patrimony.gateway.PatrimonyDataStore
 import java.lang.IllegalArgumentException
 
 class SavePatrimonyUseCase(
-    private val repository: PatrimonyRepository
+    private val patrimonyDataStore: PatrimonyDataStore
 ) {
     suspend fun execute(patrimony: Patrimony) {
         if (patrimonyIsValid(patrimony)) {
-            repository.savePatrimony(patrimony)
+            patrimonyDataStore.savePatrimony(patrimony)
         } else {
             throw IllegalArgumentException("Patrimony is invalid")
         }

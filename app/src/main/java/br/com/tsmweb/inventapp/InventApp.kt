@@ -1,6 +1,8 @@
 package br.com.tsmweb.inventapp
 
 import android.app.Application
+import br.com.tsmweb.data.room.di.DataRoomModules
+import br.com.tsmweb.domain.di.DomainModules
 import br.com.tsmweb.inventapp.di.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -12,15 +14,16 @@ class InventApp : Application() {
 
         startKoin {
             androidContext(this@InventApp)
-            modules(
-                listOf(
-                    appModule,
-                    localeModule,
-                    patrimonyModule,
-                    inventoryModule,
-                    inventoryItemModule
-                )
-            )
         }
+
+        loadAllModules()
     }
+
+    private fun loadAllModules() {
+        DataRoomModules.load()
+        DomainModules.load()
+        AppModule.load()
+    }
+
+
 }

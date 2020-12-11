@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply from: "$rootProject.projectDir/commons.gradle"
 
 android {
     compileSdkVersion compile_sdk_version
@@ -29,13 +30,10 @@ dependencies {
     implementation project(":domain")
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
-    testImplementation "junit:junit:$junit_version"
     testImplementation "androidx.room:room-testing:$room_version"
 
     androidTestImplementation "androidx.test.ext:junit:$testrunner_junit_version"

@@ -22,7 +22,7 @@ class PatrimonyFormViewModel(
     private val loadDependencyUseCase: LoadDependencyUseCase
 ) : ViewModel() {
 
-    private val patrimony = MutableLiveData<PatrimonyBinding>(PatrimonyBinding())
+    private val patrimony = MutableLiveData(PatrimonyBinding())
     private val saveState = SingleLiveEvent<ViewState<Unit>>()
     private val loadDependencyState = MutableLiveData<ViewState<List<String>>>()
 

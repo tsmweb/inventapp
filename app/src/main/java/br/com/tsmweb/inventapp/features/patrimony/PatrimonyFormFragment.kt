@@ -7,7 +7,6 @@ import android.view.inputmethod.EditorInfo
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
@@ -28,7 +27,7 @@ class PatrimonyFormFragment : BaseFragment() {
     private lateinit var binding: FragmentPatrimonyFormBinding
 
     private val patrimony: PatrimonyBinding? by lazy {
-        arguments?.getParcelable<PatrimonyBinding>(EXTRA_PATRIMONY)
+        arguments?.getParcelable(EXTRA_PATRIMONY)
     }
 
     private val viewModel: PatrimonyFormViewModel by viewModel()
@@ -102,13 +101,13 @@ class PatrimonyFormFragment : BaseFragment() {
     }
 
     private fun subscriberViewModalObservable() {
-        viewModel.saveState().observe(viewLifecycleOwner, Observer { state ->
+        viewModel.saveState().observe(viewLifecycleOwner, { state ->
             state?.let {
                 handleSaveState(it)
             }
         })
 
-        viewModel.loadDependencyState().observe(viewLifecycleOwner, Observer { state ->
+        viewModel.loadDependencyState().observe(viewLifecycleOwner, { state ->
             state?.let {
                 handleDependencyListState(it)
             }

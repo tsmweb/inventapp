@@ -10,7 +10,6 @@ import br.com.tsmweb.inventapp.features.inventory.binding.InventoryBinding
 import br.com.tsmweb.inventapp.features.inventory.binding.InventoryMapper
 import br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.Exception

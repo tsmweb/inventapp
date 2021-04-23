@@ -83,13 +83,13 @@ class InventoryPatrimonyInfoFragment: BottomSheetDialogFragment() {
     }
 
     private fun subscriberViewModalObservable() {
-        viewModel.findState().observe(viewLifecycleOwner, Observer { state ->
+        viewModel.findState().observe(viewLifecycleOwner, { state ->
             state?.let {
                 handleFindState(state)
             }
         })
 
-        viewModel.saveState().observe(viewLifecycleOwner, Observer { state ->
+        viewModel.saveState().observe(viewLifecycleOwner, { state ->
             state?.let {
                 handleSaveState(state)
             }

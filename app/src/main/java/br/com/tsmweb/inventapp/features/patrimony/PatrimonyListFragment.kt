@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ActionMode
 import androidx.appcompat.widget.SearchView
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,7 +29,7 @@ class PatrimonyListFragment : BaseFragment(),
     private var actionMode: ActionMode? = null
 
     private val locale: LocaleBinding? by lazy {
-        arguments?.getParcelable<LocaleBinding>(EXTRA_LOCALE)
+        arguments?.getParcelable(EXTRA_LOCALE)
     }
 
     private val patrimonyAdapter: PatrimonyAdapter by lazy {
@@ -114,25 +113,25 @@ class PatrimonyListFragment : BaseFragment(),
     }
 
     private fun subscriberViewModalObservable() {
-        viewModel.loadState().observe(viewLifecycleOwner, Observer { state ->
+        viewModel.loadState().observe(viewLifecycleOwner, { state ->
             state?.let {
                 handleLoadState(it)
             }
         })
 
-        viewModel.deleteState().observe(viewLifecycleOwner, Observer { state ->
+        viewModel.deleteState().observe(viewLifecycleOwner, { state ->
             state?.let {
                 handleDeleteState(it)
             }
         })
 
-        viewModel.showDetails().observe(viewLifecycleOwner, Observer { patrimony ->
+        viewModel.showDetails().observe(viewLifecycleOwner, { patrimony ->
             patrimony?.let {
                 router.showPatrimonyDetails(it)
             }
         })
 
-        viewModel.isInDeleteModel().observe(viewLifecycleOwner, Observer { deleteMode ->
+        viewModel.isInDeleteModel().observe(viewLifecycleOwner, { deleteMode ->
             if (deleteMode) {
                 showDeleteMode()
             } else {
@@ -140,7 +139,7 @@ class PatrimonyListFragment : BaseFragment(),
             }
         })
 
-        viewModel.selectionCount().observe(viewLifecycleOwner, Observer { count ->
+        viewModel.selectionCount().observe(viewLifecycleOwner, { count ->
             count?.let {
                 updateSelectionCountText(it)
                 patrimonyAdapter.notifyDataSetChanged()

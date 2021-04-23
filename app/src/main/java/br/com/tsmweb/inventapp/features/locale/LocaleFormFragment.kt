@@ -27,7 +27,7 @@ class LocaleFormFragment : BaseFragment() {
     private lateinit var binding: FragmentLocaleFormBinding
 
     private val locale: LocaleBinding? by lazy {
-        arguments?.getParcelable<LocaleBinding>(EXTRA_LOCALE)
+        arguments?.getParcelable(EXTRA_LOCALE)
     }
 
     private val viewModel: LocaleFormViewModel by viewModel()

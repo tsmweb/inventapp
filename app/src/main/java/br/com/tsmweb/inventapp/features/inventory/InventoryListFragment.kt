@@ -7,7 +7,6 @@ import androidx.appcompat.view.ActionMode
 import androidx.appcompat.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.*
 import br.com.tsmweb.inventapp.R
 import br.com.tsmweb.inventapp.common.BaseFragment
@@ -108,25 +107,25 @@ class InventoryListFragment : BaseFragment(),
     }
 
     private fun subscriberViewModalObservable() {
-        viewModel.loadState().observe(viewLifecycleOwner, Observer { state ->
+        viewModel.loadState().observe(viewLifecycleOwner, { state ->
             state?.let {
                 handleLoadState(it)
             }
         })
 
-        viewModel.deleteState().observe(viewLifecycleOwner, Observer { state ->
+        viewModel.deleteState().observe(viewLifecycleOwner, { state ->
             state?.let {
                 handleDeleteState(it)
             }
         })
 
-        viewModel.showDetails().observe(viewLifecycleOwner, Observer { inventory ->
+        viewModel.showDetails().observe(viewLifecycleOwner, { inventory ->
             inventory?.let {
                 router.showInventoryTab(it)
             }
         })
 
-        viewModel.isInDeleteModel().observe(viewLifecycleOwner, Observer { deleteMode ->
+        viewModel.isInDeleteModel().observe(viewLifecycleOwner, { deleteMode ->
             if (deleteMode) {
                 showDeleteMode()
             } else {
@@ -134,7 +133,7 @@ class InventoryListFragment : BaseFragment(),
             }
         })
 
-        viewModel.selectionCount().observe(viewLifecycleOwner, Observer { count ->
+        viewModel.selectionCount().observe(viewLifecycleOwner, { count ->
             count?.let {
                 updateSelectionCountText(it)
                 inventoryAdapter.notifyDataSetChanged()

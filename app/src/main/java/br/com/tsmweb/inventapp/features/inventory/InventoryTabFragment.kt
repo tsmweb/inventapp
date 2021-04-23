@@ -24,7 +24,7 @@ class InventoryTabFragment : BaseFragment() {
     private lateinit var binding: FragmentInventoryTabBinding
 
     private val inventory: InventoryBinding? by lazy {
-        arguments?.getParcelable<InventoryBinding>(EXTRA_INVENTORY)
+        arguments?.getParcelable(EXTRA_INVENTORY)
     }
 
     override fun onCreateView(

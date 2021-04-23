@@ -10,7 +10,6 @@ import androidx.appcompat.view.ActionMode
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.ShareActionProvider
 import androidx.core.view.MenuItemCompat
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -41,7 +40,7 @@ class InventoryItemListFragment : BaseFragment(),
     private var shareActionProvider: ShareActionProvider? = null
 
     private val inventory: InventoryBinding? by lazy {
-        arguments?.getParcelable<InventoryBinding>(EXTRA_INVENTORY)
+        arguments?.getParcelable(EXTRA_INVENTORY)
     }
 
     private val statusInventory: StatusInventory? by lazy {
@@ -113,13 +112,13 @@ class InventoryItemListFragment : BaseFragment(),
     }
 
     private fun subscriberViewModalObservable() {
-        viewModel.loadState().observe(viewLifecycleOwner, Observer { state ->
+        viewModel.loadState().observe(viewLifecycleOwner, { state ->
             state?.let {
                 handleLoadState(it)
             }
         })
 
-        viewModel.showDetails().observe(viewLifecycleOwner, Observer { item ->
+        viewModel.showDetails().observe(viewLifecycleOwner, { item ->
             item?.let {
                 InventoryPatrimonyInfoFragment
                     .newInstance(it.inventoryId, it.patrimonyCode)
@@ -127,13 +126,13 @@ class InventoryItemListFragment : BaseFragment(),
             }
         })
 
-        viewModel.shareState().observe(viewLifecycleOwner, Observer { state ->
+        viewModel.shareState().observe(viewLifecycleOwner, { state ->
             state?.let {
                 handleShareState(it)
             }
         })
 
-        viewModel.isInSelectionModel().observe(viewLifecycleOwner, Observer { selectionMode ->
+        viewModel.isInSelectionModel().observe(viewLifecycleOwner, { selectionMode ->
             if (selectionMode) {
                 showSelectionMode()
             } else {
@@ -141,7 +140,7 @@ class InventoryItemListFragment : BaseFragment(),
             }
         })
 
-        viewModel.selectionCount().observe(viewLifecycleOwner, Observer { count ->
+        viewModel.selectionCount().observe(viewLifecycleOwner, { count ->
             count?.let {
                 updateSelectionCountText(it)
                 inventoryItemAdapter.notifyDataSetChanged()

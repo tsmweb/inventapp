@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.Observer
 import br.com.tsmweb.inventapp.R
 import br.com.tsmweb.inventapp.common.Constants.EXTRA_LOCALE
 import br.com.tsmweb.inventapp.common.ViewState
@@ -56,7 +55,7 @@ class InventoryNewFragment : DialogFragment() {
     }
 
     private fun subscriberViewModalObservable() {
-        viewModel.saveState().observe(viewLifecycleOwner, Observer { state ->
+        viewModel.saveState().observe(viewLifecycleOwner, { state ->
             state?.let {
                 when (it.status) {
                     ViewState.Status.LOADING -> {

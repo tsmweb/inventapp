@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
@@ -25,7 +24,7 @@ class PatrimonyDetailsFragment : BaseFragment() {
     private lateinit var binding: FragmentPatrimonyDetailsBinding
 
     private val patrimony: PatrimonyBinding? by lazy {
-        arguments?.getParcelable<PatrimonyBinding>(EXTRA_PATRIMONY)
+        arguments?.getParcelable(EXTRA_PATRIMONY)
     }
 
     private val viewModel: PatrimonyDetailsViewModel by viewModel {
@@ -73,7 +72,7 @@ class PatrimonyDetailsFragment : BaseFragment() {
     }
 
     private fun subscriberViewModalObservable() {
-        viewModel.loadState().observe(viewLifecycleOwner, Observer { state ->
+        viewModel.loadState().observe(viewLifecycleOwner, { state ->
             state?.run {
                 when (status) {
                     ViewState.Status.SUCCESS -> {

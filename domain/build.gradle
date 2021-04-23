@@ -4,6 +4,3 @@ apply from: "$rootProject.projectDir/commons.gradle"
 
 dependencies {
 }
-
-sourceCompatibility = "1.8"
-targetCompatibility = "1.8"

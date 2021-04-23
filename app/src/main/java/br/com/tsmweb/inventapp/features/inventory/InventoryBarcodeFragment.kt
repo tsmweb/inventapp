@@ -40,7 +40,7 @@ class InventoryBarcodeFragment : BaseFragment() {
     private lateinit var cameraExecutor: ExecutorService
 
     private val inventory: InventoryBinding? by lazy {
-        arguments?.getParcelable<InventoryBinding>(EXTRA_INVENTORY)
+        arguments?.getParcelable(EXTRA_INVENTORY)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -107,7 +107,7 @@ class InventoryBarcodeFragment : BaseFragment() {
     }
 
     private fun startCamera() {
-        cameraProviderFuture.addListener(Runnable {
+        cameraProviderFuture.addListener({
             val cameraProvider = cameraProviderFuture.get()
             bindPreview(cameraProvider)
         }, ContextCompat.getMainExecutor(requireContext()))

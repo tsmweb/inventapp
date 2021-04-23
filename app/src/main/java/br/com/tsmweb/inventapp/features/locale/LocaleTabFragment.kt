@@ -14,7 +14,6 @@ import br.com.tsmweb.inventapp.common.Constants.EXTRA_LOCALE
 import br.com.tsmweb.inventapp.databinding.FragmentLocaleTabBinding
 import br.com.tsmweb.inventapp.features.inventory.InventoryListFragment
 import br.com.tsmweb.inventapp.features.inventory.InventoryNewFragment
-import br.com.tsmweb.inventapp.features.inventory.binding.InventoryBinding
 import br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding
 import br.com.tsmweb.inventapp.features.patrimony.PatrimonyListFragment
 import br.com.tsmweb.inventapp.features.patrimony.binding.PatrimonyBinding
@@ -25,10 +24,9 @@ class LocaleTabFragment : BaseFragment() {
     private val TAG = LocaleTabFragment::class.simpleName
 
     private lateinit var binding: FragmentLocaleTabBinding
-    private lateinit var tabsPagerAdapter: LocaleTabsPagerAdapter
 
     private val locale: LocaleBinding? by lazy {
-        arguments?.getParcelable<LocaleBinding>(EXTRA_LOCALE)
+        arguments?.getParcelable(EXTRA_LOCALE)
     }
 
     override fun onCreateView(

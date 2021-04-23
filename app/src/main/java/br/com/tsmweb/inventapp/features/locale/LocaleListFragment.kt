@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -137,13 +136,13 @@ class LocaleListFragment : BaseFragment(),
     }
 
     private fun subscriberViewModalObservable() {
-        viewModel.loadState().observe(viewLifecycleOwner, Observer { state ->
+        viewModel.loadState().observe(viewLifecycleOwner, { state ->
             state?.let {
                 handleLoadState(it)
             }
         })
 
-        viewModel.removeState().observe(viewLifecycleOwner, Observer { state ->
+        viewModel.removeState().observe(viewLifecycleOwner, { state ->
             state?.let {
                 handleRemoveState(it)
             }

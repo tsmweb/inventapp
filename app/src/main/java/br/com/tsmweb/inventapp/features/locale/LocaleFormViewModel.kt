@@ -18,7 +18,7 @@ class LocaleFormViewModel(
     private val saveLocaleUseCase: SaveLocaleUseCase
 ): ViewModel() {
 
-    private val locale = MutableLiveData<LocaleBinding>(LocaleBinding())
+    private val locale = MutableLiveData(LocaleBinding())
     private val saveState = SingleLiveEvent<ViewState<Unit>>()
 
     fun locale(): LiveData<LocaleBinding> = locale

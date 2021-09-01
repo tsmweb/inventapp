@@ -3,8 +3,8 @@ package br.com.tsmweb.inventapp.features.inventory.binding
 import android.os.Parcelable
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
-import kotlinx.android.parcel.Parcelize
 import androidx.databinding.library.baseAdapters.BR
+import kotlinx.parcelize.Parcelize
 import java.util.*
 
 @Parcelize

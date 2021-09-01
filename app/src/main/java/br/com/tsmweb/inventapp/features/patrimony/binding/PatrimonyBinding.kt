@@ -5,7 +5,7 @@ import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import androidx.databinding.library.baseAdapters.BR
 import br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 class PatrimonyBinding: BaseObservable(), Parcelable {

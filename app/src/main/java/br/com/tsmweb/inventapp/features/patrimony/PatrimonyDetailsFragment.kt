@@ -14,7 +14,7 @@ import br.com.tsmweb.inventapp.common.Constants.EXTRA_PATRIMONY
 import br.com.tsmweb.inventapp.common.ViewState
 import br.com.tsmweb.inventapp.databinding.FragmentPatrimonyDetailsBinding
 import br.com.tsmweb.inventapp.features.patrimony.binding.PatrimonyBinding
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class PatrimonyDetailsFragment : BaseFragment() {
@@ -48,8 +48,8 @@ class PatrimonyDetailsFragment : BaseFragment() {
 
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
-        binding.toolbar.setNavigationOnClickListener { view ->
-            view.findNavController().navigateUp()
+        binding.toolbar.setNavigationOnClickListener { _view ->
+            _view.findNavController().navigateUp()
         }
 
         subscriberViewModalObservable()
@@ -75,6 +75,9 @@ class PatrimonyDetailsFragment : BaseFragment() {
         viewModel.loadState().observe(viewLifecycleOwner, { state ->
             state?.run {
                 when (status) {
+                    ViewState.Status.LOADING -> {
+                        Log.i(TAG, "loading")
+                    }
                     ViewState.Status.SUCCESS -> {
                         binding.patrimony = data
                     }

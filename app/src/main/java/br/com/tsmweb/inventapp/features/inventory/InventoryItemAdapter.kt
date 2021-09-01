@@ -33,8 +33,6 @@ class InventoryItemAdapter(
     override fun getItemCount() = inventoryItemBindings?.size ?: 0
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder
-
         holder.binding?.apply {
             inventoryItemBindings?.get(position)?.let { currentItem ->
                 inventoryItem = currentItem

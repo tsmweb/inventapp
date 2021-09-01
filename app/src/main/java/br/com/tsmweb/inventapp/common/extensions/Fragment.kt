@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 
 fun Fragment.showKeyboard() {
     (requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).apply {
-        toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_IMPLICIT_ONLY)
+        showSoftInput(requireActivity().currentFocus, 0)
     }
 }
 

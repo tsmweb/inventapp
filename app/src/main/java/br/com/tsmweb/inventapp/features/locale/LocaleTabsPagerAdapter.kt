@@ -1,7 +1,6 @@
 package br.com.tsmweb.inventapp.features.locale
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
 class LocaleTabsPagerAdapter(
@@ -17,7 +16,7 @@ class LocaleTabsPagerAdapter(
     override fun getItemCount() = fragmentList.size
 
     override fun createFragment(position: Int): Fragment {
-        return fragmentList.get(position)
+        return fragmentList[position]
     }
 
 }

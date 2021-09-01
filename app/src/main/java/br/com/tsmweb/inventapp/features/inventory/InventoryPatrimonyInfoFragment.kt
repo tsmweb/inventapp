@@ -8,14 +8,13 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.Observer
 import br.com.tsmweb.inventapp.R
 import br.com.tsmweb.inventapp.common.ViewState
 import br.com.tsmweb.inventapp.databinding.FragmentInventoryPatrimonyInfoBinding
 import br.com.tsmweb.inventapp.features.inventory.binding.InventoryItemBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class InventoryPatrimonyInfoFragment: BottomSheetDialogFragment() {
 

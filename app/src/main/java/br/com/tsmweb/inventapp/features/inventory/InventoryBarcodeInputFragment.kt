@@ -16,18 +16,21 @@ import br.com.tsmweb.inventapp.R
 import br.com.tsmweb.inventapp.common.Constants.EXTRA_BARCODE
 import br.com.tsmweb.inventapp.common.extensions.closeKeyboard
 import br.com.tsmweb.inventapp.common.extensions.showKeyboard
-import kotlinx.android.synthetic.main.fragment_inventory_barcode_input.*
+import br.com.tsmweb.inventapp.databinding.FragmentInventoryBarcodeInputBinding
 
 class InventoryBarcodeInputFragment : DialogFragment() {
 
     private val TAG = InventoryBarcodeInputFragment::class.simpleName
+
+    private lateinit var binding: FragmentInventoryBarcodeInputBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_inventory_barcode_input, container, false)
+        binding = FragmentInventoryBarcodeInputBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,16 +38,16 @@ class InventoryBarcodeInputFragment : DialogFragment() {
 
         requireDialog().setTitle(R.string.title_barcode)
 
-        btnCancel.setOnClickListener {
+        binding.btnCancel.setOnClickListener {
             dismiss()
         }
 
-        btnOK.setOnClickListener {
-            if (edtBarcode.text?.isBlank() == true) {
-                edtBarcode.error = getString(R.string.message_form_enter_barcode)
-                edtBarcode.requestFocus()
+        binding.btnOK.setOnClickListener {
+            if (binding.edtBarcode.text?.isBlank() == true) {
+                binding.edtBarcode.error = getString(R.string.message_form_enter_barcode)
+                binding.edtBarcode.requestFocus()
             } else {
-                setFragmentResult(BARCODE_INPUT_REQUEST_KEY, bundleOf(EXTRA_BARCODE to edtBarcode.text.toString()))
+                setFragmentResult(BARCODE_INPUT_REQUEST_KEY, bundleOf(EXTRA_BARCODE to binding.edtBarcode.text.toString()))
                 dismiss()
             }
         }
@@ -53,18 +56,18 @@ class InventoryBarcodeInputFragment : DialogFragment() {
     override fun onResume() {
         super.onResume()
 
-        edtBarcode.post {
-            edtBarcode.requestFocus()
-            (edtBarcode.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).apply {
-                showSoftInput(edtBarcode, InputMethodManager.SHOW_IMPLICIT)
+        binding.edtBarcode.post {
+            binding.edtBarcode.requestFocus()
+            (binding.edtBarcode.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).apply {
+                showSoftInput(binding.edtBarcode, InputMethodManager.SHOW_IMPLICIT)
             }
         }
     }
 
     override fun onDismiss(dialog: DialogInterface) {
-        (edtBarcode.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).apply {
+        (binding.edtBarcode.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).apply {
             if (isActive) {
-                toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS)
+                hideSoftInputFromWindow(binding.edtBarcode.windowToken, 0)
             }
         }
 

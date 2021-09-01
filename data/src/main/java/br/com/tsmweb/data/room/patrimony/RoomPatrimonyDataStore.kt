@@ -14,9 +14,9 @@ class RoomPatrimonyDataStore(
     private val patrimonyDao = db.patrimonyDao()
 
     override fun loadPatrimonies(localeId: String, term: String): Flow<List<Patrimony>> {
-        val term = if (term.isEmpty() || term.isBlank()) "%" else "%$term%"
+        val tm = if (term.isEmpty() || term.isBlank()) "%" else "%$term%"
 
-        return patrimonyDao.loadPatrimonies(localeId, term)
+        return patrimonyDao.loadPatrimonies(localeId, tm)
             .map { patrimonies -> patrimonies.map(PatrimonyMapper::toDomain)}
     }
 

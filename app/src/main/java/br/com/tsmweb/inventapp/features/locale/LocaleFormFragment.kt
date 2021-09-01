@@ -18,7 +18,7 @@ import br.com.tsmweb.inventapp.common.extensions.closeKeyboard
 import br.com.tsmweb.inventapp.common.extensions.showKeyboard
 import br.com.tsmweb.inventapp.databinding.FragmentLocaleFormBinding
 import br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LocaleFormFragment : BaseFragment() {
 
@@ -48,8 +48,8 @@ class LocaleFormFragment : BaseFragment() {
 
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
-        binding.toolbar.setNavigationOnClickListener { view ->
-            view.findNavController().navigateUp()
+        binding.toolbar.setNavigationOnClickListener { _view ->
+            _view.findNavController().navigateUp()
         }
 
         locale?.let {

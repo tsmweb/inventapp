@@ -14,7 +14,7 @@ import br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding
 import br.com.tsmweb.inventapp.features.patrimony.PatrimonyDetailsViewModel
 import br.com.tsmweb.inventapp.features.patrimony.PatrimonyFormViewModel
 import br.com.tsmweb.inventapp.features.patrimony.PatrimonyListViewModel
-import org.koin.android.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
 

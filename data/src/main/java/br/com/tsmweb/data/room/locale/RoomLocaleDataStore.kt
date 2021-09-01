@@ -19,9 +19,9 @@ class RoomLocaleDataStore(
     private val inventoryItemDao = db.inventoryItemDao()
 
     override fun loadLocales(term: String): Flow<List<Locale>> {
-        val term = if (term.isEmpty() || term.isBlank()) "%" else "%$term%"
+        val tm = if (term.isEmpty() || term.isBlank()) "%" else "%$term%"
 
-        return localeDao.loadLocales(term)
+        return localeDao.loadLocales(tm)
             .map { places -> places.map(LocaleMapper::toDomain) }
     }
 

@@ -49,8 +49,8 @@ class LocaleTabFragment : BaseFragment() {
 
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
-        binding.toolbar.setNavigationOnClickListener { view ->
-            view.findNavController().navigateUp()
+        binding.toolbar.setNavigationOnClickListener { _view ->
+            _view.findNavController().navigateUp()
         }
 
         locale?.let {

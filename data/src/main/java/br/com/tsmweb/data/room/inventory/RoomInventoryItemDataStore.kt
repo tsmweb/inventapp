@@ -18,9 +18,9 @@ class RoomInventoryItemDataStore(
         status: Int,
         term: String
     ): Flow<List<InventoryItem>> {
-        val term = if (term.isEmpty() || term.isBlank()) "%" else "%$term%"
+        val tm = if (term.isEmpty() || term.isBlank()) "%" else "%$term%"
 
-        return inventoryItemDao.loadInventoryItems(inventoryId, status, term)
+        return inventoryItemDao.loadInventoryItems(inventoryId, status, tm)
             .map { items -> items.map(InventoryItemMapper::toDomain) }
     }
 

@@ -18,7 +18,7 @@ import br.com.tsmweb.inventapp.common.extensions.closeKeyboard
 import br.com.tsmweb.inventapp.common.extensions.showKeyboard
 import br.com.tsmweb.inventapp.databinding.FragmentPatrimonyFormBinding
 import br.com.tsmweb.inventapp.features.patrimony.binding.PatrimonyBinding
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PatrimonyFormFragment : BaseFragment() {
 
@@ -55,8 +55,8 @@ class PatrimonyFormFragment : BaseFragment() {
 
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
-        binding.toolbar.setNavigationOnClickListener { view ->
-            view.findNavController().navigateUp()
+        binding.toolbar.setNavigationOnClickListener { _view ->
+            _view.findNavController().navigateUp()
         }
 
         patrimony?.let {
@@ -119,7 +119,7 @@ class PatrimonyFormFragment : BaseFragment() {
     }
 
     private fun handleSaveState(state: ViewState<Unit>) {
-        state?.run {
+        state.run {
             when (status) {
                 ViewState.Status.LOADING -> {
                     Log.d(TAG, "[SaveState] Process is loading")

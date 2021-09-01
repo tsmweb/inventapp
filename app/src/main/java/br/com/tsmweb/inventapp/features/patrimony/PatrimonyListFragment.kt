@@ -16,7 +16,7 @@ import br.com.tsmweb.inventapp.common.ViewState
 import br.com.tsmweb.inventapp.databinding.FragmentPatrimonyListBinding
 import br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding
 import br.com.tsmweb.inventapp.features.patrimony.binding.PatrimonyBinding
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class PatrimonyListFragment : BaseFragment(),
@@ -175,6 +175,9 @@ class PatrimonyListFragment : BaseFragment(),
 
     private fun handleDeleteState(state: ViewState<Int>) {
         when (state.status) {
+            ViewState.Status.LOADING -> {
+                Log.i(TAG, "loading")
+            }
             ViewState.Status.SUCCESS -> {
                 val count = state.data ?: 0
                 Toast.makeText(

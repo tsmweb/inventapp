@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
+import androidx.core.content.ContextCompat
 import br.com.tsmweb.inventapp.R
 
 class CaptureLayerView @JvmOverloads constructor(
@@ -30,7 +31,8 @@ class CaptureLayerView @JvmOverloads constructor(
         paint = Paint(Paint.ANTI_ALIAS_FLAG)
 
         strokePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            color = resources.getColor(R.color.capture_box_stroke_color)
+//            color = resources.getColor(R.color.capture_box_stroke_color)
+            color = ContextCompat.getColor(context, R.color.capture_box_stroke_color)
             style = Paint.Style.STROKE
             strokeWidth = 2f
         }
@@ -40,7 +42,8 @@ class CaptureLayerView @JvmOverloads constructor(
         }
 
         semiTransparentPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            color = resources.getColor(R.color.capture_background_color)
+//            color = resources.getColor(R.color.capture_background_color)
+            color = ContextCompat.getColor(context, R.color.capture_background_color)
         }
     }
 

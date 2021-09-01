@@ -22,7 +22,7 @@ import br.com.tsmweb.inventapp.databinding.FragmentInventoryItemListBinding
 import br.com.tsmweb.inventapp.features.inventory.binding.InventoryBinding
 import br.com.tsmweb.inventapp.features.inventory.binding.InventoryItemBinding
 import br.com.tsmweb.inventapp.features.inventory.binding.StatusInventory
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class InventoryItemListFragment : BaseFragment(),
@@ -176,6 +176,9 @@ class InventoryItemListFragment : BaseFragment(),
 
     private fun handleShareState(state: ViewState<List<InventoryItemBinding>>) {
         when (state.status) {
+            ViewState.Status.LOADING -> {
+                Log.i(TAG, "loading")
+            }
             ViewState.Status.SUCCESS -> {
                 var content = StringBuilder()
 
@@ -191,6 +194,10 @@ class InventoryItemListFragment : BaseFragment(),
                     type = "text/plain"
                     putExtra(Intent.EXTRA_TEXT, content.toString())
                 })
+            }
+            ViewState.Status.ERROR -> {
+                Log.e(TAG, state.error?.message ?: "")
+                state.error?.printStackTrace()
             }
         }
     }

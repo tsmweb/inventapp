@@ -5,7 +5,7 @@ import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import androidx.databinding.library.baseAdapters.BR
 import br.com.tsmweb.inventapp.features.patrimony.binding.StatusPatrimony
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 class InventoryItemBinding: BaseObservable(), Parcelable {

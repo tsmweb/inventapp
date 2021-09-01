@@ -19,7 +19,7 @@ import br.com.tsmweb.inventapp.databinding.FragmentLocaleListBinding
 import br.com.tsmweb.inventapp.features.about.AboutDialogFragment
 import br.com.tsmweb.inventapp.features.locale.binding.LocaleBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LocaleListFragment : BaseFragment(),
     MenuItem.OnActionExpandListener,
@@ -64,8 +64,8 @@ class LocaleListFragment : BaseFragment(),
 
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
-        binding.toolbar.setNavigationOnClickListener { view ->
-            view.findNavController().navigateUp()
+        binding.toolbar.setNavigationOnClickListener { _view ->
+            _view.findNavController().navigateUp()
         }
 
         subscriberViewModalObservable()
@@ -177,6 +177,9 @@ class LocaleListFragment : BaseFragment(),
 
     private fun handleRemoveState(state: ViewState<Unit>) {
         when (state.status) {
+            ViewState.Status.LOADING -> {
+                Log.i(TAG, "loading")
+            }
             ViewState.Status.SUCCESS -> {
                 Toast.makeText(
                     requireContext(),
@@ -209,7 +212,7 @@ class LocaleListFragment : BaseFragment(),
             R.id.action_locale_remove -> {
                 MaterialAlertDialogBuilder(requireContext())
                     .setMessage(R.string.message_confirm_remove_locale)
-                    .setPositiveButton(R.string.remove) { _, i ->
+                    .setPositiveButton(R.string.remove) { _, _ ->
                         viewModel.removePlace(locale)
                     }
                     .setNegativeButton(R.string.cancel, null)

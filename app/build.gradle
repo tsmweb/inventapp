@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-parcelize'
 apply plugin: 'kotlin-kapt'
 
 android {
@@ -39,8 +39,8 @@ android {
         jvmTarget = "1.8"
     }
 
-    androidExtensions {
-        experimental true
+    buildFeatures {
+        viewBinding true
     }
 
     android.defaultConfig.vectorDrawables.useSupportLibrary = true
@@ -63,12 +63,6 @@ dependencies {
 
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_viewmodel"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_livedata"
-//    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
-//    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
-//    implementation "androidx.lifecycle:lifecycle-service:$lifecycle_version"
-//    implementation "androidx.lifecycle:lifecycle-process:$lifecycle_version"
-//    implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version"
-//    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_common"
 
     implementation "androidx.camera:camera-core:$camerax_version"
@@ -76,16 +70,22 @@ dependencies {
     implementation "androidx.camera:camera-lifecycle:$camerax_version"
     implementation "androidx.camera:camera-view:$camerax_view_version"
     implementation "com.google.mlkit:barcode-scanning:$mlkit_barcode_version"
+    
+    // Koin core features
+    implementation "io.insert-koin:koin-core:$koin_version"
+    // Koin test features
+    testImplementation "io.insert-koin:koin-test:$koin_version"
+    // Koin main features for Android (Scope,ViewModel ...)
+    implementation "io.insert-koin:koin-android:$koin_version"
+    // Koin Java Compatibility
+    implementation "io.insert-koin:koin-android-compat:$koin_version"
+    // Koin for Jetpack WorkManager
+    implementation "io.insert-koin:koin-androidx-workmanager:$koin_version"
 
-    implementation "org.koin:koin-core:$koin_version"
-    implementation "org.koin:koin-android:$koin_version"
-    implementation "org.koin:koin-android-scope:$koin_version"
-    implementation "org.koin:koin-android-viewmodel:$koin_version"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     testImplementation "junit:junit:$junit_version"
 
     androidTestImplementation "androidx.test.ext:junit:$testrunner_junit_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
-
 }

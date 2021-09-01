@@ -3,27 +3,27 @@ package br.com.tsmweb.inventapp.features.inventory
 import android.Manifest
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowInsets
 import android.widget.Toast
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.setFragmentResultListener
-import br.com.tsmweb.inventapp.R
 import br.com.tsmweb.inventapp.common.BaseFragment
 import br.com.tsmweb.inventapp.common.Constants.EXTRA_BARCODE
 import br.com.tsmweb.inventapp.common.Constants.EXTRA_INVENTORY
+import br.com.tsmweb.inventapp.databinding.FragmentInventoryBarcodeBinding
 import br.com.tsmweb.inventapp.features.inventory.binding.InventoryBinding
 import br.com.tsmweb.inventapp.features.inventory.camera.BarcodeImageAnalyzer
 import com.google.common.util.concurrent.ListenableFuture
-import kotlinx.android.synthetic.main.fragment_inventory_barcode.*
-import kotlinx.android.synthetic.main.top_action_bar_in_live_camera.*
 import java.lang.Exception
 import java.lang.Math.*
 import java.util.concurrent.ExecutorService
@@ -33,6 +33,7 @@ class InventoryBarcodeFragment : BaseFragment() {
 
     private val TAG = InventoryBarcodeFragment::class.simpleName
 
+    private lateinit var binding: FragmentInventoryBarcodeBinding
     private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
     private var preview: Preview? = null
     private var camera: Camera? = null
@@ -54,14 +55,15 @@ class InventoryBarcodeFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_inventory_barcode, container, false)
+        binding = FragmentInventoryBarcodeBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         if (isCameraPermissionGranted()) {
-            pvBarcode.post {
+            binding.pvBarcode.post {
                 startCamera()
             }
         } else {
@@ -69,11 +71,11 @@ class InventoryBarcodeFragment : BaseFragment() {
                 arrayOf(Manifest.permission.CAMERA), REQUEST_CAMERA_PERMISSION)
         }
 
-        btnClose.setOnClickListener {
+        binding.pvActionBar.btnClose.setOnClickListener {
             router.back()
         }
 
-        btnFlash.setOnClickListener {
+        binding.pvActionBar.btnFlash.setOnClickListener {
             if (camera?.cameraInfo?.torchState?.value == TorchState.OFF) {
                 it.isSelected = true
                 camera?.cameraControl?.enableTorch(true)
@@ -83,13 +85,13 @@ class InventoryBarcodeFragment : BaseFragment() {
             }
         }
 
-        setFragmentResultListener(InventoryBarcodeInputFragment.BARCODE_INPUT_REQUEST_KEY) { key, bundle ->
+        setFragmentResultListener(InventoryBarcodeInputFragment.BARCODE_INPUT_REQUEST_KEY) { _, bundle ->
             bundle.getString(EXTRA_BARCODE)?.let {
                 onShowInventoryPatrimonyInfo(it)
             }
         }
 
-        chipTypeBarcode.setOnClickListener {
+        binding.chipTypeBarcode.setOnClickListener {
             InventoryBarcodeInputFragment
                 .newInstance()
                 .open(parentFragmentManager)
@@ -115,10 +117,11 @@ class InventoryBarcodeFragment : BaseFragment() {
 
     private fun bindPreview(cameraProvider: ProcessCameraProvider) {
         val metrics = DisplayMetrics().also {
-            pvBarcode.display.getRealMetrics(it)
+            binding.pvBarcode.display.getRealMetrics(it)
         }
+
         val screenAspectRatio = aspectRatio(metrics.widthPixels, metrics.heightPixels)
-        val rotation = pvBarcode.display.rotation
+        val rotation = binding.pvBarcode.display.rotation
 
         preview = Preview.Builder()
             .setTargetAspectRatio(screenAspectRatio)
@@ -150,7 +153,7 @@ class InventoryBarcodeFragment : BaseFragment() {
             cameraProvider.unbindAll()
 
             camera = cameraProvider.bindToLifecycle(viewLifecycleOwner, cameraSelector, preview, imageAnalysis)
-            preview?.setSurfaceProvider(pvBarcode.surfaceProvider)
+            preview?.setSurfaceProvider(binding.pvBarcode.surfaceProvider)
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -178,7 +181,7 @@ class InventoryBarcodeFragment : BaseFragment() {
     ) {
         if (requestCode == REQUEST_CAMERA_PERMISSION) {
             if (isCameraPermissionGranted()) {
-                pvBarcode.post {
+                binding.pvBarcode.post {
                     startCamera()
                 }
             } else {

@@ -16,9 +16,9 @@ class RoomInventoryDataStore(
     private val inventoryItemDao = db.inventoryItemDao()
 
     override fun loadInventories(localeId: String, term: String): Flow<List<Inventory>> {
-        val term = if (term.isEmpty() || term.isBlank()) "%" else "%$term%"
+        val tm = if (term.isEmpty() || term.isBlank()) "%" else "%$term%"
 
-        return inventoryDao.loadInventories(localeId, term)
+        return inventoryDao.loadInventories(localeId, tm)
             .map { inventories -> inventories.map(InventoryMapper::toDomain) }
     }
 

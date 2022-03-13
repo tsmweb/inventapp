@@ -83,7 +83,7 @@ class LocaleFormFragment : BaseFragment() {
     }
 
     private fun subscriberViewModalObservable() {
-        viewModel.saveState().observe(viewLifecycleOwner, Observer { state ->
+        viewModel.saveState().observe(viewLifecycleOwner) { state ->
             state?.run {
                 when (status) {
                     ViewState.Status.LOADING -> {
@@ -93,13 +93,17 @@ class LocaleFormFragment : BaseFragment() {
                         router.back()
                     }
                     ViewState.Status.ERROR -> {
-                        Toast.makeText(requireContext(), R.string.message_error_save_locale, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            R.string.message_error_save_locale,
+                            Toast.LENGTH_SHORT
+                        ).show()
 
                         Log.e(TAG, state.error?.message ?: "")
                     }
                 }
             }
-        })
+        }
     }
 
     private fun handleKeyboardEvent(actionId: Int): Boolean {

@@ -4,10 +4,11 @@ import br.com.tsmweb.data.room.common.Constants.DATE_FORMAT_DB
 import br.com.tsmweb.data.room.locale.entity.LocaleEntity
 import br.com.tsmweb.data.room.locale.entity.LocaleView
 import br.com.tsmweb.domain.locale.model.Locale
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-object LocaleMapper {
+internal object LocaleMapper {
     fun fromDomain(domain: Locale) = LocaleEntity(
         id = domain.id,
         code = domain.code,
@@ -20,6 +21,7 @@ object LocaleMapper {
         name = entity.name,
         amountPatrimony = entity.amountPatrimony,
         lastInventory = SimpleDateFormat(DATE_FORMAT_DB).parse(entity.lastInventory)
+//        lastInventory = DateFormat.getDateInstance().parse(entity.lastInventory)
     )
 
     fun toDomain(entity: LocaleEntity) = Locale(

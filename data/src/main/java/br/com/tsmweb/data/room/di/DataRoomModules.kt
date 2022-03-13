@@ -1,14 +1,14 @@
 package br.com.tsmweb.data.room.di
 
 import br.com.tsmweb.data.room.database.AppDataBase
-import br.com.tsmweb.data.room.inventory.RoomInventoryDataStore
-import br.com.tsmweb.data.room.inventory.RoomInventoryItemDataStore
-import br.com.tsmweb.data.room.locale.RoomLocaleDataStore
-import br.com.tsmweb.data.room.patrimony.RoomPatrimonyDataStore
-import br.com.tsmweb.domain.inventory.gateway.InventoryDataStore
-import br.com.tsmweb.domain.inventory.gateway.InventoryItemDataStore
-import br.com.tsmweb.domain.locale.gateway.LocaleDataStore
-import br.com.tsmweb.domain.patrimony.gateway.PatrimonyDataStore
+import br.com.tsmweb.data.room.inventory.RoomInventoryRepository
+import br.com.tsmweb.data.room.inventory.RoomInventoryItemRepository
+import br.com.tsmweb.data.room.locale.RoomLocaleRepository
+import br.com.tsmweb.data.room.patrimony.RoomPatrimonyRepository
+import br.com.tsmweb.domain.inventory.repository.InventoryRepository
+import br.com.tsmweb.domain.inventory.repository.InventoryItemRepository
+import br.com.tsmweb.domain.locale.repository.LocaleRepository
+import br.com.tsmweb.domain.patrimony.repository.PatrimonyRepository
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
 
@@ -16,20 +16,20 @@ object DataRoomModules {
 
     fun load() {
         loadKoinModules(module {
-            single<LocaleDataStore> {
-                RoomLocaleDataStore(AppDataBase.getDatabase(context = get()))
+            single<LocaleRepository> {
+                RoomLocaleRepository(AppDataBase.getDatabase(context = get()))
             }
 
-            single<PatrimonyDataStore> {
-                RoomPatrimonyDataStore(AppDataBase.getDatabase(context = get()))
+            single<PatrimonyRepository> {
+                RoomPatrimonyRepository(AppDataBase.getDatabase(context = get()))
             }
 
-            single<InventoryDataStore> {
-                RoomInventoryDataStore(AppDataBase.getDatabase(context = get()))
+            single<InventoryRepository> {
+                RoomInventoryRepository(AppDataBase.getDatabase(context = get()))
             }
 
-            single<InventoryItemDataStore> {
-                RoomInventoryItemDataStore(AppDataBase.getDatabase(context = get()))
+            single<InventoryItemRepository> {
+                RoomInventoryItemRepository(AppDataBase.getDatabase(context = get()))
             }
         })
     }

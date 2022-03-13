@@ -1,12 +1,12 @@
 package br.com.tsmweb.domain.inventory.interactor
 
 import br.com.tsmweb.domain.inventory.model.Inventory
-import br.com.tsmweb.domain.inventory.gateway.InventoryDataStore
+import br.com.tsmweb.domain.inventory.repository.InventoryRepository
 
 class RemoveInventoryUseCase(
-    private val inventoryDataStore: InventoryDataStore
+    private val repository: InventoryRepository
 ) {
     suspend fun execute(inventories: List<Inventory>) {
-        inventoryDataStore.removeInventory(inventories)
+        repository.removeInventory(inventories)
     }
 }

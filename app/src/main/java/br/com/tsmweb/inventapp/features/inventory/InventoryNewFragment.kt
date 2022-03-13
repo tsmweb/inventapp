@@ -54,7 +54,7 @@ class InventoryNewFragment : DialogFragment() {
     }
 
     private fun subscriberViewModalObservable() {
-        viewModel.saveState().observe(viewLifecycleOwner, { state ->
+        viewModel.saveState().observe(viewLifecycleOwner) { state ->
             state?.let {
                 when (it.status) {
                     ViewState.Status.LOADING -> {
@@ -68,7 +68,8 @@ class InventoryNewFragment : DialogFragment() {
                         Toast.makeText(
                             requireContext(),
                             R.string.message_error_new_inventory,
-                            Toast.LENGTH_SHORT).show()
+                            Toast.LENGTH_SHORT
+                        ).show()
 
                         Log.e(TAG, state.error?.message ?: "")
 
@@ -76,7 +77,7 @@ class InventoryNewFragment : DialogFragment() {
                     }
                 }
             }
-        })
+        }
     }
 
     fun open(fm: FragmentManager) {

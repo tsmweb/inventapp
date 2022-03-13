@@ -101,17 +101,17 @@ class PatrimonyFormFragment : BaseFragment() {
     }
 
     private fun subscriberViewModalObservable() {
-        viewModel.saveState().observe(viewLifecycleOwner, { state ->
+        viewModel.saveState().observe(viewLifecycleOwner) { state ->
             state?.let {
                 handleSaveState(it)
             }
-        })
+        }
 
-        viewModel.loadDependencyState().observe(viewLifecycleOwner, { state ->
+        viewModel.loadDependencyState().observe(viewLifecycleOwner) { state ->
             state?.let {
                 handleDependencyListState(it)
             }
-        })
+        }
 
         patrimony?.locale?.let {
             viewModel.loadDependency(it.id)

@@ -1,15 +1,15 @@
 package br.com.tsmweb.domain.locale.interactor
 
 import br.com.tsmweb.domain.locale.model.Locale
-import br.com.tsmweb.domain.locale.gateway.LocaleDataStore
+import br.com.tsmweb.domain.locale.repository.LocaleRepository
 import java.lang.IllegalArgumentException
 
 class SaveLocaleUseCase(
-    private val localeDataStore: LocaleDataStore
+    private val repository: LocaleRepository
 ) {
     suspend fun execute(locale: Locale) {
         if (localeIsValid(locale)) {
-            localeDataStore.saveLocale(locale)
+            repository.saveLocale(locale)
         } else {
             throw IllegalArgumentException("Locale is invalid")
         }

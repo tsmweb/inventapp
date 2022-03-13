@@ -72,7 +72,7 @@ class PatrimonyDetailsFragment : BaseFragment() {
     }
 
     private fun subscriberViewModalObservable() {
-        viewModel.loadState().observe(viewLifecycleOwner, { state ->
+        viewModel.loadState().observe(viewLifecycleOwner) { state ->
             state?.run {
                 when (status) {
                     ViewState.Status.LOADING -> {
@@ -92,7 +92,7 @@ class PatrimonyDetailsFragment : BaseFragment() {
                     }
                 }
             }
-        })
+        }
 
         if (viewModel.loadState().value == null) {
             viewModel.loadPatrimony()

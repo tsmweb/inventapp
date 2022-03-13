@@ -1,5 +1,6 @@
 package br.com.tsmweb.inventapp.features.inventory
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -111,41 +112,43 @@ class InventoryItemListFragment : BaseFragment(),
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun subscriberViewModalObservable() {
-        viewModel.loadState().observe(viewLifecycleOwner, { state ->
+        viewModel.loadState().observe(viewLifecycleOwner) { state ->
             state?.let {
                 handleLoadState(it)
             }
-        })
+        }
 
-        viewModel.showDetails().observe(viewLifecycleOwner, { item ->
+        viewModel.showDetails().observe(viewLifecycleOwner) { item ->
             item?.let {
                 InventoryPatrimonyInfoFragment
                     .newInstance(it.inventoryId, it.patrimonyCode)
                     .open(parentFragmentManager)
             }
-        })
+        }
 
-        viewModel.shareState().observe(viewLifecycleOwner, { state ->
-            state?.let {
-                handleShareState(it)
-            }
-        })
-
-        viewModel.isInSelectionModel().observe(viewLifecycleOwner, { selectionMode ->
+        viewModel.isInSelectionModel().observe(viewLifecycleOwner) { selectionMode ->
             if (selectionMode) {
                 showSelectionMode()
             } else {
                 hideSelectionMode()
             }
-        })
+        }
 
-        viewModel.selectionCount().observe(viewLifecycleOwner, { count ->
+        viewModel.selectionCount().observe(viewLifecycleOwner) { count ->
             count?.let {
                 updateSelectionCountText(it)
                 inventoryItemAdapter.notifyDataSetChanged()
+                viewModel.shareSelected()
             }
-        })
+        }
+
+        viewModel.shareState().observe(viewLifecycleOwner) { state ->
+            state?.let {
+                handleShareState(it)
+            }
+        }
 
         if (viewModel.loadState().value == null) {
             viewModel.search()
@@ -186,8 +189,6 @@ class InventoryItemListFragment : BaseFragment(),
                     val item = getString(R.string.content_share_inventory_item, it.patrimonyCode, it.patrimonyName, it.note)
                     content.append(item)
                 }
-
-                Toast.makeText(requireContext(), content.toString(), Toast.LENGTH_LONG).show()
 
                 shareActionProvider?.setShareIntent(Intent(Intent.ACTION_SEND).apply {
                     addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
@@ -256,23 +257,18 @@ class InventoryItemListFragment : BaseFragment(),
         return object : ActionMode.Callback {
 
             override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
-                when (item?.itemId) {
-                    R.id.action_share -> {
-                        Toast.makeText(requireContext(), "Menu Share!", Toast.LENGTH_SHORT).show()
-
-                        viewModel.shareSelected()
-                        return true
-                    }
-                }
-
                 return false
             }
 
             override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-                activity?.menuInflater?.inflate(R.menu.inventory_item_cab, menu)
+                mode?.menuInflater?.inflate(R.menu.inventory_item_cab, menu)
 
                 val shareItem = menu?.findItem(R.id.action_share)
                 shareActionProvider = MenuItemCompat.getActionProvider(shareItem) as? ShareActionProvider
+                shareActionProvider?.setShareIntent(Intent(Intent.ACTION_SEND).apply {
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
+                    type = "text/plain"
+                })
 
                 return true
             }

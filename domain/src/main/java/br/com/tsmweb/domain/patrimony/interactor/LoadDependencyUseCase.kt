@@ -1,12 +1,12 @@
 package br.com.tsmweb.domain.patrimony.interactor
 
-import br.com.tsmweb.domain.patrimony.gateway.PatrimonyDataStore
+import br.com.tsmweb.domain.patrimony.repository.PatrimonyRepository
 import kotlinx.coroutines.flow.Flow
 
 class LoadDependencyUseCase(
-    private val patrimonyDataStore: PatrimonyDataStore
+    private val repository: PatrimonyRepository
 ) {
     fun execute(localeId: String): Flow<List<String>> {
-        return patrimonyDataStore.loadDependencies(localeId)
+        return repository.loadDependencies(localeId)
     }
 }

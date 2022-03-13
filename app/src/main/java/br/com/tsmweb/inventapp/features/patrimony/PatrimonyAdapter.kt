@@ -1,5 +1,6 @@
 package br.com.tsmweb.inventapp.features.patrimony
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ class PatrimonyAdapter(
 
     private var patrimonies: List<PatrimonyBinding>? = null
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(data: List<PatrimonyBinding>?) {
         patrimonies = data
         notifyDataSetChanged()

@@ -1,13 +1,13 @@
 package br.com.tsmweb.domain.patrimony.interactor
 
 import br.com.tsmweb.domain.patrimony.model.Patrimony
-import br.com.tsmweb.domain.patrimony.gateway.PatrimonyDataStore
+import br.com.tsmweb.domain.patrimony.repository.PatrimonyRepository
 import kotlinx.coroutines.flow.Flow
 
 class DetailsPatrimonyUseCase(
-    private val patrimonyDataStore: PatrimonyDataStore
+    private val repository: PatrimonyRepository
 ) {
     fun execute(id: Long): Flow<Patrimony?> {
-        return patrimonyDataStore.loadPatrimony(id)
+        return repository.loadPatrimony(id)
     }
 }

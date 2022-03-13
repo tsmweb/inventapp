@@ -1,5 +1,6 @@
 package br.com.tsmweb.inventapp.features.inventory
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ class InventoryItemAdapter(
 
     private var inventoryItemBindings: List<InventoryItemBinding>? = null
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(data: List<InventoryItemBinding>?) {
         inventoryItemBindings = data
         notifyDataSetChanged()

@@ -2,14 +2,14 @@ package br.com.tsmweb.domain.inventory.interactor
 
 import br.com.tsmweb.domain.inventory.model.InventoryItem
 import br.com.tsmweb.domain.inventory.model.StatusInventory
-import br.com.tsmweb.domain.inventory.gateway.InventoryItemDataStore
+import br.com.tsmweb.domain.inventory.repository.InventoryItemRepository
 import br.com.tsmweb.domain.patrimony.model.StatusPatrimony
 
 class FindInventoryItemByBarcodeUseCase(
-    private val inventoryItemDataStore: InventoryItemDataStore
+    private val repository: InventoryItemRepository
 ) {
     suspend fun execute(inventoryId: Long, barcode: String): InventoryItem {
-        var inventoryItem = inventoryItemDataStore.loadInventoryItemByBarcode(inventoryId, barcode)
+        var inventoryItem = repository.loadInventoryItemByBarcode(inventoryId, barcode)
 
         if (inventoryItem == null) {
             inventoryItem = InventoryItem(

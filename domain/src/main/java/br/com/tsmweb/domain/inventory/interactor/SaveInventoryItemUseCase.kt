@@ -2,11 +2,11 @@ package br.com.tsmweb.domain.inventory.interactor
 
 import br.com.tsmweb.domain.inventory.model.InventoryItem
 import br.com.tsmweb.domain.inventory.model.StatusInventory
-import br.com.tsmweb.domain.inventory.gateway.InventoryItemDataStore
+import br.com.tsmweb.domain.inventory.repository.InventoryItemRepository
 import java.lang.IllegalArgumentException
 
 class SaveInventoryItemUseCase(
-    private val inventoryItemDataStore: InventoryItemDataStore
+    private val repository: InventoryItemRepository
 ) {
     suspend fun execute(inventoryItem: InventoryItem, editMode: Boolean) {
         if (inventoryItemIsValid(inventoryItem)) {
@@ -14,7 +14,7 @@ class SaveInventoryItemUseCase(
                 inventoryItem.status = StatusInventory.CHECKED
             }
 
-            inventoryItemDataStore.saveInventoryItem(inventoryItem)
+            repository.saveInventoryItem(inventoryItem)
         } else {
             throw IllegalArgumentException("InventoryItem is invalid")
         }

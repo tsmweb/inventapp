@@ -28,7 +28,7 @@ class FrameLayoutCaptureLayerView @JvmOverloads constructor(
         setLayerType(View.LAYER_TYPE_HARDWARE, null)
 
         transparentPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            setXfermode(PorterDuffXfermode(PorterDuff.Mode.CLEAR))
+            xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
         }
 
         strokePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {

@@ -3,14 +3,14 @@ package br.com.tsmweb.data.room.inventory
 import androidx.room.withTransaction
 import br.com.tsmweb.data.room.database.AppDataBase
 import br.com.tsmweb.data.room.inventory.mapper.InventoryMapper
-import br.com.tsmweb.domain.inventory.gateway.InventoryDataStore
+import br.com.tsmweb.domain.inventory.repository.InventoryRepository
 import br.com.tsmweb.domain.inventory.model.Inventory
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class RoomInventoryDataStore(
+internal class RoomInventoryRepository(
     private val db: AppDataBase
-) : InventoryDataStore {
+) : InventoryRepository {
 
     private val inventoryDao = db.inventoryDao()
     private val inventoryItemDao = db.inventoryItemDao()

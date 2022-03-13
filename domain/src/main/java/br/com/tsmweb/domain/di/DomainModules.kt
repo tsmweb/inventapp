@@ -14,70 +14,70 @@ object DomainModules {
         loadKoinModules(module {
             // Locale
             factory {
-                ListLocalesUseCase(localeDataStore = get())
+                ListLocalesUseCase(repository = get())
             }
 
             factory {
-                SaveLocaleUseCase(localeDataStore = get())
+                SaveLocaleUseCase(repository = get())
             }
 
             factory {
-                RemoveLocaleUseCase(localeDataStore = get())
+                RemoveLocaleUseCase(repository = get())
             }
 
             // Patrimony
             factory {
-                ListPatrimonyUseCase(patrimonyDataStore = get())
+                ListPatrimonyUseCase(repository = get())
             }
 
             factory {
-                SavePatrimonyUseCase(patrimonyDataStore = get())
+                SavePatrimonyUseCase(repository = get())
             }
 
             factory {
-                RemovePatrimonyUseCase(patrimonyDataStore = get())
+                RemovePatrimonyUseCase(repository = get())
             }
 
             factory {
-                DetailsPatrimonyUseCase(patrimonyDataStore = get())
+                DetailsPatrimonyUseCase(repository = get())
             }
 
             factory {
-                LoadDependencyUseCase(patrimonyDataStore = get())
+                LoadDependencyUseCase(repository = get())
             }
 
             // Inventory
             factory {
-                ListInventoryUseCase(inventoryDataStore = get())
+                ListInventoryUseCase(repository = get())
             }
 
             factory {
                 SaveInventoryUseCase(
-                    inventoryDataStore = get(),
+                    repository = get(),
                     createInventoryItemsUseCase = get())
             }
 
             factory {
-                RemoveInventoryUseCase(inventoryDataStore = get())
+                RemoveInventoryUseCase(repository = get())
             }
 
             // InventoryItem
             factory {
-                ListInventoryItemUseCase(inventoryItemDataStore = get())
+                ListInventoryItemUseCase(repository = get())
             }
 
             factory {
-                FindInventoryItemByBarcodeUseCase(inventoryItemDataStore = get())
+                FindInventoryItemByBarcodeUseCase(repository = get())
             }
 
             factory {
-                SaveInventoryItemUseCase(inventoryItemDataStore = get())
+                SaveInventoryItemUseCase(repository = get())
             }
 
             factory {
                 CreateInventoryItemsUseCase(
-                    inventoryItemDataStore = get(),
-                    patrimonyDataStore = get())
+                    inventoryItemRepository = get(),
+                    patrimonyRepository = get())
             }
         })
     }

@@ -22,7 +22,7 @@ import br.com.tsmweb.data.room.patrimony.entity.PatrimonyEntity
     ],
     version = 1,
     exportSchema = false)
-abstract class AppDataBase: RoomDatabase() {
+internal abstract class AppDataBase: RoomDatabase() {
 
     abstract fun localeDao(): LocaleDao
     abstract fun patrimonyDao(): PatrimonyDao

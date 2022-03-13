@@ -136,17 +136,17 @@ class LocaleListFragment : BaseFragment(),
     }
 
     private fun subscriberViewModalObservable() {
-        viewModel.loadState().observe(viewLifecycleOwner, { state ->
+        viewModel.loadState().observe(viewLifecycleOwner) { state ->
             state?.let {
                 handleLoadState(it)
             }
-        })
+        }
 
-        viewModel.removeState().observe(viewLifecycleOwner, { state ->
+        viewModel.removeState().observe(viewLifecycleOwner) { state ->
             state?.let {
                 handleRemoveState(it)
             }
-        })
+        }
 
         if (viewModel.loadState().value == null) {
             viewModel.search()

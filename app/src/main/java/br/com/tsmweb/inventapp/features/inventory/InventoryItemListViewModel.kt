@@ -1,9 +1,6 @@
 package br.com.tsmweb.inventapp.features.inventory
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import br.com.tsmweb.domain.inventory.interactor.ListInventoryItemUseCase
 import br.com.tsmweb.domain.inventory.model.StatusInventory
 import br.com.tsmweb.inventapp.common.SingleLiveEvent

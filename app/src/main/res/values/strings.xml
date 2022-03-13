@@ -27,6 +27,7 @@
     <string name="form_label_name">Nome</string>
     <string name="label_status">Status:</string>
     <string name="title_new_locale">Novo Local</string>
+    <string name="description_fab_locale">Adicionar localidade</string>
     <string name="message_form_enter_code">Informe o código</string>
     <string name="message_form_enter_name">Informe o nome</string>
     <string name="message_form_enter_dependency">Informe a dependência</string>

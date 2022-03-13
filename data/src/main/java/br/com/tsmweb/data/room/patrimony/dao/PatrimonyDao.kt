@@ -9,15 +9,31 @@ import kotlinx.coroutines.flow.Flow
 interface PatrimonyDao {
 
     @Query("""
-        SELECT * FROM patrimony
-        WHERE locale_id = :localeId  
-        AND (code LIKE :term OR name LIKE :term)
-        ORDER BY code, name
+        SELECT p.id,
+            p.locale_id,
+            p.code,
+            p.name,
+            p.dependency,
+            p.status
+        FROM patrimony p
+        WHERE p.locale_id = :localeId  
+        AND (p.code LIKE :term OR p.name LIKE :term)
+        ORDER BY p.code, p.name
     """)
     fun loadPatrimonies(localeId: String, term: String): Flow<List<PatrimonyEntity>>
 
     @Transaction
-    @Query("SELECT * FROM patrimony WHERE id = :id")
+    @Query("""
+        SELECT p.id,
+            p.locale_id,
+            p.code,
+            p.name,
+            p.dependency,
+            p.status
+        FROM patrimony p 
+        WHERE p.id = :id
+        
+    """)
     fun loadPatrimony(id: Long): Flow<PatrimonyAndLocale>
 
     @Query("""
@@ -29,7 +45,12 @@ interface PatrimonyDao {
     fun loadDependencies(localeId: String): Flow<List<String>>
 
     @Query("""
-        SELECT p.*
+        SELECT p.id,
+            p.locale_id,
+            p.code,
+            p.name,
+            p.dependency,
+            p.status
         FROM patrimony p
         WHERE p.locale_id = :localeId
         AND p.code NOT IN (

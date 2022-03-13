@@ -8,7 +8,14 @@ import kotlinx.coroutines.flow.Flow
 interface InventoryItemDao {
 
     @Query("""
-        SELECT i.*
+        SELECT i.id,
+            i.inventory_id,
+            i.patrimony_code,
+            i.patrimony_name,
+            i.patrimony_dependency,
+            i.patrimony_status,
+            i.status,
+            i.note
         FROM inventory_item i
         WHERE i.inventory_id = :inventoryId
         AND i.status = :status
@@ -17,11 +24,29 @@ interface InventoryItemDao {
     """)
     fun loadInventoryItems(inventoryId: Long, status: Int, term: String): Flow<List<InventoryItemEntity>>
 
-    @Query("SELECT * FROM inventory_item WHERE id = :id")
+    @Query("""
+        SELECT i.id,
+            i.inventory_id,
+            i.patrimony_code,
+            i.patrimony_name,
+            i.patrimony_dependency,
+            i.patrimony_status,
+            i.status,
+            i.note
+        FROM inventory_item i 
+        WHERE i.id = :id
+    """)
     fun loadInventoryItem(id: Long): Flow<InventoryItemEntity>
 
     @Query("""
-        SELECT i.* 
+        SELECT i.id,
+            i.inventory_id,
+            i.patrimony_code,
+            i.patrimony_name,
+            i.patrimony_dependency,
+            i.patrimony_status,
+            i.status,
+            i.note
         FROM inventory_item i
         WHERE i.inventory_id = :inventoryId
         AND i.patrimony_code = :barcode

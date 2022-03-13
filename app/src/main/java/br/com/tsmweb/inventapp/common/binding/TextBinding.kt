@@ -1,6 +1,7 @@
 package br.com.tsmweb.inventapp.common.binding
 
 import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.databinding.BindingAdapter
 import br.com.tsmweb.inventapp.R
 import br.com.tsmweb.inventapp.features.patrimony.binding.StatusPatrimony
@@ -26,7 +27,7 @@ object TextBinding {
     fun setTextFromDate(textView: TextView, value: Date?) {
         if (value != null) {
             val dateFormat = textView.context.resources.getString(R.string.date_format)
-            textView.text = SimpleDateFormat(dateFormat).format(value)
+            textView.text = SimpleDateFormat(dateFormat, Locale.getDefault()).format(value)
         }
     }
 
@@ -53,14 +54,14 @@ object TextBinding {
         val context = textView.context
 
         if (statusPatrimony == null) {
-            textView.background = context.getDrawable(R.drawable.bg_rectangle_gray)
+            textView.background = AppCompatResources.getDrawable(context, R.drawable.bg_rectangle_gray)
             return
         }
 
         when (statusPatrimony) {
-            StatusPatrimony.ACTIVE -> textView.background = context.getDrawable(R.drawable.bg_rectangle_green)
-            StatusPatrimony.DEPRECIATED -> textView.background = context.getDrawable(R.drawable.bg_rectangle_gray)
-            StatusPatrimony.INACTIVE -> textView.background = context.getDrawable(R.drawable.bg_rectangle_red)
+            StatusPatrimony.ACTIVE -> textView.background = AppCompatResources.getDrawable(context, R.drawable.bg_rectangle_green)
+            StatusPatrimony.DEPRECIATED -> textView.background = AppCompatResources.getDrawable(context, R.drawable.bg_rectangle_gray)
+            StatusPatrimony.INACTIVE -> textView.background = AppCompatResources.getDrawable(context, R.drawable.bg_rectangle_red)
         }
     }
 

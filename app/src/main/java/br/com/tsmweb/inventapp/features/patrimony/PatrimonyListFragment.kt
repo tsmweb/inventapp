@@ -1,5 +1,6 @@
 package br.com.tsmweb.inventapp.features.patrimony
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -112,39 +113,40 @@ class PatrimonyListFragment : BaseFragment(),
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun subscriberViewModalObservable() {
-        viewModel.loadState().observe(viewLifecycleOwner, { state ->
+        viewModel.loadState().observe(viewLifecycleOwner) { state ->
             state?.let {
                 handleLoadState(it)
             }
-        })
+        }
 
-        viewModel.deleteState().observe(viewLifecycleOwner, { state ->
+        viewModel.deleteState().observe(viewLifecycleOwner) { state ->
             state?.let {
                 handleDeleteState(it)
             }
-        })
+        }
 
-        viewModel.showDetails().observe(viewLifecycleOwner, { patrimony ->
+        viewModel.showDetails().observe(viewLifecycleOwner) { patrimony ->
             patrimony?.let {
                 router.showPatrimonyDetails(it)
             }
-        })
+        }
 
-        viewModel.isInDeleteModel().observe(viewLifecycleOwner, { deleteMode ->
+        viewModel.isInDeleteModel().observe(viewLifecycleOwner) { deleteMode ->
             if (deleteMode) {
                 showDeleteMode()
             } else {
                 hideDeleteMode()
             }
-        })
+        }
 
-        viewModel.selectionCount().observe(viewLifecycleOwner, { count ->
+        viewModel.selectionCount().observe(viewLifecycleOwner) { count ->
             count?.let {
                 updateSelectionCountText(it)
                 patrimonyAdapter.notifyDataSetChanged()
             }
-        })
+        }
 
         if (viewModel.loadState().value == null) {
             viewModel.search()
@@ -239,7 +241,7 @@ class PatrimonyListFragment : BaseFragment(),
             }
 
             override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-                activity?.menuInflater?.inflate(R.menu.inventories_cab, menu)
+                mode?.menuInflater?.inflate(R.menu.patrimonies_cab, menu)
                 return true
             }
 

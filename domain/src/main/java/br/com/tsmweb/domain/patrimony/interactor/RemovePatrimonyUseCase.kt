@@ -1,12 +1,12 @@
 package br.com.tsmweb.domain.patrimony.interactor
 
 import br.com.tsmweb.domain.patrimony.model.Patrimony
-import br.com.tsmweb.domain.patrimony.gateway.PatrimonyDataStore
+import br.com.tsmweb.domain.patrimony.repository.PatrimonyRepository
 
 class RemovePatrimonyUseCase(
-    private val patrimonyDataStore: PatrimonyDataStore
+    private val repository: PatrimonyRepository
 ) {
     suspend fun execute(patrimonies: List<Patrimony>) {
-        patrimonyDataStore.removePatrimony(patrimonies)
+        repository.removePatrimony(patrimonies)
     }
 }

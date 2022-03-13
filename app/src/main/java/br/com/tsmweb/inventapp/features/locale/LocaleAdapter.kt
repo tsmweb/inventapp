@@ -1,5 +1,6 @@
 package br.com.tsmweb.inventapp.features.locale
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -18,6 +19,7 @@ class LocaleAdapter(
 
     private var locales: List<LocaleBinding>? = null
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(data: List<LocaleBinding>?) {
         locales = data
         notifyDataSetChanged()

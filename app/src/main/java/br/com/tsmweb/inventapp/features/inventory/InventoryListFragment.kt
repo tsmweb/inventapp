@@ -107,38 +107,38 @@ class InventoryListFragment : BaseFragment(),
     }
 
     private fun subscriberViewModalObservable() {
-        viewModel.loadState().observe(viewLifecycleOwner, { state ->
+        viewModel.loadState().observe(viewLifecycleOwner) { state ->
             state?.let {
                 handleLoadState(it)
             }
-        })
+        }
 
-        viewModel.deleteState().observe(viewLifecycleOwner, { state ->
+        viewModel.deleteState().observe(viewLifecycleOwner) { state ->
             state?.let {
                 handleDeleteState(it)
             }
-        })
+        }
 
-        viewModel.showDetails().observe(viewLifecycleOwner, { inventory ->
+        viewModel.showDetails().observe(viewLifecycleOwner) { inventory ->
             inventory?.let {
                 router.showInventoryTab(it)
             }
-        })
+        }
 
-        viewModel.isInDeleteModel().observe(viewLifecycleOwner, { deleteMode ->
+        viewModel.isInDeleteModel().observe(viewLifecycleOwner) { deleteMode ->
             if (deleteMode) {
                 showDeleteMode()
             } else {
                 hideDeleteMode()
             }
-        })
+        }
 
-        viewModel.selectionCount().observe(viewLifecycleOwner, { count ->
+        viewModel.selectionCount().observe(viewLifecycleOwner) { count ->
             count?.let {
                 updateSelectionCountText(it)
                 inventoryAdapter.notifyDataSetChanged()
             }
-        })
+        }
 
         if (viewModel.loadState().value == null) {
             viewModel.search()
@@ -233,7 +233,7 @@ class InventoryListFragment : BaseFragment(),
             }
 
             override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-                activity?.menuInflater?.inflate(R.menu.inventories_cab, menu)
+                mode?.menuInflater?.inflate(R.menu.inventories_cab, menu)
                 return true
             }
 

@@ -4,14 +4,14 @@ import androidx.room.withTransaction
 import br.com.tsmweb.data.room.database.AppDataBase
 import br.com.tsmweb.data.room.locale.mapper.LocaleMapper
 import br.com.tsmweb.domain.locale.model.Locale
-import br.com.tsmweb.domain.locale.gateway.LocaleDataStore
+import br.com.tsmweb.domain.locale.repository.LocaleRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import java.util.*
 
-class RoomLocaleDataStore(
+internal class RoomLocaleRepository(
     private val db: AppDataBase
-): LocaleDataStore {
+): LocaleRepository {
 
     private val localeDao = db.localeDao()
     private val patrimonyDao = db.patrimonyDao()

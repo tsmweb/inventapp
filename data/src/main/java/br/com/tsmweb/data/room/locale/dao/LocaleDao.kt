@@ -9,7 +9,9 @@ import kotlinx.coroutines.flow.Flow
 interface LocaleDao {
 
     @Query("""
-        SELECT l.*, 
+        SELECT l.id,
+            l.code,
+            l.name,
             COUNT(p.id) AS amountPatrimony, 
             IFNULL(
                 (SELECT MAX(IFNULL(date_inventory, '1900-01-01')) 

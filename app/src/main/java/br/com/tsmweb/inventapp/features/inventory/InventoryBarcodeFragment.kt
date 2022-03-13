@@ -3,14 +3,12 @@ package br.com.tsmweb.inventapp.features.inventory
 import android.Manifest
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowInsets
 import android.widget.Toast
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
@@ -25,7 +23,7 @@ import br.com.tsmweb.inventapp.features.inventory.binding.InventoryBinding
 import br.com.tsmweb.inventapp.features.inventory.camera.BarcodeImageAnalyzer
 import com.google.common.util.concurrent.ListenableFuture
 import java.lang.Exception
-import java.lang.Math.*
+import kotlin.math.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -160,7 +158,7 @@ class InventoryBarcodeFragment : BaseFragment() {
     }
 
     private fun aspectRatio(width: Int, height: Int): Int {
-        val previewRatio = max(width, height).toDouble() / min(width, height)
+        val previewRatio = width.coerceAtLeast(height).toDouble() / width.coerceAtMost(height)
 
         if (abs(previewRatio - RATIO_4_3_VALUE) <= abs(previewRatio - RATIO_16_9_VALUE)) {
             return AspectRatio.RATIO_4_3

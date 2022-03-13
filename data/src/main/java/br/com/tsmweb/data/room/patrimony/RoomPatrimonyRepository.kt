@@ -2,14 +2,14 @@ package br.com.tsmweb.data.room.patrimony
 
 import br.com.tsmweb.data.room.database.AppDataBase
 import br.com.tsmweb.data.room.patrimony.mapper.PatrimonyMapper
-import br.com.tsmweb.domain.patrimony.gateway.PatrimonyDataStore
+import br.com.tsmweb.domain.patrimony.repository.PatrimonyRepository
 import br.com.tsmweb.domain.patrimony.model.Patrimony
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class RoomPatrimonyDataStore(
+internal class RoomPatrimonyRepository(
     db: AppDataBase
-): PatrimonyDataStore {
+): PatrimonyRepository {
 
     private val patrimonyDao = db.patrimonyDao()
 

@@ -1,9 +1,9 @@
-package br.com.tsmweb.domain.patrimony.gateway
+package br.com.tsmweb.domain.patrimony.repository
 
 import br.com.tsmweb.domain.patrimony.model.Patrimony
 import kotlinx.coroutines.flow.Flow
 
-interface PatrimonyDataStore {
+interface PatrimonyRepository {
     fun loadPatrimonies(localeId: String, term: String): Flow<List<Patrimony>>
     fun loadPatrimony(id: Long): Flow<Patrimony?>
     fun loadDependencies(localeId: String): Flow<List<String>>

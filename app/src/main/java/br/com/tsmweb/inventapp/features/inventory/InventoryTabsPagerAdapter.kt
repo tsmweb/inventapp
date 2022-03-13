@@ -16,7 +16,7 @@ class InventoryTabsPagerAdapter(
     override fun getItemCount() = fragmentList.size
 
     override fun createFragment(position: Int): Fragment {
-        return fragmentList.get(position)
+        return fragmentList[position]
     }
 
 }

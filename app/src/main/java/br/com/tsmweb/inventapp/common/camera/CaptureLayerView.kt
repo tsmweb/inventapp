@@ -31,7 +31,6 @@ class CaptureLayerView @JvmOverloads constructor(
         paint = Paint(Paint.ANTI_ALIAS_FLAG)
 
         strokePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-//            color = resources.getColor(R.color.capture_box_stroke_color)
             color = ContextCompat.getColor(context, R.color.capture_box_stroke_color)
             style = Paint.Style.STROKE
             strokeWidth = 2f
@@ -42,7 +41,6 @@ class CaptureLayerView @JvmOverloads constructor(
         }
 
         semiTransparentPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-//            color = resources.getColor(R.color.capture_background_color)
             color = ContextCompat.getColor(context, R.color.capture_background_color)
         }
     }

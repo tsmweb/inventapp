@@ -6,19 +6,20 @@ import br.com.tsmweb.data.room.inventory.entity.InventoryEntity
 import br.com.tsmweb.data.room.inventory.entity.InventoryView
 import br.com.tsmweb.domain.inventory.model.Inventory
 import java.text.SimpleDateFormat
+import java.util.*
 
 object InventoryMapper {
     fun fromDomain(domain: Inventory) = InventoryEntity(
         id = domain.id,
         localeId = domain.localeId,
-        dateInventory = SimpleDateFormat(DATE_FORMAT_DB).format(domain.dateInventory)
+        dateInventory = SimpleDateFormat(DATE_FORMAT_DB, Locale.getDefault()).format(domain.dateInventory)
     )
 
     @SuppressLint("SimpleDateFormat")
     fun toDomain(entity: InventoryView) = Inventory(
         id = entity.id,
         localeId = entity.localeId,
-        dateInventory = SimpleDateFormat(DATE_FORMAT_DB).parse(entity.dateInventory),
+        dateInventory = SimpleDateFormat(DATE_FORMAT_DB).parse(entity.dateInventory)!!,
         patrimonyChecked = entity.patrimonyChecked,
         patrimonyUnchecked = entity.patrimonyUnchecked,
         patrimonyNotFound = entity.patrimonyNotFound
